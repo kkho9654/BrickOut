@@ -5,7 +5,7 @@ function pageLoad(){
 	var a= document.getElementById("stopball");
 	a.onclick=stopBall;
 }
-
+asd
 var canvas;
 var context;
 var dx;//공속도
