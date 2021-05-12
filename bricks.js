@@ -11,7 +11,7 @@ $(function(){
 	$("#day").on("click",function(){
 		$("#mCanvas").css("background-image","url('img/bg1.png')");
 	});
-	$("#moon").on("click",function(){
+	$("#noon").on("click",function(){
 		$("#mCanvas").css("background-image","url('img/bg2.png')");
 	});
 	$("#night").on("click",function(){
@@ -28,9 +28,7 @@ $(function(){
 	});
 });
 
-var imgArray = ["img/tuto1.png", "img/tuto2.png", 
-"img/tuto3.png", "img/tuto4.png", "img/tuto5.png"];
-
+var imgArray = ["img/tuto1.png", "img/tuto2.png", "img/tuto3.png", "img/tuto4.png", "img/tuto5.png"];
 function album(){
 	var imgSrc = document.getElementById("tutoAlbum").getAttribute("src");
 	for(var i=0; i < imgArray.length; i++){
@@ -196,19 +194,3 @@ function keyUpHandler(e){
 function stopBall(){
 	clearInterval(ball);
 }
-
-function changeImage(){
-	// alert(document.getElementById("myCanvas").style.backgroundImage);
-
-	document.getElementById("myCanvas").setAttribute('style', 'background-image: url("bg2.png")');
-	// var imgsrc = document.getElementById("myCanvas").style.backgroundImage;
-	// var sarray = imgsrc.split('/');
-	// var str = sarray[sarray.length-1];
-
-	// if(str == "bg1.png")
-	// 	document.getElementById("myCanvas").setAttribute('style', 'background-image: url("bg2.png")');
-	// 	 // imgsrc.src = "bg2.png";
-	// else
-	// 	 document.getElementById("myCanvas").setAttribute('style', 'background-image: url("bg1.png")');
-		 // imgsrc.src = "bg1.png"; 
-		}

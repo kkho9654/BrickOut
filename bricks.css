@@ -73,7 +73,8 @@ button {
 #changeImgDiv, #changeMusicDiv {
 	display: none;
 	position: absolute;
-	width: 200px;
+	overflow: hidden;
+	width: 210px;
 	margin-top: 330px;
 	background-color: #000;
 	border: 2px solid #fff;
@@ -98,7 +99,16 @@ button {
 }
 #exit1,#exit2,#exit3{
 	height: 20px; font-size: 15px;
+	width: 80px;
 }
 #mCanvas{
 	background-image:url('img/bg1.png');
+}
+.bgBtn{
+	float: left;
+	width: 70px;
+}
+.on-off{
+	float: left;
+	width: 105px;
 }
