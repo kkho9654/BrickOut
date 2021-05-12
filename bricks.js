@@ -1,4 +1,32 @@
-window.onload=pageLoad;
+$(function(){
+	$("#TutoBtn").on("click",function(){
+		$("#tutorial").css("display","inline");
+	});
+	$("#cBtn").on("click",function(){
+		$("#changeImgDiv").css("display","inline");
+	});
+	$("#cBtn2").on("click",function(){
+		$("#changeMusicDiv").css("display","inline");
+	});
+	$("#day").on("click",function(){
+		$("#mCanvas").css("background-image","url('img/bg1.png')");
+	});
+	$("#moon").on("click",function(){
+		$("#mCanvas").css("background-image","url('img/bg2.png')");
+	});
+	$("#night").on("click",function(){
+		$("#mCanvas").css("background-image","url('img/bg3.png')");
+	});
+	$("#exit1").on("click",function(){
+		$("#changeImgDiv").css("display","none");
+	});
+	$("#exit2").on("click",function(){
+		$("#changeMusicDiv").css("display","none");
+	});
+	$("#exit3").on("click",function(){
+		$("#tutorial").css("display","none");
+	});
+});
 
 var imgArray = ["img/tuto1.png", "img/tuto2.png", 
 "img/tuto3.png", "img/tuto4.png", "img/tuto5.png"];
@@ -15,45 +43,11 @@ function album(){
 	}
 }
 
-function showTutoDiv(){
-	document.getElementById("tutorial").style.display="inline";
-}
-
-function closeTutoDiv(){
-	document.getElementById("tutorial").style.display="none";
-}
-
-function pageLoad(){
+/*function pageLoad(){
 	init();
-}
+}*/
 
-function showImgDiv(){
-	document.getElementById("changeImgDiv").style.display="inline";
-}
 
-function closeImgDiv(){
-	document.getElementById("changeImgDiv").style.display="none";
-}
-
-function showMusDiv(){
-	document.getElementById("changeMusicDiv").style.display="inline";
-}
-
-function closeMusDiv(){
-	document.getElementById("changeMusicDiv").style.display="none";
-}
-
-function bg1(){
-	document.getElementById("mCanvas").style.backgroundImage="url('img/bg1.png')";
-}
-
-function bg2(){
-	document.getElementById("mCanvas").style.backgroundImage="url('img/bg2.png')";
-}
-
-function bg3(){
-	document.getElementById("mCanvas").style.backgroundImage="url('img/bg3.png')";
-}
 
 
 var canvas;

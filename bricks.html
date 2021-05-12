@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>brickout</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 	<script src="bricks.js"></script>
 	<link rel="stylesheet" type="text/css" href="bricks.css">
 	<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
@@ -14,46 +15,45 @@
 			<img src="img/ht.png" width="25px" />
 			<img src="img/ht.png" width="25px" />
 		</div>
-		<title>아기되지 삼형제!</title>
+		<div id="score">Score: 0</div>
+		<title id="title">아기돼지 삼형제!</title>
 		<div id="menu">
-			<button id="TutoBtn" 
-			onclick="showTutoDiv()">게임을 하는 방법</button><br>
-			<button id="cBtn" onclick="showImgDiv()">배경 이미지 선택</button><br>
-			<button id="cBtn2" onclick="showMusDiv()">배경 음악을 조절</button><br>
-			레벨을 선택:
+			<button id="TutoBtn">튜토리얼</button><br>
+			<button id="cBtn">배경 이미지</button><br>
+			<button id="cBtn2">배경 음악</button><br>
+			레벨을 선택
 			<br><br>
 			<!-- 라디오 버튼을 필요할 것 같다 -->
- 			<button id="easy" style="display: inline;">Easy</button>
-			<button id="normal" style="display:inline;">Normal</button>
-			<button id="hard" style="display: inline;">Hard</button><br><br>
+			<button id="easy" class="level">Easy</button>
+			<button id="normal" class="level">Normal</button>
+			<button id="hard" class="level">Hard</button><br><br>
 			<button id="start">시작</button>
 		</div>
 
 		<div id="space">
-		<div id="changeImgDiv"><br>
-			<button id="day" onclick="bg1()" style="display: inline;">아침</button>&nbsp
-			<button id="noon" onclick="bg2()" style="display: inline;">저녁</button>&nbsp
-			<button id="night" onclick="bg3()" style="display: inline;">밤</button><br><br>
-			<button id="exit1" onclick="closeImgDiv()" style="height: 20px; font-size: 15px">닫기</button><br>
-		</div>
+			<div id="changeImgDiv"><br>
+				<button id="day">아침</button>&nbsp
+				<button id="noon">저녁</button>&nbsp
+				<button id="night">밤</button><br><br>
+				<button id="exit1" >닫기</button><br>
+			</div>
 
-		<div id="changeMusicDiv"><br>
-			<button id="song1" style="display: inline;">켜다</button>&nbsp
-			<button id="song2" style="display: inline;">끄다</button><br><br>
-			<button id="exit2" onclick="closeMusDiv()" style="height: 20px; font-size: 15px">닫기</button><br>
+			<div id="changeMusicDiv"><br>
+				<button id="song-on">켜다</button>&nbsp
+				<button id="song-off">끄다</button><br><br>
+				<button id="exit2" onclick="closeMusDiv()">닫기</button><br>
+			</div>
 		</div>
-	</div>
 
 		<div id="space2">
-		<div id="tutorial">
-			<img id="tutoAlbum" src="img/tuto1.png" onclick="album()"/>
-			<br>
-			<button id="exit3" onclick="closeTutoDiv()" style="height: 20px; font-size: 15px">닫기</button><br>
-		</div>
+			<div id="tutorial">
+				<img id="tutoAlbum" src="img/tuto1.png" onclick="album()"/>
+				<br>
+				<button id="exit3" onclick="closeTutoDiv()">닫기</button><br>
+			</div>
 		</div>
 
-		<div id="score">Score: 0</div>
-	<canvas id="mCanvas" width="600px" height="650px"></canvas>
+		<canvas id="mCanvas" width="600px" height="650px"></canvas>
 
 	</div>
 </body>

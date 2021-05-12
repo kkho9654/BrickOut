@@ -41,6 +41,10 @@ title{
 	padding-right: 10px;
 	margin-top: 50px;
 }
+.level{
+	display: inline;
+	width: 120px;
+}
 canvas {
 	margin-top: 35px;
 	margin-bottom: 35px;
@@ -55,6 +59,7 @@ button {
 	font-size: 25px;
 	display: block;
 	margin: 0 auto;
+	width: 170px;
 }
 #menu {
 	display: inline-block;
@@ -90,4 +95,10 @@ button {
 #space2 {
 	width: 600px;
 	position: absolute;
+}
+#exit1,#exit2,#exit3{
+	height: 20px; font-size: 15px;
+}
+#mCanvas{
+	background-image:url('img/bg1.png');
 }
