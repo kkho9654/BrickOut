@@ -1,0 +1,93 @@
+body {
+	width: 657px;
+	margin: 0 auto;
+	display: block;
+	text-align: center;
+	overflow: hidden;
+	background-image: url("img/bcg.png");
+	/*background-repeat: no-repeat;*/
+	background-size: 100%;
+	background-attachment: fixed;
+	border: 5px solid #000;
+}
+#content {
+	background-image: url("img/walla.png");
+	background-size: 60px;
+}
+title{
+	position: absolute;
+	display: inline-block;
+	margin-top: 100px;
+	width: 600px;
+	font-size: 60px;
+	font-family: 'Black Han Sans', sans-serif;
+}
+#life {
+	margin-top: 50px;
+	margin-left: 40px;
+	width: 200px;
+	display: block;
+	position: absolute;
+	text-align: left;
+}
+#score{
+	display: inline-block;
+	position: absolute;
+	float: right;
+	font-size: 20px;
+	font-family: 'Black Han Sans', sans-serif;
+	text-align: right;
+	width: 590px;
+	padding-right: 10px;
+	margin-top: 50px;
+}
+canvas {
+	margin-top: 35px;
+	margin-bottom: 35px;
+	background-color: #e1d6d6;
+	border: 2px solid black;
+	/*background-image: url("img/bg1.png");*/
+}
+button {
+	background-color: #fff;
+	font-family: 'Jua', sans-serif;
+	height: 40px;
+	font-size: 25px;
+	display: block;
+	margin: 0 auto;
+}
+#menu {
+	display: inline-block;
+	position: absolute;
+	width: 600px;
+	margin-top: 200px;
+	font-family: 'Jua', sans-serif;
+	font-size: 25px;
+
+}
+#changeImgDiv, #changeMusicDiv {
+	display: none;
+	position: absolute;
+	width: 200px;
+	margin-top: 330px;
+	background-color: #000;
+	border: 2px solid #fff;
+}
+#tutorial{
+	display: none;
+	position: absolute;
+	margin-top: 330px;
+	background-color: #000;
+	border: 2px solid #fff;
+	left: 0px;
+	right: 0px;
+	margin-left: 60px;
+}
+#space {
+	width: 450px;
+	position: absolute;
+}
+#space2 {
+	width: 600px;
+	position: absolute;
+}

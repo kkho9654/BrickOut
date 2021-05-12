@@ -1,10 +1,60 @@
 window.onload=pageLoad;
 
+var imgArray = ["img/tuto1.png", "img/tuto2.png", 
+"img/tuto3.png", "img/tuto4.png", "img/tuto5.png"];
+
+function album(){
+	var imgSrc = document.getElementById("tutoAlbum").getAttribute("src");
+	for(var i=0; i < imgArray.length; i++){
+		if(imgSrc == imgArray[i]){
+			document.getElementById("tutoAlbum").setAttribute("src", imgArray[i+1]);
+		}
+		if(imgSrc == imgArray[imgArray.length-1]){
+			document.getElementById("tutoAlbum").setAttribute("src", imgArray[0]);
+		}
+	}
+}
+
+function showTutoDiv(){
+	document.getElementById("tutorial").style.display="inline";
+}
+
+function closeTutoDiv(){
+	document.getElementById("tutorial").style.display="none";
+}
+
 function pageLoad(){
 	init();
-	var a= document.getElementById("stopball");
-	a.onclick=stopBall;
 }
+
+function showImgDiv(){
+	document.getElementById("changeImgDiv").style.display="inline";
+}
+
+function closeImgDiv(){
+	document.getElementById("changeImgDiv").style.display="none";
+}
+
+function showMusDiv(){
+	document.getElementById("changeMusicDiv").style.display="inline";
+}
+
+function closeMusDiv(){
+	document.getElementById("changeMusicDiv").style.display="none";
+}
+
+function bg1(){
+	document.getElementById("mCanvas").style.backgroundImage="url('img/bg1.png')";
+}
+
+function bg2(){
+	document.getElementById("mCanvas").style.backgroundImage="url('img/bg2.png')";
+}
+
+function bg3(){
+	document.getElementById("mCanvas").style.backgroundImage="url('img/bg3.png')";
+}
+
 
 var canvas;
 var context;
@@ -27,7 +77,9 @@ function bricks(a,b,c){//벽돌 좌표
 	this.brickY=b;
 	this.status=c;
 }
-var brickArr=new Array();
+
+var brickArr = new Array();
+
 function init(){
 	canvas=document.getElementById('myCanvas');
 	context= canvas.getContext('2d');
@@ -36,15 +88,15 @@ function init(){
 	brickHeight=20;
 	for(var i=0;i<10;i++){
 		brickArr.push(new bricks(i*60+i,100,3));
-		brickArr.push(new bricks(i*60+i,300,2));
-		brickArr.push(new bricks(i*60+i,500,1));
+		brickArr.push(new bricks(i*60+i,200,2));
+		brickArr.push(new bricks(i*60+i,300,1));
 	}
 	paddleHeight=10;
 	paddleWidth=600;
 	paddleX=0;
 	dx=3;
 	dy=-3;
-	y=760;
+	y=560;
 	x=300-ballR;
 	rightPressed= false;
 	leftPressed=false;
@@ -52,6 +104,7 @@ function init(){
 	document.addEventListener("keyup",keyUpHandler,false);
 	ball=setInterval(draw,1);
 }
+
 function draw(){
 	context.clearRect(0,0,canvas.width,canvas.height);
 	x=x+dx;
@@ -68,7 +121,7 @@ function draw(){
 	if(y>canvas.height-ballR||y<ballR){
 		dy=-dy;
 	}
-	if(y>790){
+	if(y>canvas.height-paddleHeight){
 		alert("gameOver");
 		stopBall();
 	}
@@ -78,7 +131,9 @@ function draw(){
 		paddleX-=5;
 	}
 }
+
 function checkBall(a){
+
 	if((x>a.brickX-ballR-dx&&x<a.brickX+brickWidth+ballR-dx)&&(y>a.brickY&&y<a.brickY+brickHeight)&&a.status>0){
 		a.status--;
 		dx=-dx;
@@ -88,17 +143,20 @@ function checkBall(a){
 		dy=-dy;
 	}
 }
+
 function checkBall2(){//paddle과 공이 부딪치는지 검사
-	if(y>770-ballR&&(x>paddleX-ballR&&x<paddleX+paddleWidth+ballR)){
+	if(y>570-ballR&&(x>paddleX-ballR&&x<paddleX+paddleWidth+ballR)){
 		dy=-dy;
 	}
 }
+
 function drawBall(){
 	context.beginPath();
 	context.arc(x,y,ballR,0,2.0*Math.PI,true);
 	context.fillStyle="red";
 	context.fill();
 }
+
 function drawBrick(a){
 	checkBall(a);
 	if(a.status==1){
@@ -118,12 +176,14 @@ function drawBrick(a){
 		context.fill();
 	}
 }
+
 function drawPaddle(){
 	context.beginPath();
-	context.rect(paddleX,770,paddleWidth,paddleHeight);
+	context.rect(paddleX,570,paddleWidth,paddleHeight);
 	context.fillStyle="blue";
 	context.fill();
 }
+
 function keyDownHandler(e){
 	if(e.keyCode==39){
 		rightPressed=true;
@@ -142,3 +202,19 @@ function keyUpHandler(e){
 function stopBall(){
 	clearInterval(ball);
 }
+
+function changeImage(){
+	// alert(document.getElementById("myCanvas").style.backgroundImage);
+
+	document.getElementById("myCanvas").setAttribute('style', 'background-image: url("bg2.png")');
+	// var imgsrc = document.getElementById("myCanvas").style.backgroundImage;
+	// var sarray = imgsrc.split('/');
+	// var str = sarray[sarray.length-1];
+
+	// if(str == "bg1.png")
+	// 	document.getElementById("myCanvas").setAttribute('style', 'background-image: url("bg2.png")');
+	// 	 // imgsrc.src = "bg2.png";
+	// else
+	// 	 document.getElementById("myCanvas").setAttribute('style', 'background-image: url("bg1.png")');
+		 // imgsrc.src = "bg1.png"; 
+		}
