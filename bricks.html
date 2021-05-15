@@ -10,49 +10,49 @@
 </head>
 <body>
 	<div id="content">
-		<div id="life">
-			<img src="img/ht.png" width="25px" />
-			<img src="img/ht.png" width="25px" />
-			<img src="img/ht.png" width="25px" />
+		<div id="life-wrapper">
+			<div id="life">
+				<img src="img/ht.png" width="25px" />
+				<img src="img/ht.png" width="25px" />
+				<img src="img/ht.png" width="25px" />
+			</div>
+			<div id="score">Score:0</div>
 		</div>
-		<div id="score">Score: 0</div>
-		<title id="title">아기돼지 삼형제!</title>
-		<div id="menu">
-			<button id="TutoBtn">튜토리얼</button><br>
-			<button id="cBtn">배경 이미지</button><br>
-			<button id="cBtn2">배경 음악</button><br>
-			레벨을 선택
-			<br><br>
-			<!-- 라디오 버튼을 필요할 것 같다 -->
-			<button id="easy" class="level">Easy</button>
-			<button id="normal" class="level">Normal</button>
-			<button id="hard" class="level">Hard</button><br><br>
-			<button id="start">시작</button>
-		</div>
+		<div id="startPage">
+			<title id="title">아기돼지 삼형제!</title><br>
+			<div id="menu">
+				<button id="TutoBtn">튜토리얼</button><br>
+				<button id="cBtn">배경 이미지</button><br>
+				<button id="cBtn2">배경 음악</button><br>
+				<button id="start">시작</button>
+			</div>
 
-		<div id="space">
-			<div id="changeImgDiv"><br>
+			<div id="changeImgDiv">
 				<button class="bgBtn" id="day">아침</button>
 				<button class="bgBtn" id="noon">저녁</button>
-				<button class="bgBtn" id="night">밤</button><br><br>
+				<button class="bgBtn" id="night">밤</button><br>
 				<button id="exit1" >닫기</button><br>
 			</div>
 
-			<div id="changeMusicDiv"><br>
-				<button class="on-off" id="song-on">켜다</button>
-				<button class="on-off" id="song-off">끄다</button><br><br>
+			<div id="changeMusicDiv">
+				<button class="on-off" id="song-on">On</button>
+				<button class="on-off" id="song-off">Off</button><br>
 				<button id="exit2" >닫기</button><br>
 			</div>
-		</div>
 
-		<div id="space2">
 			<div id="tutorial">
 				<img id="tutoAlbum" src="img/tuto1.png" onclick="album()"/>
-				<br>
 				<button id="exit3" >닫기</button><br>
 			</div>
-		</div>
 
+			<div id="choose-level">
+				<button class="level" id="easy">Easy</button>
+				<button class="level" id="normal">Normal</button>
+				<button class="level" id="hard">Hard</button><br>
+				<button id="exit4" >닫기</button><br>
+			</div>
+
+		</div>
 		<canvas id="mCanvas" width="600px" height="650px"></canvas>
 
 	</div>

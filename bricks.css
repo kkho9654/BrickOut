@@ -1,49 +1,101 @@
-body {
-	width: 657px;
-	margin: 0 auto;
-	display: block;
-	text-align: center;
-	overflow: hidden;
+*{margin: 0;padding: 0}
+body{
 	background-image: url("img/bcg.png");
-	/*background-repeat: no-repeat;*/
-	background-size: 100%;
-	background-attachment: fixed;
-	border: 5px solid #000;
 }
-#content {
-	background-image: url("img/walla.png");
-	background-size: 60px;
-}
-title{
-	position: absolute;
-	display: inline-block;
-	margin-top: 100px;
+#content{
+	position: relative;
+	overflow: hidden;
+	margin: 40px auto;
 	width: 600px;
+	height: 650px;
+	background-image:url('img/bg1.png');
+	border:50px solid black;
+	border-image: url('img/brc.png') 37% repeat;
+	box-sizing: content-box;
+}
+#startPage{
+	position: relative;
+	z-index:1;
+}
+#life-wrapper{
+	overflow: hidden;
+}
+#life{
+	float: left;
+}
+#score{
+	float: right;
+	font-family: 'Black Han Sans', sans-serif;
+}
+#menu{
+	text-align: center;
+}
+#title{
+	width: 390px;
+	display: block;
+	margin:30px auto;
 	font-size: 60px;
 	font-family: 'Black Han Sans', sans-serif;
 }
-#life {
-	margin-top: 50px;
-	margin-left: 40px;
-	width: 200px;
-	display: block;
-	position: absolute;
-	text-align: left;
+#menu>button{
+	width: 150px;
+	margin:15px auto;
+	background-color: #fff;
+	font-size: 30px;
+	font-family: 'Jua', sans-serif;
 }
-#score{
-	display: inline-block;
+
+#changeImgDiv, #changeMusicDiv,#choose-level {
+	display: none;
+	overflow: hidden;
+	background-color: #000;
+	border: 2px solid #fff;
+	z-index: 2;
+	width: 400px;
+	height: 100px;
 	position: absolute;
-	float: right;
-	font-size: 20px;
-	font-family: 'Black Han Sans', sans-serif;
-	text-align: right;
-	width: 590px;
-	padding-right: 10px;
-	margin-top: 50px;
+	left: 50%;
+	top: 60%;
+	transform: translate(-50%, -50%);
+	text-align: center;
+	font-family: 'Jua', sans-serif;
+}
+#tutorial{
+	display: none;
+	background-color: #000;
+	border: 2px solid #fff;
+	z-index: 2;
+	width: 580px;
+	position: absolute;
+	left: 50%;
+	top: 60%;
+	transform: translate(-50%, -50%);
+	text-align: center;
+	font-family: 'Jua', sans-serif;
+}
+#exit1,#exit2,#exit3,#exit4{
+	height: 20px; font-size: 15px;
+	width: 80px;
+}
+.bgBtn{
+	width: 115px;
+	height: 40px;
+	margin:15px 5px;
+}
+.on-off{
+	float: left;
+	width: 190px;
+	height: 40px;
+	margin:15px 5px;
 }
 .level{
-	display: inline;
-	width: 120px;
+	width: 115px;
+	height: 40px;
+	margin:15px 5px;
+}
+#mCanvas{
+	display: none;
+	background-image:url('img/bg1.png');
 }
 canvas {
 	margin-top: 35px;
@@ -51,64 +103,4 @@ canvas {
 	background-color: #e1d6d6;
 	border: 2px solid black;
 	/*background-image: url("img/bg1.png");*/
-}
-button {
-	background-color: #fff;
-	font-family: 'Jua', sans-serif;
-	height: 40px;
-	font-size: 25px;
-	display: block;
-	margin: 0 auto;
-	width: 170px;
-}
-#menu {
-	display: inline-block;
-	position: absolute;
-	width: 600px;
-	margin-top: 200px;
-	font-family: 'Jua', sans-serif;
-	font-size: 25px;
-
-}
-#changeImgDiv, #changeMusicDiv {
-	display: none;
-	position: absolute;
-	overflow: hidden;
-	width: 210px;
-	margin-top: 330px;
-	background-color: #000;
-	border: 2px solid #fff;
-}
-#tutorial{
-	display: none;
-	position: absolute;
-	margin-top: 330px;
-	background-color: #000;
-	border: 2px solid #fff;
-	left: 0px;
-	right: 0px;
-	margin-left: 60px;
-}
-#space {
-	width: 450px;
-	position: absolute;
-}
-#space2 {
-	width: 600px;
-	position: absolute;
-}
-#exit1,#exit2,#exit3{
-	height: 20px; font-size: 15px;
-	width: 80px;
-}
-#mCanvas{
-	background-image:url('img/bg1.png');
-}
-.bgBtn{
-	float: left;
-	width: 70px;
-}
-.on-off{
-	float: left;
-	width: 105px;
 }

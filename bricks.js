@@ -1,12 +1,15 @@
 $(function(){
 	$("#TutoBtn").on("click",function(){
-		$("#tutorial").css("display","inline");
+		$("#tutorial").css("display","block");
 	});
 	$("#cBtn").on("click",function(){
-		$("#changeImgDiv").css("display","inline");
+		$("#changeImgDiv").css("display","block");
+	});
+	$("#start").on("click",function(){
+		$("#choose-level").css("display","block");
 	});
 	$("#cBtn2").on("click",function(){
-		$("#changeMusicDiv").css("display","inline");
+		$("#changeMusicDiv").css("display","block");
 	});
 	$("#day").on("click",function(){
 		$("#mCanvas").css("background-image","url('img/bg1.png')");
@@ -25,6 +28,9 @@ $(function(){
 	});
 	$("#exit3").on("click",function(){
 		$("#tutorial").css("display","none");
+	});
+	$("#exit4").on("click",function(){
+		$("#choose-level").css("display","none");
 	});
 });
 
