@@ -30,6 +30,8 @@ $(function(){
 		parent1.css("display","none");
 	});
 
+
+	$("#title").fadeIn(3000);
 });
 
 var imgArray = ["img/tuto1.png", "img/tuto2.png", "img/tuto3.png", "img/tuto4.png", "img/tuto5.png"];
