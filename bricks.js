@@ -9,15 +9,20 @@ $(function(){
 		$("#choose-level").css("display","block");
 		
 	});
+
 	$("#easy").on("click",function(){//시작->easy 클릭
-		$("#mCanvas").css("display","block");
+		$("#story1").css("display","block");
 		$("#startPage").css("display","none");
-		init();
+		init(1);
 		document.addEventListener("keydown", keyDownHandler, false);
 		document.addEventListener("keyup", keyUpHandler, false);
 		document.addEventListener("keydown", startGame, false);
-		
 	});
+	$(".skip").on("click",function(){
+		$("#mCanvas").css("display","block");
+		$(this).parent().css("display","none");
+	});
+
 	$("#cBtn2").on("click",function(){//배경음악  버튼 클릭
 		$("#changeMusicDiv").css("display","block");
 	});
@@ -93,6 +98,7 @@ var score=0;
 var combo=0;
 var item1=0;
 var item4=0;
+var level;
 function bricks(a,b,c){
 	this.brickX=a;
 	this.brickY=b;
@@ -110,16 +116,22 @@ var itemArr2=new Array();
 var itemArr3 = new Array();
 var itemArr4= new Array();
 
-function init(){
+function init(level){
 	canvas=document.getElementById('mCanvas');
 	context= canvas.getContext('2d');
 	ballR=10;
 	brickWidth=60;
 	brickHeight=20;
-	for(var i=0;i<10;i++){
-		brickArr.push(new bricks(i*60+i,100,3));
-		brickArr.push(new bricks(i*60+i,200,2));
-		brickArr.push(new bricks(i*60+i,300,1));
+	if(level==1){
+		for(var i=0;i<10;i++){
+			brickArr.push(new bricks(i*60+i,100,3));
+			brickArr.push(new bricks(i*60+i,200,2));
+			brickArr.push(new bricks(i*60+i,300,1));
+		}
+	}else if(level==2){
+
+	}else{
+
 	}
 	paddleHeight=10;
 	paddleWidth=100;
@@ -277,7 +289,7 @@ function checkBall2(){
 					setTimeout(function() {item4=0}, 5000);
 				}
 			}
-		}
+}
 		function drawItem1(a){
 			context.beginPath();
 			context.rect(a.itemx,a.itemy, "20", "20");
@@ -303,6 +315,10 @@ function checkBall2(){
 			context.beginPath();
 			context.arc(x,y,ballR,0,2.0*Math.PI,true);
 			context.fillStyle="red";
+			context.fill();
+			context.beginPath();
+			context.arc(x,y,ballR-0.5,0,2.0*Math.PI,true);
+			context.fillStyle="yellow";
 			context.fill();
 		}
 		function drawBrick(a){

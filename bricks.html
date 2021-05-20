@@ -10,16 +10,18 @@
 </head>
 <body>
 	<div id="content">
-		<div id="life-wrapper">
+		<div id="header">
 			<div id="life">
 				<img src="img/ht.png" width="25px" />
 				<img src="img/ht.png" width="25px" />
 				<img src="img/ht.png" width="25px" />
 			</div>
-			<div id="score">Score:0</div>
+			<div id="score">Score : 0</div>
+			<button id="in-game-menu">menu</button>
 		</div>
 		<div id="startPage">
-			<title id="title">아기돼지 삼형제!</title><br>
+
+			<br><br><title id="title">아기돼지 삼형제!</title><br><br>
 			<div id="menu">
 				<button id="TutoBtn">튜토리얼</button><br>
 				<button id="cBtn">배경 이미지</button><br>
@@ -53,7 +55,40 @@
 			</div>
 
 		</div>
-		<canvas id="mCanvas" width="600px" height="650px"></canvas>
+		<canvas id="mCanvas" width="600px" height="720px"></canvas>
+		<div class="StoryBoard" id="story1">
+			<button class="skip">skip</button>
+			<div class="board">스토리#1</div>
+		</div>
+		<div class="StoryBoard" id="story2">
+			<button class="skip">skip</button>
+			<button class="skip">skip</button>
+			<div class="board">스토리#2</div>
+		</div>
+
+		<div class="StoryBoard" id="story3">
+			<button class="skip">skip</button>
+			<button class="skip">skip</button>
+			<div class="board">스토리#3</div>
+		</div>
+		<div class="StoryBoard" id="story4">
+			<button class="skip">skip</button>
+			<button class="skip">skip</button>
+			<div class="board">스토리#4</div>
+		</div>
+
+		<div class="StoryBoard" id="story5">
+			<button class="skip">skip</button>
+			<button class="skip">skip</button>
+			<div class="board">스토리#5</div>
+		</div>
+		<div class="StoryBoard" id="story6">
+			<button class="skip">skip</button>
+			<button class="skip">skip</button>
+			<div class="board">스토리#6</div>
+		</div>
+
+		<div id="credit"></div>
 	</div>
 </body>
 </html>
