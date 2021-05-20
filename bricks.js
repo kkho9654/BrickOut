@@ -11,8 +11,10 @@ $(function(){
 	});
 
 	$("#easy").on("click",function(){//시작->easy 클릭
+		$("#in-game-menu-button").css("display","block");
 		$("#story1").css("display","block");
 		$("#startPage").css("display","none");
+		$("#choose-level").css("display","none");
 		init(1);
 		document.addEventListener("keydown", keyDownHandler, false);
 		document.addEventListener("keyup", keyUpHandler, false);
@@ -55,6 +57,21 @@ $(function(){
 	$("#song-off").on("click", function(){ //배경 음악 설정
 		bgm.pause();
 	});
+
+	$("#in-game-menu-button").on("click", function(){ //ingamemenu 버튼 클릭
+		$("#in-game-menu").css("display","block");
+	});
+	$("#continue").on("click", function(){ //ingamemenu 안에 게임 계속 버튼 클릭
+		$("#in-game-menu").css("display","none");
+	});
+	$("#quit").on("click", function(){ //ingamemenu 안에 나가기 버튼 클릭
+		$("#in-game-menu").css("display","none");
+		$("#in-game-menu-button").css("display","none");
+		$("#story1").css("display","none");
+		$("#mCanvas").css("display","none");
+		$("#startPage").css("display","block");
+	});
+
 });
 
 var audio = new Audio("sound/button.mp3");
