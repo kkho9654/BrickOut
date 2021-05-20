@@ -54,6 +54,7 @@ var imgArray = ["img/tuto1.png", "img/tuto2.png", "img/tuto3.png", "img/tuto4.pn
 function album(){
 	var imgSrc = document.getElementById("tutoAlbum").getAttribute("src");
 	for(var i=0; i < imgArray.length; i++){
+		audio.play();
 		if(imgSrc == imgArray[i]){
 			document.getElementById("tutoAlbum").setAttribute("src", imgArray[i+1]);
 		}
