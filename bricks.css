@@ -2,6 +2,9 @@
 body{
 	background-image: url("img/bcg.png");
 }
+.noo{
+	display: none;
+}
 #content{
 	position: relative;
 	overflow: hidden;
@@ -63,9 +66,9 @@ body{
 	font-family: 'Black Han Sans', sans-serif;
 	color: white;
 	text-shadow: -5px 0 #000,
-	       0 5px #000,
-	       5px 0 #000,
-	       0 -5px #000;
+	0 5px #000,
+	5px 0 #000,
+	0 -5px #000;
 
 }
 
