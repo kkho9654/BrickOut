@@ -32,7 +32,23 @@ $(function(){
 
 
 	$("#title").fadeIn(3000);
+	
+	$("button").on("click", function(){ //버튼을 클릭할때마다 클릭 소리가 나옴
+		audio.play();
+	});
+
+	$("#song-on").on("click", function(){ //배경 음악 설정
+		bgm.play();
+		bgm.loop = true;
+	});
+
+	$("#song-off").on("click", function(){ //배경 음악 설정
+		bgm.pause();
+	});
 });
+
+var audio = new Audio("sound/button.mp3");
+var bgm = new Audio("sound/bgm.mp3");
 
 var imgArray = ["img/tuto1.png", "img/tuto2.png", "img/tuto3.png", "img/tuto4.png", "img/tuto5.png"];
 function album(){
