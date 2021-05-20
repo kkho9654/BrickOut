@@ -21,7 +21,7 @@ function init(){
 	context = canvas.getContext('2d');
 	
 
-	Player = new GameObject("Player.png",40,60);//게임오브젝트로 만듬
+	Player = new GameObject("Player.png",60,60);//게임오브젝트로 만듬
 	//brick = new GameObject("brick.jpg",30,30);
 
 	Player.x = canvas.width/2 - 30;
@@ -42,7 +42,7 @@ function init(){
 
 	//벽돌 만드는 함수 난이도에 따라 함수 실행 간격 결정
 	setInterval(function() {
-    const newObstacle = new GameObject('brick.jpg', 30, 30);
+    const newObstacle = new GameObject('brick.png', 30, 30);
     Bricks.push(newObstacle);
     newObstacle.isObstacle = true;
 
