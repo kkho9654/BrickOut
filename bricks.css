@@ -37,19 +37,33 @@ body{
 	margin:30px auto;
 	font-size: 60px;
 	font-family: 'Black Han Sans', sans-serif;
+	color: #34322f;
 }
+
+::selection{
+	color: #fff;
+	background: #34322f;
+}
+
+::-moz-selection{
+	color: #fff;
+	background: #34322f;
+}
+
 #menu>button{
-	width: 150px;
+	width: 220px;
 	margin:15px auto;
-	background-color: #fff;
+	background-color: #ebfbfe;
 	font-size: 30px;
 	font-family: 'Jua', sans-serif;
+	color: #34322f;	
+	border: 3px solid #34322f;	
 }
 
 #changeImgDiv, #changeMusicDiv,#choose-level {
 	display: none;
 	overflow: hidden;
-	background-color: #000;
+	background-color: #323333;
 	border: 2px solid #fff;
 	z-index: 2;
 	width: 400px;
@@ -63,7 +77,7 @@ body{
 }
 #tutorial{
 	display: none;
-	background-color: #000;
+	background-color: #323333;
 	border: 2px solid #fff;
 	z-index: 2;
 	width: 580px;
