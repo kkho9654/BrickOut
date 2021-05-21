@@ -2,13 +2,17 @@
 body{
 	background-image: url("img/bcg.png");
 }
+.noo{
+	display: none;
+}
 #content{
 	position: relative;
 	overflow: hidden;
 	margin: 40px auto;
 	width: 600px;
-	height: 650px;
+	height: 750px;
 	background-image:url('img/bg1.png');
+	background-size: 600px 750px;
 	border:50px solid black;
 	border-image: url('img/brc.png') 37% repeat;
 	box-sizing: content-box;
@@ -18,8 +22,9 @@ body{
 	position: relative;
 	z-index:1;
 }
-#life-wrapper{
+#header{
 	overflow: hidden;
+	height: 30px;
 }
 #life{
 	float: left;
@@ -27,6 +32,28 @@ body{
 #score{
 	float: right;
 	font-family: 'Black Han Sans', sans-serif;
+}
+#in-game-menu-button{
+	width: 50px;
+	height: 20px;
+	float: right;
+	font-family: 'Black Han Sans', sans-serif;
+	margin-right: 10px;
+	display: none;
+}
+#in-game-menu{
+	z-index: 5;
+	border:solid 5px white;
+	border-radius: 15px;
+	width: 350px;
+	height: 200px;
+	background-color: black;
+	color: white;
+	position: absolute;
+	top: 280px;
+	left: 125px;
+	text-align: center;
+	display: none;
 }
 #menu{
 	text-align: center;
@@ -39,9 +66,9 @@ body{
 	font-family: 'Black Han Sans', sans-serif;
 	color: white;
 	text-shadow: -5px 0 #000,
-	       0 5px #000,
-	       5px 0 #000,
-	       0 -5px #000;
+	0 5px #000,
+	5px 0 #000,
+	0 -5px #000;
 
 }
 
@@ -124,7 +151,33 @@ body{
 #mCanvas{
 	z-index: 3;
 	position: absolute;
-	top: 0;
+	top: 30px;
 	left: 0;
 	display: none;
+}
+
+.StoryBoard{
+	display: none;
+	width: 600px;
+	height: 750px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: black;
+}
+.StoryBoard button{
+	z-index: 5;
+	position: absolute;
+	top: 550px;right: 0;
+}
+.StoryBoard .board{
+	z-index: 4;
+	display: block;
+	width: 600px;
+	height: 320px;
+	position: absolute;
+	opacity: 0.7;
+	top: 220px;
+	left: 0;
+	background-color: white;
 }

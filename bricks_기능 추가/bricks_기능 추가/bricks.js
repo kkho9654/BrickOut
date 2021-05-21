@@ -30,6 +30,11 @@ var score=0;
 var combo=0;
 var item1=0;
 var item4=0;
+var item5= 0;
+var ballcolor = "black";
+var bgm = new Audio("sound_bgm.mp3");
+var getItem = new Audio("sound_getItem.mp3");
+
 function bricks(a,b,c){
 	this.brickX=a;
 	this.brickY=b;
@@ -46,31 +51,32 @@ var itemArr1=new Array();
 var itemArr2=new Array();
 var itemArr3 = new Array();
 var itemArr4= new Array();
+var itemArr5 = new Array();
 
 function init(){
-		canvas=document.getElementById('myCanvas');
-		context= canvas.getContext('2d');
-		ballR=10;
-		brickWidth=60;
-		brickHeight=20;
-		for(var i=0;i<10;i++){
-			brickArr.push(new bricks(i*60+i,100,3));
-			brickArr.push(new bricks(i*60+i,200,2));
-			brickArr.push(new bricks(i*60+i,300,1));
-		}
-		paddleHeight=10;
-		paddleWidth=100;
-		paddleX=250;
-		dx=5;
-		dy=-5;
-		itemdy=-2;
-		y=610;
-		x=300-ballR;
-		rightPressed= false;
-		leftPressed=false;
-		draw();
+	canvas=document.getElementById('myCanvas');
+	context= canvas.getContext('2d');
+	ballR=10;
+	brickWidth=60;
+	brickHeight=36;
+	paddleHeight=10;
+	paddleWidth=120;
+	paddleX=230;
+	dx=0;
+	dy=-5;
+	itemdy=-2;
+	y = 680;
+	x=300-ballR;
+	rightPressed= false;
+	leftPressed=false;
+	buildHouse();
+	draw();
+	
 }
 function start(){
+	
+	bgm.play();
+	bgm.loop="ture";
 	ball = setInterval(draw, 10);
 	document.removeEventListener("keydown", startGame, false);
 }
@@ -79,7 +85,7 @@ function draw(){
 	x=x+dx;
 	y=y+dy;
 	drawBall();
-	for(var i=0;i<30;i++)
+	for(var i=0;i<brickArr.length;i++)
 		drawBrick(brickArr[i]);
 	checkBall2();
 	drawPaddle();
@@ -91,6 +97,8 @@ function draw(){
 		drawItem3(itemArr3[i]);
 	for (var i = 0; i < itemArr4.length; i++)
 		drawItem4(itemArr4[i]);
+	for (var i = 0; i < itemArr5.length; i++)
+		drawItem5(itemArr5[i]);
 	if(x>canvas.width-ballR||x<ballR){
 		dx=-dx;
 	}
@@ -103,10 +111,10 @@ function draw(){
 	}else if(leftPressed&&paddleX>0){
 		paddleX-=8;
 	}
-	if (y > 640) {
+	if (y > 710) {
 		$("#" + life).css({ visibility: "hidden" });
 		life--;
-		if (life == 0) { alert("gameOver"); }
+		if (life == 0) { alert("gameOver"); } // 게임오버 시 화면 이동 또는 팝업 필요
 		else { alert("remain:" + life); reset()}
 	}
 	$("#score").text("     score"+score);
@@ -119,18 +127,84 @@ function draw(){
 		itemArr3[i].itemy = itemArr3[i].itemy + 3;
 	for (var i = 0; i < itemArr4.length; i++)
 		itemArr4[i].itemy = itemArr4[i].itemy + 3;
+	for (var i = 0; i < itemArr5.length; i++)
+		itemArr5[i].itemy = itemArr5[i].itemy + 3;
 }
 function reset() {
-	dx = -dx; 
-	dy = -5;
+	paddleHeight = 10;
+	paddleWidth = 120;
+	paddleX = 250;
+	itemdy = -2;
+	y = 680;
+	x = 290 - ballR;
 	rightPressed = false;
 	leftPressed = false;
+	clearInterval(ball);
+	draw();
+	document.addEventListener("keydown", retry, false);
 } //죽었을 때 리스타트
+// function buildHouse() {
+// 	for (var i = 0; i < 10; i++) {
+// 		brickArr.push(new bricks(i * 60 + i, 100, 3));
+// 		brickArr.push(new bricks(i * 60 + i, 200, 2));
+// 		brickArr.push(new bricks(i * 60 + i, 300, 1));
+// 	}
+// }
+function buildHouse() {
+	for (var i = 4; i < 6; i++) {
+		brickArr.push(new bricks(i * 60 + i, 100, 3));
+	}
+	for (var i = 3; i < 4; i++) {
+		brickArr.push(new bricks(i * 60 + i, 136, 3));
+	}
+	for (var i = 6; i < 7; i++) {
+		brickArr.push(new bricks(i * 60 + i, 136, 3));
+	}
+	for (var i = 2; i < 3; i++) {
+		brickArr.push(new bricks(i * 60 + i, 172, 3));
+	}
+	for (var i = 7; i < 8; i++) {
+		brickArr.push(new bricks(i * 60 + i, 172, 3));
+	}
+	for (var i = 1; i < 2; i++) {
+		brickArr.push(new bricks(i * 60 + i, 208, 3));
+	}
+	for (var i = 8; i < 9; i++) {
+		brickArr.push(new bricks(i * 60 + i, 208, 3));
+	}
+	brickArr.push(new bricks(61, 244, 3));
+	brickArr.push(new bricks(488, 244, 3));
+	brickArr.push(new bricks(61, 280, 3));
+	brickArr.push(new bricks(61, 316, 3));
+	brickArr.push(new bricks(61, 352, 3));
+	brickArr.push(new bricks(488, 280, 3));
+	brickArr.push(new bricks(488, 316, 3));
+	brickArr.push(new bricks(488, 352, 3));
+	for (var i = 4; i < 6; i++) {
+		brickArr.push(new bricks(i * 60 + i, 280, 3));
+	}
+	for (var i = 1; i < 4; i++) {
+		brickArr.push(new bricks(i * 60 + i, 352, 3));
+	}
+	for (var i = 6; i < 9; i++) {
+		brickArr.push(new bricks(i * 60 + i, 352, 3));
+	}
+	brickArr.push(new bricks(183, 316, 3));
+	brickArr.push(new bricks(366, 316, 3));
+}
 
 function checkBall(a){
 	if((x>a.brickX-ballR-dx&&x<a.brickX+brickWidth+ballR-dx)&&(y>a.brickY&&y<a.brickY+brickHeight)&&a.status>0){
+		if (item5 == 1) {
+			a.status = 0;
+			dx = -dx;
+		}
+		if (item1 == 1) {
+			a.status--;
+		}
 		a.status--;
 		dx =-dx;
+		
 		if (a.status==0){
 			combo++;
 			var b = Math.random();
@@ -146,18 +220,26 @@ function checkBall(a){
 			if (0.8 > b && b > 0.7) {
 				itemArr4.push(new item(x, y));
 			}
-			if(item1==1){
-				dx=-dx;
+			if (0.7 > b && b > 0.65) {
+				itemArr5.push(new item(x, y));
 			}
+			
 		}
 	}
 	else if((y>a.brickY-ballR-dy&&y<a.brickY+brickHeight+ballR-dy)&&(x>a.brickX&&x<a.brickX+brickWidth)&&a.status>0){
+		if (item5 == 1) {
+			a.status = 0;
+			dy = -dy;
+		}
+		if (item1 == 1) {
+			a.status--;
+		}
 		a.status--;
 		dy=-dy;
 		if (a.status == 0) {
 			combo++;
 			var b = Math.random();
-			if (b > 0.9) {
+			if (b > 0.1) {
 				itemArr1.push(new item(x, y));
 			}
 			if (0.9 > b && b > 0.85) {
@@ -169,14 +251,15 @@ function checkBall(a){
 			if (0.8 > b && b > 0.7) {
 				itemArr4.push(new item(x, y));
 			}
-			if (item1 == 1) {
-				dy = -dy;
+			if (0.7 > b && b > 0.65) {
+				itemArr5.push(new item(x, y));
 			}
+			
 		}
-	}	
+	}
 }
 function checkBall2(){
-	if(y>620-ballR&&(x>paddleX-ballR&&x<paddleX+paddleWidth+ballR)){
+	if(y>690-ballR&&(x>paddleX-ballR&&x<paddleX+paddleWidth+ballR)){
 		
 	 	dx = -((paddleX + (paddleWidth / 2) - x) / (paddleWidth)) * 10;
 		dy = -Math.sqrt(43-dx*dx);
@@ -185,34 +268,47 @@ function checkBall2(){
 	}
 	var leng1 = itemArr1.length
 	for (var i = 0; i < leng1; i++)
-	if (itemArr1[i].itemy > 620 - 10 && (itemArr1[i].itemx > paddleX - 10 && itemArr1[i].itemx < paddleX + paddleWidth + 10)) {
-		itemArr1.splice(i, 1);
-		item1=1;
-		setTimeout(function(){item1--;},3000);
-	}
+		if (itemArr1[i].itemy > 690 - 10 && (itemArr1[i].itemx > paddleX - 10 && itemArr1[i].itemx < paddleX + paddleWidth + 10)) {
+			getItem.play();
+			itemArr1.splice(i, 1);
+			item1=1;
+			ballcolor="red"
+			setTimeout(function(){item1--; ballcolor="black"},3000);
+		}
 	var leng2 = itemArr2.length
 	for (var i = 0; i < leng2; i++)
-	if (itemArr2[i].itemy > 620 - 10 && (itemArr2[i].itemx > paddleX - 10 && itemArr2[i].itemx < paddleX + paddleWidth + 10)) {
-		itemArr2.splice(i, 1);
-		paddleWidth = paddleWidth+20;
-		// setTimeout(function () { paddleWidth=100; }, 10000);
-	}
+		if (itemArr2[i].itemy > 690 - 10 && (itemArr2[i].itemx > paddleX - 10 && itemArr2[i].itemx < paddleX + paddleWidth + 10)) {
+			getItem.play();
+			itemArr2.splice(i, 1);
+			paddleWidth = paddleWidth+20;
+		}
 	var leng3 = itemArr3.length
 	for (var i = 0; i < leng3; i++)
-		if (itemArr3[i].itemy > 620 - 10 && (itemArr3[i].itemx > paddleX - 10 && itemArr3[i].itemx < paddleX + paddleWidth + 10)) {
+		if (itemArr3[i].itemy > 690 - 10 && (itemArr3[i].itemx > paddleX - 10 && itemArr3[i].itemx < paddleX + paddleWidth + 10)) {
+			getItem.play();
 			itemArr3.splice(i, 1);
 			if (life < 3) life++;
 			$("#" + life).css({ visibility: "visible" });
 		}
 	var leng4 = itemArr4.length
 	for (var i = 0; i < leng4; i++)
-		if (itemArr4[i].itemy > 620 - 10 && (itemArr4[i].itemx > paddleX - 10 && itemArr4[i].itemx < paddleX + paddleWidth + 10)) {
+		if (itemArr4[i].itemy > 690 - 10 && (itemArr4[i].itemx > paddleX - 10 && itemArr4[i].itemx < paddleX + paddleWidth + 10)) {
+			getItem.play();
 			itemArr4.splice(i, 1);
 			if(item4==0){
 			item4=1;
 			dy=0.5*dy;
 			setTimeout(function() {item4=0}, 5000);
 			}
+		}
+	var leng5 = itemArr5.length
+	for (var i = 0; i < leng5; i++)
+		if (itemArr5[i].itemy > 690 - 10 && (itemArr5[i].itemx > paddleX - 10 && itemArr5[i].itemx < paddleX + paddleWidth + 10)) {
+			getItem.play();
+			itemArr5.splice(i, 1);
+			item5 = 1;
+			ballcolor = "yellow";
+			setTimeout(function () { item5--; ballcolor="black"}, 1500);
 		}
 }
 function drawItem1(a){
@@ -236,36 +332,33 @@ function drawItem4(a) {
 	context.fillStyle = "orange";
 	context.fill();
 }
+function drawItem5(a) {
+	context.beginPath();
+	context.rect(a.itemx, a.itemy, "20", "20");
+	context.fillStyle = "white";
+	context.fill();
+}
 function drawBall(){
 	context.beginPath();
 	context.arc(x,y,ballR,0,2.0*Math.PI,true);
-	context.fillStyle="red";
+	context.fillStyle=ballcolor;
 	context.fill();
 }
 function drawBrick(a){
 	checkBall(a);
 	if(a.status==1){
-		context.beginPath();
-		context.rect(a.brickX,a.brickY,brickWidth,brickHeight);
-		context.fillStyle="green";
-		context.fill();
+		context.drawImage(document.getElementById("icon_brick3"), a.brickX, a.brickY, brickWidth, brickHeight);
 	}else if(a.status==2){
-		context.beginPath();
-		context.rect(a.brickX,a.brickY,brickWidth,brickHeight);
-		context.fillStyle="purple";
-		context.fill();
+		context.drawImage(document.getElementById("icon_brick2"), a.brickX, a.brickY, brickWidth, brickHeight);
 	}else if(a.status==3){
-		context.beginPath();
-		context.rect(a.brickX,a.brickY,brickWidth,brickHeight);
-		context.fillStyle="black";
-		context.fill();
+		context.drawImage(document.getElementById("icon_brick"), a.brickX, a.brickY, brickWidth, brickHeight);
 	}
 }
 function drawPaddle(){
 
 	context.beginPath();
-	context.rect(paddleX,620,paddleWidth,paddleHeight);
-	context.fillStyle="blue";
+	context.rect(paddleX, 690,paddleWidth,paddleHeight);
+	context.fillStyle="black";
 	context.fill();
 }
 function keyDownHandler(e){
@@ -286,5 +379,11 @@ function keyUpHandler(e){
 function startGame(e){
 	if(e.keyCode==32){
 		start();
+	}
+}
+function retry(e){
+	if(e.keyCode==32){
+		ball = setInterval(draw, 10);
+		document.removeEventListener("keydown", retry, false);
 	}
 }
