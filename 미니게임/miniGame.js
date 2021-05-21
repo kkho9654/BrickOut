@@ -13,7 +13,8 @@ var brick;//벽돌
 var Bricks = new Array();//벽돌배열
 var rightPressed;
 var leftPressed;
-var gameover = false;
+var life = 3
+//var gameover = false;
 var score = 0;
 
 function init(){
@@ -54,7 +55,9 @@ function init(){
 
 
 function draw(){//화면 그리기
-	if(gameover === false){
+	//if(gameover === false){
+	if(life > 0){
+
 		context.clearRect(0,0,canvas.width,canvas.height);
 
 		if(rightPressed){
@@ -70,23 +73,32 @@ function draw(){//화면 그리기
 		for(var i=0;i<Bricks.length;i++){
 			Bricks[i].speed += 0.02;//난이도에 따라서 스피드도 변경할 가능성 유
 			Bricks[i].y += Bricks[i].speed;
+			
+
+			
 			drawBrick(Bricks[i]);
 
-			if (checkCollision(Player, Bricks[i])) {
-            gameover = true;
-        	}//충돌을 비교하는 것	
         	if(Bricks[i].y >= canvas.height){ //canvas.height로 게임화면 세로사이즈 가져옴
             	++score;
+				//Bricks.splice(i,1);
+        		//i--;
         	}
-        	if(Bricks[i].y >= canvas.height){
-        		Bricks.splice(i,1);
-        		i--;
-        	}
+			if (checkCollision(Player, Bricks[i])) {
+				life--;
+				//Bricks.splice(i,1);
+        		//i--;
+			}//충돌을 비교하는 것	
+			if (checkCollision(Player, Bricks[i]) || Bricks[i].y >= canvas.height){
+				Bricks.splice(i,1);
+				i--;
+			}
 		}
+		
 		
         context.font = "20px malgun gothic"; //폰트의 크기, 글꼴체 지정      
         context.fillStyle = "black"; //색상지정
         context.fillText("score : "+score,canvas.width-100,30); //점수를 지정한 위치에 찍어준다.
+		context.fillText("life : "+life,canvas.width/2-20,30);
         context.fill();
 	}
 	else{
@@ -112,13 +124,14 @@ function drawPlayer(){
 }
 
 function drawBrick(a){
-
+	
 	context.drawImage(a.image, a.x, a.y,
 	 a.width, a.height);
 }
 
 function GameObject(src, width, height)
 {
+
     this.x = 0;
     this.y = 0;
     this.image = new Image();
