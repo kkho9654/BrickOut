@@ -136,7 +136,7 @@ button:hover, title:hover, #tutorial:hover, subtitle:hover{
 	padding: 5px;
 }
 .exit, .skip {
-	height: 20px; font-size: 15px;
+	height: 25px; font-size: 15px;
 	width: 80px;
 	font-family: 'Jua', sans-serif;
 	padding: 2px;
