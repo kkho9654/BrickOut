@@ -109,8 +109,9 @@ function album(){
 		}
 	}
 }
-	var gameover=false;
-	var gameover2=false;
+
+var gameover=false;
+var gameover2=false;
 
 var canvas;
 var context;
