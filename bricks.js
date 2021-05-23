@@ -7,7 +7,6 @@ $(function(){
 	});
 	$("#start").on("click",function(){//시작 버튼 클릭
 		$("#choose-level").css("display","block");
-		
 	});
 
 	$("#easy").on("click",function(){//시작->easy 클릭
@@ -15,7 +14,7 @@ $(function(){
 		$("#story1").css("display","block");
 		$("#startPage").css("display","none");
 		$("#choose-level").css("display","none");
-		init(2);
+		init(1);
 		document.addEventListener("keydown", keyDownHandler, false);
 		document.addEventListener("keyup", keyUpHandler, false);
 		document.addEventListener("keydown", startGame, false);
@@ -25,7 +24,7 @@ $(function(){
 		$("#story3").css("display","block");
 		$("#startPage").css("display","none");
 		$("#choose-level").css("display","none");
-
+		init(2);
 		document.addEventListener("keydown", keyDownHandler, false);
 		document.addEventListener("keyup", keyUpHandler, false);
 		document.addEventListener("keydown", startGame, false);
@@ -35,7 +34,7 @@ $(function(){
 		$("#story5").css("display","block");
 		$("#startPage").css("display","none");
 		$("#choose-level").css("display","none");
-
+		init(3);
 		document.addEventListener("keydown", keyDownHandler, false);
 		document.addEventListener("keyup", keyUpHandler, false);
 		document.addEventListener("keydown", startGame, false);
@@ -178,12 +177,15 @@ function init(level){
 	rightPressed= false;
 	leftPressed=false;
 	levelM=level;
-	if(levelM==1)
+	if(levelM==1){
 		buildHouse_easy();
-	else if(levelM==2)
+	}
+	else if(levelM==2){
 		buildHouse_normal();
-	else(levelM==3)
+	}
+	else if(levelM==3){
 		buildHouse_hard();
+	}
 	draw();
 }
 function start(){
