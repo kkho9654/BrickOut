@@ -41,20 +41,26 @@ body{
 	font-family: 'Black Han Sans', sans-serif;
 	margin-right: 10px;
 	display: none;
+	font-size: 12px;
+	border-radius: 3px;
+	color: #34322f;	
+	background-color: #ebfbfe;
+	border: 2px solid #000;		
 }
 #in-game-menu{
 	z-index: 5;
-	border:solid 5px white;
-	border-radius: 15px;
-	width: 350px;
-	height: 200px;
-	background-color: black;
+	border:solid 3px white;
+	border-radius: 10px;
+	width: 300px;
+	height: 120px;
+	background-color: #161717;
 	color: white;
 	position: absolute;
 	top: 280px;
-	left: 125px;
+	left: 141px;
 	text-align: center;
 	display: none;
+	padding: 10px;
 }
 #menu{
 	text-align: center;
@@ -72,17 +78,24 @@ body{
 	0 -5px #000;
 
 }
-
+subtitle {
+	display: block;
+	text-align: center;
+	font-family: 'Black Han Sans', sans-serif;
+	color: #ebfbfe;
+	font-size: 45px;
+}
 ::selection{
 	color: #fff;
 	background: #34322f;
 }
-
 ::-moz-selection{
 	color: #fff;
 	background: #34322f;
 }
-
+button:hover, title:hover, #tutorial:hover, subtitle:hover{
+	cursor: pointer;
+}
 #menu>button{
 	width: 220px;
 	margin:15px auto;
@@ -96,7 +109,7 @@ body{
 #changeImgDiv, #changeMusicDiv,#choose-level {
 	display: none;
 	overflow: hidden;
-	background-color: #323333;
+	background-color: #161717;
 	border: 2px solid #fff;
 	z-index: 2;
 	width: 400px;
@@ -106,11 +119,11 @@ body{
 	top: 60%;
 	transform: translate(-50%, -50%);
 	text-align: center;
-
+	border-radius: 5px;
 }
 #tutorial{
 	display: none;
-	background-color: #323333;
+	background-color: #161717;
 	border: 2px solid #fff;
 	z-index: 2;
 	width: 580px;
@@ -119,12 +132,18 @@ body{
 	top: 60%;
 	transform: translate(-50%, -50%);
 	text-align: center;
-
+	border-radius: 5px;
+	padding: 5px;
 }
-.exit{
-	height: 20px; font-size: 15px;
+.exit, .skip {
+	height: 25px; font-size: 15px;
 	width: 80px;
 	font-family: 'Jua', sans-serif;
+	padding: 2px;
+	color: #34322f;	
+	background-color: #ebfbfe;
+	border: 3px solid #000;
+	border-radius: 5px;
 }
 .bgBtn{
 	width: 115px;
@@ -132,6 +151,10 @@ body{
 	margin:15px 5px;
 	font-family: 'Jua', sans-serif;
 	font-size: 18px;
+	border-radius: 5px;
+	color: #34322f;	
+	background-color: #ebfbfe;
+	border: 3px solid #000;		
 }
 .on-off{
 	float: left;
@@ -140,13 +163,21 @@ body{
 	margin:15px 5px;
 	font-family: 'Jua', sans-serif;
 	font-size: 20px;
+	border-radius: 5px;
+	color: #34322f;	
+	background-color: #ebfbfe;
+	border: 3px solid #000;		
 }
-.level{
+.level , #continue, #quit {
 	width: 115px;
 	height: 40px;
 	margin:15px 5px;
 	font-family: 'Jua', sans-serif;
 	font-size: 18px;
+	border-radius: 5px;
+	color: #34322f;	
+	background-color: #ebfbfe;
+	border: 3px solid #000;		
 }
 
 #mCanvas{
