@@ -1,6 +1,7 @@
 *{margin: 0;padding: 0}
 body{
-	background-image: url("img/bcg.png");
+	background-image: url("img/newbgh.png");
+	background-size: 100%;
 }
 .noo{
 	display: none;
