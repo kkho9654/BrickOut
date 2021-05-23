@@ -130,14 +130,13 @@ var paddleWidth
 var paddleX;
 var rightPressed;
 var leftPressed;
-var life = 3;//@@@@목숨 추가
-var score=0;
-var combo=0;
-var item1=0;
-var item4=0;
-var item5= 0;
+var life;//@@@@목숨 추가
+var score;
+var combo;
+var item1;
+var item4;
+var item5;
 var ballcolor = "black";
-var bgm = new Audio("sound_bgm.mp3");
 var getItem = new Audio("sound_getItem.mp3");
 
 var levelM;
@@ -153,16 +152,29 @@ function item(a,b){
 }
 
 
-var brickArr=new Array();
-var itemArr1=new Array();
-var itemArr2=new Array();
-var itemArr3 = new Array();
-var itemArr4= new Array();
-var itemArr5 = new Array();
+var brickArr;
+var itemArr1;
+var itemArr2;
+var itemArr3;
+var itemArr4;
+var itemArr5;
 
 function init(level){
 	canvas=document.getElementById('mCanvas');
 	context= canvas.getContext('2d');
+	brickArr=new Array();
+	itemArr1=new Array();
+	itemArr2=new Array();
+	itemArr3 = new Array();
+	itemArr4= new Array();
+	itemArr5 = new Array();
+	life = 3;//@@@@목숨 추가
+	score=0;
+	combo=0;
+	item1=0;
+	item4=0;
+	item5= 0;
+	ballcolor = "black";
 	ballR=10;
 	brickWidth=60;
 	brickHeight=36;
