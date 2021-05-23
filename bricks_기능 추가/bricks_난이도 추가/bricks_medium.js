@@ -1,6 +1,6 @@
-window.onload=pageLoad;
+window.onload = pageLoad;
 
-function pageLoad(){
+function pageLoad() {
 	document.addEventListener("keydown", keyDownHandler, false);
 	document.addEventListener("keyup", keyUpHandler, false);
 	document.addEventListener("keydown", startGame, false);
@@ -26,71 +26,77 @@ var paddleX;
 var rightPressed;
 var leftPressed;
 var life = 3;//@@@@목숨 추가
-var score=0;
-var combo=0;
-var item1=0;
-var item4=0;
-var item5= 0;
-var ballcolor = "black";
+var score = 0;
+var combo = 0;
+var item1 = 0;
+var item4 = 0;
+var item5 = 0;
+var ballcolor = "brown";
 var bgm = new Audio("sound_bgm.mp3");
 var getItem = new Audio("sound_getItem.mp3");
+var woodcrack = new Audio("crack_wood.mp3");
+var bounce = new Audio("bounce.mp3");
+woodcrack.volume = "0.2";
+getItem.volume = "0.2";
+bgm.volume = "0.1";
+bounce.volume = "0.4";
 
-function bricks(a,b,c){
-	this.brickX=a;
-	this.brickY=b;
-	this.status=c;
+function bricks(a, b, c) {
+	this.brickX = a;
+	this.brickY = b;
+	this.status = c;
 }
-function item(a,b){
-	this.itemx=a;
-	this.itemy=b;
+function item(a, b) {
+	this.itemx = a;
+	this.itemy = b;
 }
 
 
-var brickArr=new Array();
-var itemArr1=new Array();
-var itemArr2=new Array();
+var brickArr = new Array();
+var itemArr1 = new Array();
+var itemArr2 = new Array();
 var itemArr3 = new Array();
-var itemArr4= new Array();
+var itemArr4 = new Array();
 var itemArr5 = new Array();
 
-function init(){
-	canvas=document.getElementById('myCanvas');
-	context= canvas.getContext('2d');
-	ballR=10;
-	brickWidth=60;
-	brickHeight=36;
-	paddleHeight=10;
-	paddleWidth=120;
-	paddleX=230;
+function init() {
+	canvas = document.getElementById('myCanvas');
+	context = canvas.getContext('2d');
+	ballR = 10;
+	brickWidth = 60;
+	brickHeight = 36;
+	paddleHeight = 15;
+	paddleWidth = 120;
+	paddleX = 230;
 	dx = (Math.random() - 0.5) * 10;
 	dy = -Math.sqrt(43 - dx * dx);
-	itemdy=-2;
+	itemdy = -2;
 	y = 680;
-	x=300-ballR;
-	rightPressed= false;
-	leftPressed=false;
+	x = 300 - ballR;
+	rightPressed = false;
+	leftPressed = false;
 	buildHouse();
 	draw();
-	
+
 }
-function start(){
-	
-	// bgm.play();
-	// bgm.loop="ture";
+function start() {
+
+	bgm.play();
+	bgm.loop = "ture";
 	ball = setInterval(draw, 10);
 	document.removeEventListener("keydown", startGame, false);
 }
-function draw(){
+function draw() {
 	checkEnd();
-	context.clearRect(0,0,canvas.width,canvas.height);
-	x=x+dx;
-	y=y+dy;
+	context.clearRect(0, 0, canvas.width, canvas.height);
+	x = x + dx;
+	y = y + dy;
 	drawBall();
-	for(var i=0;i<brickArr.length;i++)
+	for (var i = 0; i < brickArr.length; i++)
 		drawBrick(brickArr[i]);
 	checkBall2();
 	drawPaddle();
-	for(var i=0;i<itemArr1.length;i++)
+	for (var i = 0; i < itemArr1.length; i++)
 		drawItem1(itemArr1[i]);
 	for (var i = 0; i < itemArr2.length; i++)
 		drawItem2(itemArr2[i]);
@@ -100,28 +106,28 @@ function draw(){
 		drawItem4(itemArr4[i]);
 	for (var i = 0; i < itemArr5.length; i++)
 		drawItem5(itemArr5[i]);
-	if(x>canvas.width-ballR||x<ballR){
-		dx=-dx;
+	if (x > canvas.width - ballR || x < ballR) {
+		dx = -dx;
 	}
-	if(y>canvas.height-ballR||y<ballR){
-		dy=-dy;
+	if (y > canvas.height - ballR || y < ballR) {
+		dy = -dy;
 	}
-	
-	if(rightPressed&&paddleX<canvas.width-paddleWidth){
-		paddleX+=8;
-	}else if(leftPressed&&paddleX>0){
-		paddleX-=8;
+
+	if (rightPressed && paddleX < canvas.width - paddleWidth) {
+		paddleX += 8;
+	} else if (leftPressed && paddleX > 0) {
+		paddleX -= 8;
 	}
 	if (y > 710) {
 		$("#" + life).css({ visibility: "hidden" });
 		life--;
 		if (life == 0) { alert("gameOver"); } // 게임오버 시 화면 이동 또는 팝업 필요
-		else { alert("remain:" + life); reset()}
+		else { alert("remain:" + life); reset() }
 	}
-	$("#score").text("     score"+score);
-	$("#combo").text("combo"+combo);
+	$("#score").text("     score" + score);
+	$("#combo").text("combo" + combo);
 	for (var i = 0; i < itemArr1.length; i++)
-		itemArr1[i].itemy = itemArr1[i].itemy+3;
+		itemArr1[i].itemy = itemArr1[i].itemy + 3;
 	for (var i = 0; i < itemArr2.length; i++)
 		itemArr2[i].itemy = itemArr2[i].itemy + 3;
 	for (var i = 0; i < itemArr3.length; i++)
@@ -131,11 +137,10 @@ function draw(){
 	for (var i = 0; i < itemArr5.length; i++)
 		itemArr5[i].itemy = itemArr5[i].itemy + 3;
 	checkItem();
-	
+
 }
 function checkEnd() {
-	if(brickArr.length ==0)
-	{alert("You win");}
+	if (brickArr.length == 0) { alert("You win"); }
 }
 function checkItem() {
 	for (var i = 0; i < itemArr1.length; i++)
@@ -150,7 +155,7 @@ function checkItem() {
 		if (itemArr5[i].itemy > 710) itemArr5.splice(i, 1);
 }
 function reset() {
-	ballcolor = "black";
+	ballcolor = "brown";
 	item1 = 0;
 	item4 = 0;
 	item5 = 0;
@@ -175,7 +180,7 @@ function reset() {
 	clearInterval(ball);
 	draw();
 	document.addEventListener("keydown", retry, false);
-	
+
 } 
 
 function buildHouse() {
@@ -220,46 +225,11 @@ function buildHouse() {
 } // 2단계 나무집 버전
 
 
-function checkBall(a){
-	if((x>a.brickX-ballR-dx&&x<a.brickX+brickWidth+ballR-dx)&&(y>a.brickY&&y<a.brickY+brickHeight)&&a.status>0){
+function checkBall(a) {
+	if ((x > a.brickX - ballR - dx && x < a.brickX + brickWidth + ballR - dx) && (y > a.brickY && y < a.brickY + brickHeight) && a.status > 0) {
 		if (item5 == 1) {
 			a.status = 0;
 			dx = -dx;
-		}
-		if (item1 == 1) {
-			a.status--;
-		}
-		if (a.status == 4){
-			a.status = 1;
-		}
-		a.status--;
-		dx =-dx;
-		
-		if (a.status==0){
-			combo++;
-			var b = Math.random();
-			if (b > 0.9) {
-				itemArr1.push(new item(x, y));
-			}
-			if (0.9 > b && b > 0.85) {
-				itemArr2.push(new item(x, y));
-			}
-			if (0.85 > b && b > 0.8) {
-				itemArr3.push(new item(x, y));
-			}
-			if (0.8 > b && b > 0.7) {
-				itemArr4.push(new item(x, y));
-			}
-			if (0.7 > b && b > 0.65) {
-				itemArr5.push(new item(x, y));
-			}
-			
-		}
-	}
-	else if((y>a.brickY-ballR-dy&&y<a.brickY+brickHeight+ballR-dy)&&(x>a.brickX&&x<a.brickX+brickWidth)&&a.status>0){
-		if (item5 == 1) {
-			a.status = 0;
-			dy = -dy;
 		}
 		if (item1 == 1) {
 			a.status--;
@@ -268,7 +238,9 @@ function checkBall(a){
 			a.status = 1;
 		}
 		a.status--;
-		dy=-dy;
+		dx = -dx;
+		woodcrack.load();
+		woodcrack.play();
 		if (a.status == 0) {
 			combo++;
 			var b = Math.random();
@@ -287,33 +259,70 @@ function checkBall(a){
 			if (0.7 > b && b > 0.65) {
 				itemArr5.push(new item(x, y));
 			}
-			
+
+		}
+	}
+	else if ((y - 1 > a.brickY - ballR - dy && y < a.brickY + brickHeight + ballR - dy) && (x > a.brickX && x < a.brickX + brickWidth) && a.status > 0) {
+		if (item5 == 1) {
+			a.status = 0;
+			dy = -dy;
+		}
+		if (item1 == 1) {
+			a.status--;
+		}
+		if (a.status == 4) {
+			a.status = 1;
+		}
+		a.status--;
+		dy = -dy;
+		woodcrack.load();
+		woodcrack.play();
+		if (a.status == 0) {
+			combo++;
+			var b = Math.random();
+			if (b > 0.9) {
+				itemArr1.push(new item(x, y));
+			}
+			if (0.9 > b && b > 0.85) {
+				itemArr2.push(new item(x, y));
+			}
+			if (0.85 > b && b > 0.8) {
+				itemArr3.push(new item(x, y));
+			}
+			if (0.8 > b && b > 0.7) {
+				itemArr4.push(new item(x, y));
+			}
+			if (0.7 > b && b > 0.65) {
+				itemArr5.push(new item(x, y));
+			}
+
 		}
 	}
 }
-function checkBall2(){
-	if(y>690-ballR&&(x>paddleX-ballR&&x<paddleX+paddleWidth+ballR)){
-		
-	 	dx = -((paddleX + (paddleWidth / 2) - x) / (paddleWidth)) * 10;
-		dy = -Math.sqrt(43-dx*dx);
-		score=score+Math.pow(2,combo-1);
-		combo=0;
+function checkBall2() {
+	if (y > 690 - ballR && (x > paddleX - ballR && x < paddleX + paddleWidth + ballR)) {
+
+		dx = -((paddleX + (paddleWidth / 2) - x) / (paddleWidth)) * 10;
+		dy = -Math.sqrt(43 - dx * dx);
+		score = score + Math.pow(2, combo - 1);
+		combo = 0;
+		bounce.play();
 	}
 	var leng1 = itemArr1.length
 	for (var i = 0; i < leng1; i++)
 		if (itemArr1[i].itemy > 690 - 10 && (itemArr1[i].itemx > paddleX - 10 && itemArr1[i].itemx < paddleX + paddleWidth + 10)) {
 			getItem.play();
 			itemArr1.splice(i, 1);
-			item1=1;
-			ballcolor="red"
-			setTimeout(function(){item1--; ballcolor="black"},3000);
+			item1 = 1;
+			ballcolor = "red"
+			setTimeout(function () { item1--; ballcolor = "brown" }, 3000);
 		}
 	var leng2 = itemArr2.length
 	for (var i = 0; i < leng2; i++)
 		if (itemArr2[i].itemy > 690 - 10 && (itemArr2[i].itemx > paddleX - 10 && itemArr2[i].itemx < paddleX + paddleWidth + 10)) {
 			getItem.play();
 			itemArr2.splice(i, 1);
-			paddleWidth = paddleWidth+20;
+			paddleWidth = paddleWidth + 20;
 		}
 	var leng3 = itemArr3.length
 	for (var i = 0; i < leng3; i++)
@@ -328,10 +337,10 @@ function checkBall2(){
 		if (itemArr4[i].itemy > 690 - 10 && (itemArr4[i].itemx > paddleX - 10 && itemArr4[i].itemx < paddleX + paddleWidth + 10)) {
 			getItem.play();
 			itemArr4.splice(i, 1);
-			if(item4==0){
-			item4=1;
-			dy=0.5*dy;
-			setTimeout(function() {item4=0}, 5000);
+			if (item4 == 0) {
+				item4 = 1;
+				dy = 0.5 * dy;
+				setTimeout(function () { item4 = 0 }, 5000);
 			}
 		}
 	var leng5 = itemArr5.length
@@ -341,85 +350,74 @@ function checkBall2(){
 			itemArr5.splice(i, 1);
 			item5 = 1;
 			ballcolor = "yellow";
-			setTimeout(function () { item5--; ballcolor="black"}, 1500);
+			setTimeout(function () { item5--; ballcolor = "brown" }, 1500);
 		}
 }
-function drawItem1(a){
-	context.beginPath();
-	context.rect(a.itemx,a.itemy, "20", "20");
-	context.fillStyle="red";
-	context.fill();
+function drawItem1(a) {
+	context.drawImage(document.getElementById("item1"), a.itemx, a.itemy, "20", "20")
 }
 function drawItem2(a) {
-	context.beginPath();
-	context.rect(a.itemx, a.itemy, "20", "20");
-	context.fillStyle = "blue";
-	context.fill();
+	context.drawImage(document.getElementById("item2"), a.itemx, a.itemy, "20", "20")
 }
 function drawItem3(a) {
 	context.drawImage(document.getElementById('heart'), a.itemx, a.itemy, "20", "20");
 }
 function drawItem4(a) {
-	context.beginPath();
-	context.rect(a.itemx, a.itemy, "20", "20");
-	context.fillStyle = "orange";
-	context.fill();
+	context.drawImage(document.getElementById('item4'), a.itemx, a.itemy, "20", "20");
 }
 function drawItem5(a) {
+	context.drawImage(document.getElementById('item5'), a.itemx, a.itemy, "20", "20");
+}
+function drawBall() {
 	context.beginPath();
-	context.rect(a.itemx, a.itemy, "20", "20");
-	context.fillStyle = "white";
+	context.arc(x, y, ballR, 0, 2.0 * Math.PI, true);
+	context.fillStyle = "black";
+	context.fill();
+	context.beginPath();
+	context.arc(x, y, ballR - 2, 0, 2.0 * Math.PI, true);
+	context.fillStyle = ballcolor;
 	context.fill();
 }
-function drawBall(){
-	context.beginPath();
-	context.arc(x,y,ballR,0,2.0*Math.PI,true);
-	context.fillStyle=ballcolor;
-	context.fill();
-}
-function drawBrick(a){
+function drawBrick(a) {
 	checkBall(a);
-	if(a.status==1){
+	if (a.status == 1) {
 		context.drawImage(document.getElementById("icon_brick3"), a.brickX, a.brickY, brickWidth, brickHeight);
-	}else if(a.status==2){
+	} else if (a.status == 2) {
 		context.drawImage(document.getElementById("icon_brick2"), a.brickX, a.brickY, brickWidth, brickHeight);
-	}else if(a.status==3){
+	} else if (a.status == 3) {
 		context.drawImage(document.getElementById("icon_brick"), a.brickX, a.brickY, brickWidth, brickHeight);
-	}else if(a.status==0){
-		brickArr.splice(brickArr.indexOf(a),1);
+	} else if (a.status == 0) {
+		brickArr.splice(brickArr.indexOf(a), 1);
 	} else if (a.status == 4) {
 		context.drawImage(document.getElementById("door"), a.brickX, a.brickY, brickWidth, brickHeight);
 	}
 }
-function drawPaddle(){
+function drawPaddle() {
 
-	context.beginPath();
-	context.rect(paddleX, 690,paddleWidth,paddleHeight);
-	context.fillStyle="black";
-	context.fill();
+	context.drawImage(document.getElementById("paddle"), paddleX, 690, paddleWidth, paddleHeight)
 }
-function keyDownHandler(e){
-	if(e.keyCode==39){
-		rightPressed=true;
-	}else if(e.keyCode==37){
-		leftPressed=true;
+function keyDownHandler(e) {
+	if (e.keyCode == 39) {
+		rightPressed = true;
+	} else if (e.keyCode == 37) {
+		leftPressed = true;
 	}
 }
-function keyUpHandler(e){
-	if(e.keyCode==39){
-		rightPressed=false;
-	}else if(e.keyCode==37){
-		leftPressed=false;
+function keyUpHandler(e) {
+	if (e.keyCode == 39) {
+		rightPressed = false;
+	} else if (e.keyCode == 37) {
+		leftPressed = false;
 	}
 }
 
-function startGame(e){
-	if(e.keyCode==32){
+function startGame(e) {
+	if (e.keyCode == 32) {
 		start();
-	} 
+	}
 }
-function retry(e){
-	if(e.keyCode==32){
+function retry(e) {
+	if (e.keyCode == 32) {
 		dx = (Math.random() - 0.5) * 10;
 		dy = -Math.sqrt(43 - dx * dx);
 		ball = setInterval(draw, 10);

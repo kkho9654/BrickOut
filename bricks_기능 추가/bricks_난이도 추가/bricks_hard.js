@@ -31,9 +31,15 @@ var combo=0;
 var item1=0;
 var item4=0;
 var item5= 0;
-var ballcolor = "black";
+var ballcolor = "brown";
 var bgm = new Audio("sound_bgm.mp3");
 var getItem = new Audio("sound_getItem.mp3");
+var wallcrack = new Audio("crack_wall.mp3");
+var bounce = new Audio("bounce.mp3");
+wallcrack.volume = "0.2";
+getItem.volume = "0.2";
+bgm.volume = "0.1";
+bounce.volume = "0.4";
 
 function bricks(a,b,c){
 	this.brickX=a;
@@ -75,8 +81,8 @@ function init(){
 }
 function start(){
 	
-	// bgm.play();
-	// bgm.loop="ture";
+	bgm.play();
+	bgm.loop="ture";
 	ball = setInterval(draw, 10);
 	document.removeEventListener("keydown", startGame, false);
 }
@@ -150,7 +156,7 @@ function checkItem() {
 		if (itemArr5[i].itemy > 710) itemArr5.splice(i, 1);
 }
 function reset() {
-	ballcolor = "black";
+	ballcolor = "brown";
 	item1 = 0;
 	item4 = 0;
 	item5 = 0;
@@ -168,6 +174,7 @@ function reset() {
 	paddleWidth = 120;
 	paddleX = 230;
 	itemdy = -2;
+	combo = 0;
 	y = 680;
 	x = 300 - ballR;
 	rightPressed = false;
@@ -250,12 +257,12 @@ function checkBall(a){
 			a.status++;
 		}
 		if (a.status == 7) {
-			a.status = 1;
-			
+			a.status = 1;	
 		}
 		a.status--;
 		dx =-dx;
-		
+		wallcrack.load();
+		wallcrack.play();
 		if (a.status==0){
 			combo++;
 			var b = Math.random();
@@ -277,7 +284,7 @@ function checkBall(a){
 			
 		}
 	}
-	else if((y>a.brickY-ballR-dy&&y<a.brickY+brickHeight+ballR-dy)&&(x>a.brickX&&x<a.brickX+brickWidth)&&a.status>0){
+	else if((y-1>a.brickY-ballR-dy&&y<a.brickY+brickHeight+ballR-dy)&&(x>a.brickX&&x<a.brickX+brickWidth)&&a.status>0){
 		if (item5 == 1) {
 			a.status = 0;
 			dy = -dy;
@@ -294,9 +301,10 @@ function checkBall(a){
 		if (a.status == 7) {
 			a.status = 1;
 		}
-		
 		a.status--;
 		dy=-dy;
+		wallcrack.load();
+		wallcrack.play();
 		if (a.status == 0) {
 			combo++;
 			var b = Math.random();
@@ -315,7 +323,6 @@ function checkBall(a){
 			if (0.7 > b && b > 0.65) {
 				itemArr5.push(new item(x, y));
 			}
-			
 		}
 	}
 }
@@ -324,8 +331,9 @@ function checkBall2(){
 		
 	 	dx = -((paddleX + (paddleWidth / 2) - x) / (paddleWidth)) * 10;
 		dy = -Math.sqrt(43-dx*dx);
-		score=score+Math.pow(2,combo-1);
+		score=score+combo;
 		combo=0;
+		bounce.play();
 	}
 	var leng1 = itemArr1.length
 	for (var i = 0; i < leng1; i++)
@@ -334,14 +342,14 @@ function checkBall2(){
 			itemArr1.splice(i, 1);
 			item1=1;
 			ballcolor="red"
-			setTimeout(function(){item1--; ballcolor="black"},3000);
+			setTimeout(function(){item1--; ballcolor="brown"},3000);
 		}
 	var leng2 = itemArr2.length
 	for (var i = 0; i < leng2; i++)
 		if (itemArr2[i].itemy > 690 - 10 && (itemArr2[i].itemx > paddleX - 10 && itemArr2[i].itemx < paddleX + paddleWidth + 10)) {
 			getItem.play();
 			itemArr2.splice(i, 1);
-			paddleWidth = paddleWidth+20;
+			paddleWidth = paddleWidth+30;
 		}
 	var leng3 = itemArr3.length
 	for (var i = 0; i < leng3; i++)
@@ -369,40 +377,32 @@ function checkBall2(){
 			itemArr5.splice(i, 1);
 			item5 = 1;
 			ballcolor = "yellow";
-			setTimeout(function () { item5--; ballcolor="black"}, 1500);
+			setTimeout(function () { item5--; ballcolor ="brown"}, 1500);
 		}
 }
-function drawItem1(a){
-	context.beginPath();
-	context.rect(a.itemx,a.itemy, "20", "20");
-	context.fillStyle="red";
-	context.fill();
+function drawItem1(a) {
+	context.drawImage(document.getElementById("item1"), a.itemx, a.itemy, "20", "20")
 }
 function drawItem2(a) {
-	context.beginPath();
-	context.rect(a.itemx, a.itemy, "20", "20");
-	context.fillStyle = "blue";
-	context.fill();
+	context.drawImage(document.getElementById("item2"), a.itemx, a.itemy, "20", "20")
 }
 function drawItem3(a) {
 	context.drawImage(document.getElementById('heart'), a.itemx, a.itemy, "20", "20");
 }
 function drawItem4(a) {
-	context.beginPath();
-	context.rect(a.itemx, a.itemy, "20", "20");
-	context.fillStyle = "orange";
-	context.fill();
+	context.drawImage(document.getElementById('item4'), a.itemx, a.itemy, "20", "20");
 }
 function drawItem5(a) {
-	context.beginPath();
-	context.rect(a.itemx, a.itemy, "20", "20");
-	context.fillStyle = "white";
-	context.fill();
+	context.drawImage(document.getElementById('item5'), a.itemx, a.itemy, "20", "20");
 }
-function drawBall(){
+function drawBall() {
 	context.beginPath();
-	context.arc(x,y,ballR,0,2.0*Math.PI,true);
-	context.fillStyle=ballcolor;
+	context.arc(x, y, ballR, 0, 2.0 * Math.PI, true);
+	context.fillStyle = "black";
+	context.fill();
+	context.beginPath();
+	context.arc(x, y, ballR - 2, 0, 2.0 * Math.PI, true);
+	context.fillStyle = ballcolor;
 	context.fill();
 }
 function drawBrick(a){
@@ -427,12 +427,9 @@ function drawBrick(a){
 		context.drawImage(document.getElementById("dok3"), a.brickX, a.brickY, brickWidth, brickHeight);
 	}
 }
-function drawPaddle(){
+function drawPaddle() {
 
-	context.beginPath();
-	context.rect(paddleX, 690,paddleWidth,paddleHeight);
-	context.fillStyle="black";
-	context.fill();
+	context.drawImage(document.getElementById("paddle"), paddleX, 690, paddleWidth, paddleHeight)
 }
 function keyDownHandler(e){
 	if(e.keyCode==39){
