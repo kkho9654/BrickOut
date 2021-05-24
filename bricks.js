@@ -129,7 +129,7 @@ function album(){
 var gameover=false;
 var gameover2=false;
 var quit3;
-
+var breakBricksNum;
 var canvas;
 var context;
 var dx;
@@ -190,6 +190,7 @@ var itemArr5;
 
 function init(level){
 	quit3=false;
+	breakBricksNum=0;//파괴된 벽돌수 세는 변수
 	canvas=document.getElementById('mCanvas');
 	context= canvas.getContext('2d');
 	document.addEventListener("keydown", keyDownHandler, false);
@@ -234,7 +235,6 @@ function init(level){
 	draw();
 }
 function start(){
-	
 	// bgm.play();
 	// bgm.loop="ture";
 	ball = setInterval(draw, 10);
@@ -326,8 +326,15 @@ function draw(){
 	
 }
 function checkEnd() {
-	if(brickArr.length ==0)
-	{alert("You win");}
+	var num=0;
+	for(var i=0;i<brickArr.length;i++){
+		if(brickArr[i].status==0)
+			num++;
+	}
+	if(brickArr.length==num){
+		clearInterval(ball);
+		alert('game클리어');
+	}
 }
 function checkItem() {
 	for (var i = 0; i < itemArr1.length; i++)
