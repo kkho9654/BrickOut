@@ -62,6 +62,23 @@ body{
 	display: none;
 	padding: 10px;
 }
+
+#gameover{
+	z-index: 5;
+	border:solid 3px white;
+	border-radius: 10px;
+	width: 300px;
+	height: 120px;
+	background-color: #161717;
+	color: white;
+	position: absolute;
+	top: 280px;
+	left: 141px;
+	text-align: center;
+	display: none;
+	padding: 10px;
+}
+
 #menu{
 	text-align: center;
 }
@@ -168,7 +185,7 @@ button:hover, title:hover, #tutorial:hover, subtitle:hover{
 	background-color: #ebfbfe;
 	border: 3px solid #000;		
 }
-.level , #continue, #quit {
+.level , #continue, #quit, #restart, #quit2 {
 	width: 115px;
 	height: 40px;
 	margin:15px 5px;

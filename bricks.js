@@ -90,7 +90,17 @@ $(function(){
 		$("#mCanvas").css("display","none");
 		$("#startPage").css("display","block");
 	});
-
+	$("#restart").on("click", function(){ //restart 버튼 클릭
+		$("#gameover").css("display","none");
+		init(1);//현재 진행중인 게임을 받아와야 함. 변수 하나 생성해야될듯
+	});
+	$("#quit2").on("click", function(){ //실패시 나가기 버튼 클릭
+		$("#gameover").css("display","none");
+		$("#in-game-menu-button").css("display","none");
+		$("#story1").css("display","none");
+		$("#mCanvas").css("display","none");
+		$("#startPage").css("display","block");
+	});
 });
 
 var audio = new Audio("sound/button.mp3");
@@ -251,7 +261,9 @@ function draw(){
 	if (y > 710) {
 		$("#" + life).css({ visibility: "hidden" });
 		life--;
-		if (life == 0) { alert("gameOver"); } // 게임오버 시 화면 이동 또는 팝업 필요
+		if (life == 0) { 
+			$("#gameover").css("display","block");
+		} // 게임오버 시 화면 이동 또는 팝업 필요
 		else { alert("remain:" + life); reset()}
 	}
 	$("#score").text("     score"+score);
