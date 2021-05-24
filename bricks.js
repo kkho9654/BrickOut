@@ -284,8 +284,12 @@ function draw(){
 		//itemArr3.pop();
 		if(life == 2){
 			$("#heart:nth-child(3)").css({ visibility: "hidden" });
+			$("#heart:nth-child(2)").css({ visibility: "visible" });
+			$("#heart:nth-child(1)").css({ visibility: "visible" });
 		}else if(life == 1){
+			$("#heart:nth-child(3").css({ visibility: "hidden" });
 			$("#heart:nth-child(2").css({ visibility: "hidden" });
+			$("#heart:nth-child(1)").css({ visibility: "visible" });
 		}
 
 		if (life == 0) { 
@@ -777,7 +781,19 @@ function checkBall2(){
 			getItem.play();
 			itemArr3.splice(i, 1);
 			if (life < 3) life++;
-			$("#" + life).css({ visibility: "visible" });
+		if(life == 2){
+			$("#heart:nth-child(3)").css({ visibility: "hidden" });
+			$("#heart:nth-child(2)").css({ visibility: "visible" });
+			$("#heart:nth-child(1)").css({ visibility: "visible" });
+		}else if(life == 1){
+			$("#heart:nth-child(3").css({ visibility: "hidden" });
+			$("#heart:nth-child(2").css({ visibility: "hidden" });
+			$("#heart:nth-child(1)").css({ visibility: "visible" });
+		}else if(life== 3){
+			$("#heart:nth-child(3)").css({ visibility: "visible" });
+			$("#heart:nth-child(2)").css({ visibility: "visible" });
+			$("#heart:nth-child(1)").css({ visibility: "visible" });
+		}
 		}
 	var leng4 = itemArr4.length
 	for (var i = 0; i < leng4; i++)
