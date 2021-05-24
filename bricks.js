@@ -46,11 +46,11 @@ $(function(){
 	$(".bgBtn").on("click",function(){//배경이미지 바꾸기
 		var str=$(this).attr("id");
 		if(str=="day")
-			$("#content").css("background-image","url('img/bg1.png')");
+			$("#content").css("background-image","url(" + dayImg.src + ")");
 		else if(str=="noon")
-			$("#content").css("background-image","url('img/bg2.png')");
+			$("#content").css("background-image","url("+ noonImg.src + ")");
 		else if(str=="night")
-			$("#content").css("background-image","url('img/bg3.png')");
+			$("#content").css("background-image","url(" + nightImg.src + ")");
 	});
 	$(".exit").on("click",function(){//나가기버튼
 		var parent1=$(this).parent();
@@ -110,6 +110,12 @@ $(function(){
 	})
 });
 
+var dayImg = new Image();
+var noonImg = new Image();
+var nightImg = new Image();
+dayImg.src = "img/bg1.png";
+noonImg.src ="img/bg2.png";
+nightImg.src ="img/bg3.png";
 var audio = new Audio("sound/button.mp3");
 var bgm = new Audio("sound/bgm.mp3");
 
@@ -1092,6 +1098,7 @@ function checkCollision(a, b) {//충돌 체크 함수
         a.y + a.height < b.y
     );
 }
+//<<<<<<< HEAD
 function startMiniGame(){
 	mini = setInterval(draw2, 1);
 	setobs=setInterval(createObs, 100);
@@ -1110,3 +1117,5 @@ function createObs() {
     newObstacle.x = Math.random() * canvas.width;//0에서 440사이의 소수 반환
     newObstacle.y = 0;
 }
+//=======
+//>>>>>>> 202e1d56762c14ce9be972881e0deed95028f5e8
