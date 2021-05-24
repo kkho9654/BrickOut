@@ -99,6 +99,7 @@ $(function(){
 		document.addEventListener("keydown", startGame, false);
 	});
 	$("#quit2").on("click", function(){ //gameover시 나가기 버튼 클릭
+		quit3=true;
 		$("#gameover").css("display","none");
 		$("#in-game-menu-button").css("display","none");
 		$("#mCanvas").css("display","none");
@@ -248,7 +249,7 @@ function start(){
 	document.removeEventListener("keydown", startGame, false);
 }
 function draw(){
-	
+
 	context.clearRect(0,0,canvas.width,canvas.height);
 	x=x+dx;
 	y=y+dy;
@@ -308,10 +309,7 @@ function draw(){
 			quit3=true;
 		} // 게임오버 시 화면 이동 또는 팝업 필요
 		else { 
-			
-			alert("remain:" + life); 
 			reset();
-			
 		}
 		if(quit3==true){
 			clearInterval(ball);
@@ -348,15 +346,15 @@ function checkEnd() {
 			$("#mCanvas").css("display","none");
 			init2();
 			$("#story2").css("display","block");
-			
 		}else if(levelM==2){
+			alert('1');
 			$("#mCanvas").css("display","none");
 			init2();
-			$("#stroy4").css("display","block");
+			$("#story4").css("display","block");
 		}else if(levelM==3){
 			$("#mCanvas").css("display","none");
 			init2();
-			$("#stroy6").css("display","block");
+			$("#story6").css("display","block");
 		}
 	}
 }
@@ -931,11 +929,11 @@ function drawBrick_hard(a){
 		checkBall_hard(a);
 	}
 	if(a.status==1){
-		context.drawImage(document.getElementById("icon_brick3"), a.brickX, a.brickY, brickWidth, brickHeight);
+		context.drawImage(document.getElementById("icon_brick3_hard"), a.brickX, a.brickY, brickWidth, brickHeight);
 	}else if(a.status==2){
-		context.drawImage(document.getElementById("icon_brick2"), a.brickX, a.brickY, brickWidth, brickHeight);
+		context.drawImage(document.getElementById("icon_brick2_hard"), a.brickX, a.brickY, brickWidth, brickHeight);
 	}else if(a.status==3){
-		context.drawImage(document.getElementById("icon_brick"), a.brickX, a.brickY, brickWidth, brickHeight);
+		context.drawImage(document.getElementById("icon_brick_hard"), a.brickX, a.brickY, brickWidth, brickHeight);
 	}else if(a.status==0){
 		brickArr.splice(brickArr.indexOf(a),1);
 	} else if (a.status == 4) {
