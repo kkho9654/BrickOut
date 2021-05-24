@@ -31,6 +31,8 @@ var combo=0;
 var item1=0;
 var item4=0;
 var item5= 0;
+var chimney = 0.55;
+var chimneycount = 2;
 var ballcolor = "brown";
 var bgm = new Audio("sound_bgm.mp3");
 var getItem = new Audio("sound_getItem.mp3");
@@ -87,6 +89,7 @@ function start(){
 	document.removeEventListener("keydown", startGame, false);
 }
 function draw(){
+	if (chimneycount ==0) {chimney = 0.2; }
 	checkEnd();
 	context.clearRect(0,0,canvas.width,canvas.height);
 	x=x+dx;
@@ -195,8 +198,8 @@ function buildHouse() {
 	for (var i = 4; i < 6; i++) {
 		brickArr.push(new bricks(i * 60 + i, 136, 3));
 	}
-	brickArr.push(new bricks(427, 100, 9));
-	brickArr.push(new bricks(427, 136, 9));
+	brickArr.push(new bricks(427, 100, 8));
+	brickArr.push(new bricks(427, 136, 8));
 	for (var i = 3; i < 7; i++) {
 		brickArr.push(new bricks(i * 60 + i, 172, 3));
 	}
@@ -244,11 +247,12 @@ function buildHouse() {
 function checkBall(a){
 	if((x>a.brickX-ballR-dx&&x<a.brickX+brickWidth+ballR-dx)&&(y>a.brickY&&y<a.brickY+brickHeight)&&a.status>0){
 		if (item5 == 1) {
-			a.status = 0;
+			a.status = 1;
 			dx = -dx;
 		}
 		if (item1 == 1) {
-			a.status--;
+			if (a.status != 6)
+				a.status--;
 		}
 		if (a.status == 6){
 			a.status = 1;
@@ -258,39 +262,42 @@ function checkBall(a){
 		}
 		if (a.status == 7) {
 			a.status = 1;	
+			chimneycount--;
 		}
 		a.status--;
 		dx =-dx;
+		combo++;
 		wallcrack.load();
 		wallcrack.play();
 		if (a.status==0){
-			combo++;
+			
 			var b = Math.random();
-			if (b > 0.9) {
+			if (b > 0.85) {
 				itemArr1.push(new item(x, y));
 			}
-			if (0.9 > b && b > 0.85) {
+			if (0.85 > b && b > 0.75) {
 				itemArr2.push(new item(x, y));
 			}
-			if (0.85 > b && b > 0.8) {
+			if (0.75 > b && b > 0.7) {
 				itemArr3.push(new item(x, y));
 			}
-			if (0.8 > b && b > 0.7) {
+			if (0.7 > b && b > 0.6) {
 				itemArr4.push(new item(x, y));
 			}
-			if (0.7 > b && b > 0.65) {
+			if (0.6 > b && b > chimney) {
 				itemArr5.push(new item(x, y));
 			}
 			
 		}
 	}
-	else if((y-1>a.brickY-ballR-dy&&y<a.brickY+brickHeight+ballR-dy)&&(x>a.brickX&&x<a.brickX+brickWidth)&&a.status>0){
+	else if((y-5>a.brickY-ballR-dy&&y+5<a.brickY+brickHeight+ballR-dy)&&(x>a.brickX&&x<a.brickX+brickWidth)&&a.status>0){
 		if (item5 == 1) {
-			a.status = 0;
+			a.status = 1;
 			dy = -dy;
 		}
 		if (item1 == 1) {
-			a.status--;
+			if (a.status != 6)
+				a.status--;
 		}
 		if (a.status == 6) {
 			a.status = 1;
@@ -300,27 +307,30 @@ function checkBall(a){
 		} 
 		if (a.status == 7) {
 			a.status = 1;
+			chimneycount--;
 		}
 		a.status--;
 		dy=-dy;
+		combo++;
 		wallcrack.load();
 		wallcrack.play();
+		
 		if (a.status == 0) {
-			combo++;
+			
 			var b = Math.random();
-			if (b > 0.9) {
+			if (b > 0.85) {
 				itemArr1.push(new item(x, y));
 			}
-			if (0.9 > b && b > 0.85) {
+			if (0.85 > b && b > 0.75) {
 				itemArr2.push(new item(x, y));
 			}
-			if (0.85 > b && b > 0.8) {
+			if (0.75 > b && b > 0.7) {
 				itemArr3.push(new item(x, y));
 			}
-			if (0.8 > b && b > 0.7) {
+			if (0.7 > b && b > 0.6) {
 				itemArr4.push(new item(x, y));
 			}
-			if (0.7 > b && b > 0.65) {
+			if (0.6 > b && b > chimney) {
 				itemArr5.push(new item(x, y));
 			}
 		}
@@ -331,8 +341,11 @@ function checkBall2(){
 		
 	 	dx = -((paddleX + (paddleWidth / 2) - x) / (paddleWidth)) * 10;
 		dy = -Math.sqrt(43-dx*dx);
-		score=score+combo;
-		combo=0;
+		if (3 > combo) score = score + combo;
+		if (6 > combo >= 3) score = score + combo + 2;
+		if (10 > combo >= 6) score = score + combo + 5;
+		if (combo >= 10) score = score + combo + 10;
+		combo = 0;
 		bounce.play();
 	}
 	var leng1 = itemArr1.length
@@ -376,6 +389,7 @@ function checkBall2(){
 			getItem.play();
 			itemArr5.splice(i, 1);
 			item5 = 1;
+			item1 = 0;
 			ballcolor = "yellow";
 			setTimeout(function () { item5--; ballcolor ="brown"}, 1500);
 		}
@@ -419,10 +433,8 @@ function drawBrick(a){
 		context.drawImage(document.getElementById("roof"), a.brickX, a.brickY, brickWidth, brickHeight);
 	} else if (a.status == 6) {
 		context.drawImage(document.getElementById("door"), a.brickX, a.brickY, brickWidth, brickHeight);
-	}else if (a.status == 9) {
-		context.drawImage(document.getElementById("dok"), a.brickX, a.brickY, brickWidth, brickHeight);
 	} else if (a.status == 8) {
-		context.drawImage(document.getElementById("dok2"), a.brickX, a.brickY, brickWidth, brickHeight);
+		context.drawImage(document.getElementById("dok"), a.brickX, a.brickY, brickWidth, brickHeight);
 	} else if (a.status == 7) {
 		context.drawImage(document.getElementById("dok3"), a.brickX, a.brickY, brickWidth, brickHeight);
 	}

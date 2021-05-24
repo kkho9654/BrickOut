@@ -67,7 +67,7 @@ function init(){
 	brickHeight=36;
 	paddleHeight=15;
 	paddleWidth=120;
-	paddleX=230;
+	paddleX= 230;
 	dx = (Math.random() - 0.5) * 10;
 	dy = -Math.sqrt(43 - dx * dx);
 	itemdy=-2;
@@ -233,7 +233,7 @@ function buildHouse() {
 function checkBall(a){
 	if((x>a.brickX-ballR-dx&&x<a.brickX+brickWidth+ballR-dx)&&(y>a.brickY&&y<a.brickY+brickHeight)&&a.status>0){
 		if (item5 == 1) {
-			a.status = 0;
+			a.status = 1;
 			dx = -dx;
 		}
 		if (item1 == 1) {
@@ -243,30 +243,31 @@ function checkBall(a){
 		dx =-dx;
 		haycrack.load();
 		haycrack.play();
+		combo++;
 		if (a.status==0){
-			combo++;
+			
 			var b = Math.random();
-			if (b > 0.9) {
+			if (b > 0.85) {
 				itemArr1.push(new item(x, y));
 			}
-			if (0.9 > b && b > 0.85) {
+			if (0.85 > b && b > 0.75) {
 				itemArr2.push(new item(x, y));
 			}
-			if (0.85 > b && b > 0.8) {
+			if (0.75 > b && b > 0.7) {
 				itemArr3.push(new item(x, y));
 			}
-			if (0.8 > b && b > 0.7) {
+			if (0.7 > b && b > 0.6) {
 				itemArr4.push(new item(x, y));
 			}
-			if (0.7 > b && b > 0.65) {
+			if (0.6 > b && b > 0.55) {
 				itemArr5.push(new item(x, y));
 			}
 			
 		}
 	}
-	else if((y-1>a.brickY-ballR-dy&&y<a.brickY+brickHeight+ballR-dy)&&(x>a.brickX&&x<a.brickX+brickWidth)&&a.status>0){
+	else if((y-5>a.brickY-ballR-dy&&y+5<a.brickY+brickHeight+ballR-dy)&&(x>a.brickX&&x<a.brickX+brickWidth)&&a.status>0){
 		if (item5 == 1) {
-			a.status = 0;
+			a.status = 1;
 			dy = -dy;
 		}
 		if (item1 == 1) {
@@ -276,22 +277,23 @@ function checkBall(a){
 		dy=-dy;
 		haycrack.load();
 		haycrack.play();
+		combo++;
 		if (a.status == 0) {
-			combo++;
+			
 			var b = Math.random();
-			if (b > 0.9) {
+			if (b > 0.85) {
 				itemArr1.push(new item(x, y));
 			}
-			if (0.9 > b && b > 0.85) {
+			if (0.85 > b && b > 0.75) {
 				itemArr2.push(new item(x, y));
 			}
-			if (0.85 > b && b > 0.8) {
+			if (0.75 > b && b > 0.7) {
 				itemArr3.push(new item(x, y));
 			}
-			if (0.8 > b && b > 0.7) {
+			if (0.7 > b && b > 0.6) {
 				itemArr4.push(new item(x, y));
 			}
-			if (0.7 > b && b > 0.65) {
+			if (0.6 > b && b > 0.55) {
 				itemArr5.push(new item(x, y));
 			}
 			
@@ -303,8 +305,11 @@ function checkBall2(){
 		
 	 	dx = -((paddleX + (paddleWidth / 2) - x) / (paddleWidth)) * 10;
 		dy = -Math.sqrt(43-dx*dx);
-		score=score+Math.pow(2,combo-1);
-		combo=0;
+		if (3 > combo) score = score + combo;
+		if (6 > combo >= 3) score = score + combo + 2;
+		if (10 > combo >= 6) score = score + combo + 5;
+		if (combo >= 10) score = score + combo + 10;
+		combo = 0;
 		bounce.play();
 	}
 	var leng1 = itemArr1.length
@@ -348,6 +353,7 @@ function checkBall2(){
 			getItem.play();
 			itemArr5.splice(i, 1);
 			item5 = 1;
+			item1 = 0;
 			ballcolor = "yellow";
 			setTimeout(function () { item5--; ballcolor ="brown"}, 1500);
 		}
