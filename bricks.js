@@ -16,9 +16,7 @@ $(function(){
 		$("#startPage").css("display","none");
 		$("#choose-level").css("display","none");
 		init(1);
-		document.addEventListener("keydown", keyDownHandler, false);
-		document.addEventListener("keyup", keyUpHandler, false);
-		document.addEventListener("keydown", startGame, false);
+		
 	});
 	$("#normal").on("click",function(){//시작->normal 클릭
 		$("#in-game-menu-button").css("display","block");
@@ -26,9 +24,7 @@ $(function(){
 		$("#startPage").css("display","none");
 		$("#choose-level").css("display","none");
 		init(2);
-		document.addEventListener("keydown", keyDownHandler, false);
-		document.addEventListener("keyup", keyUpHandler, false);
-		document.addEventListener("keydown", startGame, false);
+		
 	});
 	$("#hard").on("click",function(){//시작->hard 클릭
 		$("#in-game-menu-button").css("display","block");
@@ -36,13 +32,12 @@ $(function(){
 		$("#startPage").css("display","none");
 		$("#choose-level").css("display","none");
 		init(3);
-		document.addEventListener("keydown", keyDownHandler, false);
-		document.addEventListener("keyup", keyUpHandler, false);
-		document.addEventListener("keydown", startGame, false);
+		
 	});
 	$(".skip").on("click",function(){
 		$("#mCanvas").css("display","block");
 		$(this).parent().css("display","none");
+
 	});
 
 	$("#cBtn2").on("click",function(){//배경음악  버튼 클릭
@@ -84,19 +79,18 @@ $(function(){
 		clearInterval(ball);
 	});
 	$("#continue").on("click", function(){ //ingamemenu 안에 게임 계속 버튼 클릭
-		document.addEventListener("keydown", keyDownHandler, false);
-		document.addEventListener("keyup", keyUpHandler, false);
 		start();
 		$("#in-game-menu").css("display","none");
 	});
 	$("#quit").on("click", function(){ //ingamemenu 안에 나가기 버튼 클릭
+		quit3=true;
 		$("#in-game-menu").css("display","none");
 		$("#in-game-menu-button").css("display","none");
 		$("#story1").css("display","none");
 		$("#mCanvas").css("display","none");
 		$("#startPage").css("display","block");
 		$("#heart:nth-child(n)").css({ visibility: "hidden" });
-		clearInterval(ball);
+		
 	});
 	$("#restart").on("click", function(){ //restart 버튼 클릭
 		$("#gameover").css("display","none");
@@ -134,6 +128,7 @@ function album(){
 
 var gameover=false;
 var gameover2=false;
+var quit3;
 
 var canvas;
 var context;
@@ -194,8 +189,12 @@ var itemArr4;
 var itemArr5;
 
 function init(level){
+	quit3=false;
 	canvas=document.getElementById('mCanvas');
 	context= canvas.getContext('2d');
+	document.addEventListener("keydown", keyDownHandler, false);
+	document.addEventListener("keyup", keyUpHandler, false);
+	document.addEventListener("keydown", startGame, false);
 	brickArr=new Array();
 	itemArr1=new Array();
 	itemArr2=new Array();
@@ -291,21 +290,24 @@ function draw(){
 			$("#heart:nth-child(2)").css({ visibility: "visible" });
 			$("#heart:nth-child(1)").css({ visibility: "visible" });
 		}else if(life == 1){
-			$("#heart:nth-child(3").css({ visibility: "hidden" });
-			$("#heart:nth-child(2").css({ visibility: "hidden" });
+			$("#heart:nth-child(3)").css({ visibility: "hidden" });
+			$("#heart:nth-child(2)").css({ visibility: "hidden" });
 			$("#heart:nth-child(1)").css({ visibility: "visible" });
 		}
 
 		if (life == 0) { 
 			$("#gameover").css("display","block");
 			$("#heart:nth-child(1)").css({ visibility: "hidden" });
-			clearInterval(ball);
+			quit3=true;
 		} // 게임오버 시 화면 이동 또는 팝업 필요
 		else { 
 			
 			alert("remain:" + life); 
 			reset();
 			
+		}
+		if(quit3==true){
+			clearInterval(ball);
 		}
 	}
 	$("#score").text("     score:"+score);
@@ -790,8 +792,8 @@ function checkBall2(){
 			$("#heart:nth-child(2)").css({ visibility: "visible" });
 			$("#heart:nth-child(1)").css({ visibility: "visible" });
 		}else if(life == 1){
-			$("#heart:nth-child(3").css({ visibility: "hidden" });
-			$("#heart:nth-child(2").css({ visibility: "hidden" });
+			$("#heart:nth-child(3)").css({ visibility: "hidden" });
+			$("#heart:nth-child(2)").css({ visibility: "hidden" });
 			$("#heart:nth-child(1)").css({ visibility: "visible" });
 		}else if(life== 3){
 			$("#heart:nth-child(3)").css({ visibility: "visible" });
