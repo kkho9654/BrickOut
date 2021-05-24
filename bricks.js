@@ -99,6 +99,7 @@ $(function(){
 		$("#heart:nth-child(n)").css({ visibility: "visible" });
 		init(levelM);//현재 진행중인 게임을 받아옴		
 		document.addEventListener("keydown", startGame, false);
+
 	});
 	$("#quit2").on("click", function(){ //실패시 나가기 버튼 클릭
 		$("#gameover").css("display","none");
@@ -154,8 +155,15 @@ var combo;
 var item1;
 var item4;
 var item5;
-var ballcolor = "black";
+var ballcolor = "brown";
+var bgm = new Audio("sound_bgm.mp3");
 var getItem = new Audio("sound_getItem.mp3");
+var haycrack = new Audio("crack_hay.mp3");
+var bounce = new Audio("bounce.mp3");
+haycrack.volume = "0.2";
+getItem.volume = "0.2";
+bgm.volume = "0.1";
+bounce.volume = "0.4";
 
 var levelM;
 
@@ -196,7 +204,7 @@ function init(level){
 	ballR=10;
 	brickWidth=60;
 	brickHeight=36;
-	paddleHeight=10;
+	paddleHeight=15;
 	paddleWidth=120;
 	paddleX=230;
 	dx = (Math.random() - 0.5) * 10;
@@ -320,7 +328,7 @@ function checkItem() {
 		if (itemArr5[i].itemy > 710) itemArr5.splice(i, 1);
 }
 function reset() {
-	ballcolor = "black";
+	ballcolor = "brown";
 	item1 = 0;
 	item4 = 0;
 	item5 = 0;
@@ -359,10 +367,7 @@ function buildHouse_easy() {
 	for (var i = 4; i < 6; i++) {
 		brickArr.push(new bricks(i * 60 + i, 100, 3));
 	}
-	for (var i = 3; i < 4; i++) {
-		brickArr.push(new bricks(i * 60 + i, 136, 3));
-	}
-	for (var i = 6; i < 7; i++) {
+	for (var i = 3; i < 7; i++) {
 		brickArr.push(new bricks(i * 60 + i, 136, 3));
 	}
 	for (var i = 2; i < 3; i++) {
@@ -446,8 +451,8 @@ function buildHouse_hard() {
 	for (var i = 4; i < 6; i++) {
 		brickArr.push(new bricks(i * 60 + i, 136, 3));
 	}
-	brickArr.push(new bricks(427, 100, 9));
-	brickArr.push(new bricks(427, 136, 9));
+	brickArr.push(new bricks(427, 100, 8));
+	brickArr.push(new bricks(427, 136, 8));
 	for (var i = 3; i < 7; i++) {
 		brickArr.push(new bricks(i * 60 + i, 172, 3));
 	}
@@ -493,7 +498,7 @@ function buildHouse_hard() {
 function checkBall_easy(a){
 	if((x>a.brickX-ballR-dx&&x<a.brickX+brickWidth+ballR-dx)&&(y>a.brickY&&y<a.brickY+brickHeight)&&a.status>0){
 		if (item5 == 1) {
-			a.status = 0;
+			a.status = 1;
 			dx = -dx;
 		}
 		if (item1 == 1) {
@@ -501,31 +506,33 @@ function checkBall_easy(a){
 		}
 		a.status--;
 		dx =-dx;
-		
+		haycrack.load();
+		haycrack.play();
+		combo++;
 		if (a.status==0){
-			combo++;
+			
 			var b = Math.random();
-			if (b > 0.9) {
+			if (b > 0.85) {
 				itemArr1.push(new item(x, y));
 			}
-			if (0.9 > b && b > 0.85) {
+			if (0.85 > b && b > 0.75) {
 				itemArr2.push(new item(x, y));
 			}
-			if (0.85 > b && b > 0.8) {
+			if (0.75 > b && b > 0.7) {
 				itemArr3.push(new item(x, y));
 			}
-			if (0.8 > b && b > 0.7) {
+			if (0.7 > b && b > 0.6) {
 				itemArr4.push(new item(x, y));
 			}
-			if (0.7 > b && b > 0.65) {
+			if (0.6 > b && b > 0.55) {
 				itemArr5.push(new item(x, y));
 			}
 			
 		}
 	}
-	else if((y>a.brickY-ballR-dy&&y<a.brickY+brickHeight+ballR-dy)&&(x>a.brickX&&x<a.brickX+brickWidth)&&a.status>0){
+	else if((y-5>a.brickY-ballR-dy&&y+5<a.brickY+brickHeight+ballR-dy)&&(x>a.brickX&&x<a.brickX+brickWidth)&&a.status>0){
 		if (item5 == 1) {
-			a.status = 0;
+			a.status = 1;
 			dy = -dy;
 		}
 		if (item1 == 1) {
@@ -533,22 +540,25 @@ function checkBall_easy(a){
 		}
 		a.status--;
 		dy=-dy;
+		haycrack.load();
+		haycrack.play();
+		combo++;
 		if (a.status == 0) {
-			combo++;
+			
 			var b = Math.random();
-			if (b > 0.9) {
+			if (b > 0.85) {
 				itemArr1.push(new item(x, y));
 			}
-			if (0.9 > b && b > 0.85) {
+			if (0.85 > b && b > 0.75) {
 				itemArr2.push(new item(x, y));
 			}
-			if (0.85 > b && b > 0.8) {
+			if (0.75 > b && b > 0.7) {
 				itemArr3.push(new item(x, y));
 			}
-			if (0.8 > b && b > 0.7) {
+			if (0.7 > b && b > 0.6) {
 				itemArr4.push(new item(x, y));
 			}
-			if (0.7 > b && b > 0.65) {
+			if (0.6 > b && b > 0.55) {
 				itemArr5.push(new item(x, y));
 			}
 			
@@ -557,73 +567,80 @@ function checkBall_easy(a){
 }
 
 function checkBall_normal(a){
-	if((x>a.brickX-ballR-dx&&x<a.brickX+brickWidth+ballR-dx)&&(y>a.brickY&&y<a.brickY+brickHeight)&&a.status>0){
+	if ((x > a.brickX - ballR - dx && x < a.brickX + brickWidth + ballR - dx) && (y > a.brickY && y < a.brickY + brickHeight) && a.status > 0) {
 		if (item5 == 1) {
-			a.status = 0;
+			a.status = 1;
 			dx = -dx;
 		}
 		if (item1 == 1) {
-			a.status--;
+			if (a.status != 4)
+				a.status--;
 		}
-		if (a.status == 4){
+		if (a.status == 4) {
 			a.status = 1;
 		}
 		a.status--;
-		dx =-dx;
-		
-		if (a.status==0){
-			combo++;
+		dx = -dx;
+		woodcrack.load();
+		woodcrack.play();
+		combo++;
+		if (a.status == 0) {
+			
 			var b = Math.random();
-			if (b > 0.9) {
+			if (b > 0.85) {
 				itemArr1.push(new item(x, y));
 			}
-			if (0.9 > b && b > 0.85) {
+			if (0.85 > b && b > 0.75) {
 				itemArr2.push(new item(x, y));
 			}
-			if (0.85 > b && b > 0.8) {
+			if (0.75 > b && b > 0.7) {
 				itemArr3.push(new item(x, y));
 			}
-			if (0.8 > b && b > 0.7) {
+			if (0.7 > b && b > 0.6) {
 				itemArr4.push(new item(x, y));
 			}
-			if (0.7 > b && b > 0.65) {
+			if (0.6 > b && b > 0.55) {
 				itemArr5.push(new item(x, y));
 			}
-			
+
 		}
 	}
-	else if((y>a.brickY-ballR-dy&&y<a.brickY+brickHeight+ballR-dy)&&(x>a.brickX&&x<a.brickX+brickWidth)&&a.status>0){
+	else if ((y -5> a.brickY - ballR - dy && y+5 < a.brickY + brickHeight + ballR - dy) && (x > a.brickX && x < a.brickX + brickWidth) && a.status > 0) {
 		if (item5 == 1) {
-			a.status = 0;
+			a.status = 1;
 			dy = -dy;
 		}
 		if (item1 == 1) {
+			if(a.status != 4)
 			a.status--;
 		}
 		if (a.status == 4) {
 			a.status = 1;
 		}
 		a.status--;
-		dy=-dy;
+		dy = -dy;
+		woodcrack.load();
+		woodcrack.play();
+		combo++;
 		if (a.status == 0) {
-			combo++;
+			
 			var b = Math.random();
-			if (b > 0.9) {
+			if (b > 0.85) {
 				itemArr1.push(new item(x, y));
 			}
-			if (0.9 > b && b > 0.85) {
+			if (0.85 > b && b > 0.75) {
 				itemArr2.push(new item(x, y));
 			}
-			if (0.85 > b && b > 0.8) {
+			if (0.75 > b && b > 0.7) {
 				itemArr3.push(new item(x, y));
 			}
-			if (0.8 > b && b > 0.7) {
+			if (0.7 > b && b > 0.6) {
 				itemArr4.push(new item(x, y));
 			}
-			if (0.7 > b && b > 0.65) {
+			if (0.6 > b && b > 0.55) {
 				itemArr5.push(new item(x, y));
 			}
-			
+
 		}
 	}
 }
@@ -632,11 +649,12 @@ function checkBall_normal(a){
 function checkBall_hard(a){
 	if((x>a.brickX-ballR-dx&&x<a.brickX+brickWidth+ballR-dx)&&(y>a.brickY&&y<a.brickY+brickHeight)&&a.status>0){
 		if (item5 == 1) {
-			a.status = 0;
+			a.status = 1;
 			dx = -dx;
 		}
 		if (item1 == 1) {
-			a.status--;
+			if (a.status != 6)
+				a.status--;
 		}
 		if (a.status == 6){
 			a.status = 1;
@@ -645,40 +663,43 @@ function checkBall_hard(a){
 			a.status++;
 		}
 		if (a.status == 7) {
-			a.status = 1;
-			
+			a.status = 1;	
+			chimneycount--;
 		}
 		a.status--;
 		dx =-dx;
-		
+		combo++;
+		wallcrack.load();
+		wallcrack.play();
 		if (a.status==0){
-			combo++;
+			
 			var b = Math.random();
-			if (b > 0.9) {
+			if (b > 0.85) {
 				itemArr1.push(new item(x, y));
 			}
-			if (0.9 > b && b > 0.85) {
+			if (0.85 > b && b > 0.75) {
 				itemArr2.push(new item(x, y));
 			}
-			if (0.85 > b && b > 0.8) {
+			if (0.75 > b && b > 0.7) {
 				itemArr3.push(new item(x, y));
 			}
-			if (0.8 > b && b > 0.7) {
+			if (0.7 > b && b > 0.6) {
 				itemArr4.push(new item(x, y));
 			}
-			if (0.7 > b && b > 0.65) {
+			if (0.6 > b && b > chimney) {
 				itemArr5.push(new item(x, y));
 			}
 			
 		}
 	}
-	else if((y>a.brickY-ballR-dy&&y<a.brickY+brickHeight+ballR-dy)&&(x>a.brickX&&x<a.brickX+brickWidth)&&a.status>0){
+	else if((y-5>a.brickY-ballR-dy&&y+5<a.brickY+brickHeight+ballR-dy)&&(x>a.brickX&&x<a.brickX+brickWidth)&&a.status>0){
 		if (item5 == 1) {
-			a.status = 0;
+			a.status = 1;
 			dy = -dy;
 		}
 		if (item1 == 1) {
-			a.status--;
+			if (a.status != 6)
+				a.status--;
 		}
 		if (a.status == 6) {
 			a.status = 1;
@@ -688,29 +709,32 @@ function checkBall_hard(a){
 		} 
 		if (a.status == 7) {
 			a.status = 1;
+			chimneycount--;
 		}
-		
 		a.status--;
 		dy=-dy;
+		combo++;
+		wallcrack.load();
+		wallcrack.play();
+		
 		if (a.status == 0) {
-			combo++;
+			
 			var b = Math.random();
-			if (b > 0.9) {
+			if (b > 0.85) {
 				itemArr1.push(new item(x, y));
 			}
-			if (0.9 > b && b > 0.85) {
+			if (0.85 > b && b > 0.75) {
 				itemArr2.push(new item(x, y));
 			}
-			if (0.85 > b && b > 0.8) {
+			if (0.75 > b && b > 0.7) {
 				itemArr3.push(new item(x, y));
 			}
-			if (0.8 > b && b > 0.7) {
+			if (0.7 > b && b > 0.6) {
 				itemArr4.push(new item(x, y));
 			}
-			if (0.7 > b && b > 0.65) {
+			if (0.6 > b && b > chimney) {
 				itemArr5.push(new item(x, y));
 			}
-			
 		}
 	}
 }
@@ -719,8 +743,12 @@ function checkBall2(){
 		
 	 	dx = -((paddleX + (paddleWidth / 2) - x) / (paddleWidth)) * 10;
 		dy = -Math.sqrt(43-dx*dx);
-		score=score+Math.pow(2,combo-1);
-		combo=0;
+		if (3 > combo) score = score + combo;
+		if (6 > combo >= 3) score = score + combo + 2;
+		if (10 > combo >= 6) score = score + combo + 5;
+		if (combo >= 10) score = score + combo + 10;
+		combo = 0;
+		bounce.play();
 	}
 	var leng1 = itemArr1.length
 	for (var i = 0; i < leng1; i++)
@@ -729,7 +757,7 @@ function checkBall2(){
 			itemArr1.splice(i, 1);
 			item1=1;
 			ballcolor="red"
-			setTimeout(function(){item1--; ballcolor="black"},3000);
+			setTimeout(function(){item1--; ballcolor="brown"},3000);
 		}
 	var leng2 = itemArr2.length
 	for (var i = 0; i < leng2; i++)
@@ -763,41 +791,34 @@ function checkBall2(){
 			getItem.play();
 			itemArr5.splice(i, 1);
 			item5 = 1;
+			item1 = 0;
 			ballcolor = "yellow";
-			setTimeout(function () { item5--; ballcolor="black"}, 1500);
+			setTimeout(function () { item5--; ballcolor ="brown"}, 1500);
 		}
 }
 function drawItem1(a){
-	context.beginPath();
-	context.rect(a.itemx,a.itemy, "20", "20");
-	context.fillStyle="red";
-	context.fill();
+	context.drawImage(document.getElementById("item1"),a.itemx, a.itemy, "20", "20");
 }
 function drawItem2(a) {
-	context.beginPath();
-	context.rect(a.itemx, a.itemy, "20", "20");
-	context.fillStyle = "blue";
-	context.fill();
+	context.drawImage(document.getElementById("item2"), a.itemx, a.itemy, "20", "20");
 }
 function drawItem3(a) {
 	context.drawImage(document.getElementById('heart'), a.itemx, a.itemy, "20", "20");
 }
 function drawItem4(a) {
-	context.beginPath();
-	context.rect(a.itemx, a.itemy, "20", "20");
-	context.fillStyle = "orange";
-	context.fill();
+	context.drawImage(document.getElementById('item4'), a.itemx, a.itemy, "20", "20");
 }
 function drawItem5(a) {
-	context.beginPath();
-	context.rect(a.itemx, a.itemy, "20", "20");
-	context.fillStyle = "white";
-	context.fill();
+	context.drawImage(document.getElementById('item5'), a.itemx, a.itemy, "20", "20");
 }
 function drawBall(){
 	context.beginPath();
-	context.arc(x,y,ballR,0,2.0*Math.PI,true);
-	context.fillStyle=ballcolor;
+	context.arc(x, y, ballR, 0, 2.0 * Math.PI, true);
+	context.fillStyle = "black";
+	context.fill();
+	context.beginPath();
+	context.arc(x, y, ballR - 2, 0, 2.0 * Math.PI, true);
+	context.fillStyle = ballcolor;
 	context.fill();
 }
 function drawBrick_easy(a){
@@ -851,32 +872,26 @@ function drawBrick_hard(a){
 	else if(levelM==3){
 		checkBall_hard(a);
 	}
-	;
 	if(a.status==1){
-		context.drawImage(document.getElementById("icon_brick3_hard"), a.brickX, a.brickY, brickWidth, brickHeight);
+		context.drawImage(document.getElementById("icon_brick3"), a.brickX, a.brickY, brickWidth, brickHeight);
 	}else if(a.status==2){
-		context.drawImage(document.getElementById("icon_brick2_hard"), a.brickX, a.brickY, brickWidth, brickHeight);
+		context.drawImage(document.getElementById("icon_brick2"), a.brickX, a.brickY, brickWidth, brickHeight);
 	}else if(a.status==3){
-		context.drawImage(document.getElementById("icon_brick_hard"), a.brickX, a.brickY, brickWidth, brickHeight);
+		context.drawImage(document.getElementById("icon_brick"), a.brickX, a.brickY, brickWidth, brickHeight);
 	}else if(a.status==0){
 		brickArr.splice(brickArr.indexOf(a),1);
 	} else if (a.status == 4) {
 		context.drawImage(document.getElementById("roof"), a.brickX, a.brickY, brickWidth, brickHeight);
 	} else if (a.status == 6) {
 		context.drawImage(document.getElementById("door"), a.brickX, a.brickY, brickWidth, brickHeight);
-	}else if (a.status == 9) {
-		context.drawImage(document.getElementById("dok"), a.brickX, a.brickY, brickWidth, brickHeight);
 	} else if (a.status == 8) {
-		context.drawImage(document.getElementById("dok2"), a.brickX, a.brickY, brickWidth, brickHeight);
+		context.drawImage(document.getElementById("dok"), a.brickX, a.brickY, brickWidth, brickHeight);
 	} else if (a.status == 7) {
 		context.drawImage(document.getElementById("dok3"), a.brickX, a.brickY, brickWidth, brickHeight);
 	}
 }
 function drawPaddle(){
-	context.beginPath();
-	context.rect(paddleX, 690,paddleWidth,paddleHeight);
-	context.fillStyle="black";
-	context.fill();
+	context.drawImage(document.getElementById("paddle"), paddleX, 690, paddleWidth, paddleHeight);
 }
 function keyDownHandler(e){
 	if(e.keyCode==39){
