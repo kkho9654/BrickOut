@@ -350,8 +350,12 @@ function checkEnd() {
 			$("#story2").css("display","block");
 			
 		}else if(levelM==2){
+			$("#mCanvas").css("display","none");
+			init2();
 			$("#stroy4").css("display","block");
 		}else if(levelM==3){
+			$("#mCanvas").css("display","none");
+			init2();
 			$("#stroy6").css("display","block");
 		}
 	}
@@ -982,16 +986,16 @@ var Player;//움직일 플레이어
 var mini;
 var setobs;
 var Bricks2;//벽돌배열
+var index;
+var initScore;
 //var gameover = false;
 //var score = 0;
 
 function init2(){
-	
-
-
 	Player = new GameObject("Player.png",60,60);//게임오브젝트로 만듬
 	//brick = new GameObject("brick.jpg",30,30);
-
+	index=0;
+	initScore=score;
 	Player.x = canvas.width/2 - 30;
 	Player.y = canvas.height - 60;
 	//brick.x = 0;
@@ -1003,10 +1007,8 @@ function init2(){
 	leftPressed=false;
 	document.addEventListener("keydown", startGame2, false);
 	Player.speed = 1;
-
 	
 	drawPlayer();
-	alert('1');
 	//벽돌 만드는 함수 난이도에 따라 함수 실행 간격 결정
 	//<-실행간격
 }
@@ -1014,6 +1016,7 @@ function init2(){
 
 function draw2(){//화면 그리기
 	//if(gameover === false){
+
 	if(life > 0){
 
 		context.clearRect(0,0,canvas.width,canvas.height);
@@ -1025,7 +1028,19 @@ function draw2(){//화면 그리기
 			if(Player.x >= 0)
 			Player.x -= Player.speed;
 		}
-
+		if(life == 2){
+			$("#heart:nth-child(3)").css({ visibility: "hidden" });
+			$("#heart:nth-child(2)").css({ visibility: "visible" });
+			$("#heart:nth-child(1)").css({ visibility: "visible" });
+		}else if(life == 1){
+			$("#heart:nth-child(3)").css({ visibility: "hidden" });
+			$("#heart:nth-child(2)").css({ visibility: "hidden" });
+			$("#heart:nth-child(1)").css({ visibility: "visible" });
+		}else if(life== 3){
+			$("#heart:nth-child(3)").css({ visibility: "visible" });
+			$("#heart:nth-child(2)").css({ visibility: "visible" });
+			$("#heart:nth-child(1)").css({ visibility: "visible" });
+		}
 		drawPlayer();//플레이어 그리기
 
 		for(var i=0;i<Bricks2.length;i++){
@@ -1050,14 +1065,10 @@ function draw2(){//화면 그리기
 				Bricks2.splice(i,1);
 				i--;
 			}
+
 		}
-		
-		
-        context.font = "20px malgun gothic"; //폰트의 크기, 글꼴체 지정      
-        context.fillStyle = "black"; //색상지정
-        context.fillText("score : "+score,canvas.width-100,30); //점수를 지정한 위치에 찍어준다.
-		context.fillText("life : "+life,canvas.width/2-20,30);
-        context.fill();
+	checkEnd2();
+	$("#score").text("     score:"+score);
 	}
 	else{
         $("#gameover").css("display","block");
@@ -1067,6 +1078,7 @@ function draw2(){//화면 그리기
 		clearInterval(mini);
 		clearInterval(setobs);
 	}
+
 }
 	
 
@@ -1117,5 +1129,41 @@ function createObs() {
     newObstacle.x = Math.random() * canvas.width;//0에서 440사이의 소수 반환
     newObstacle.y = 0;
 }
+function checkEnd2() {
+	if(levelM==1){
+		if(score-initScore==15){
+			$("#mCanvas").css("display","none");
+			context.beginPath();
+			canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
+			clearInterval(mini);
+			clearInterval(setobs);
+			init(2);
+			$("#in-game-menu-button").css("display","block");
+			$("#story3").css("display","block");
+		}
+	}else if(levelM==2){
+		if(score-initScore==15){
+			$("#mCanvas").css("display","none");
+			context.beginPath();
+			canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
+			clearInterval(mini);
+			clearInterval(setobs);
+			init(3);
+			$("#in-game-menu-button").css("display","block");
+			$("#story5").css("display","block");
+		}
+	}else if(levelM==3){
+		if(score-initScore==15){
+			$("#mCanvas").css("display","none");
+			context.beginPath();
+			canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
+			clearInterval(mini);
+			clearInterval(setobs);
+			$("#in-game-menu-button").css("display","block");
+			$("#ending").css("display","block");
+		}
+	}
+}
+
 //=======
 //>>>>>>> 202e1d56762c14ce9be972881e0deed95028f5e8
