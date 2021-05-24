@@ -81,8 +81,12 @@ $(function(){
 
 	$("#in-game-menu-button").on("click", function(){ //ingamemenu 버튼 클릭
 		$("#in-game-menu").css("display","block");
+		clearInterval(ball);
 	});
 	$("#continue").on("click", function(){ //ingamemenu 안에 게임 계속 버튼 클릭
+		document.addEventListener("keydown", keyDownHandler, false);
+		document.addEventListener("keyup", keyUpHandler, false);
+		start();
 		$("#in-game-menu").css("display","none");
 	});
 	$("#quit").on("click", function(){ //ingamemenu 안에 나가기 버튼 클릭
@@ -204,7 +208,7 @@ function init(level){
 	item1=0;
 	item4=0;
 	item5= 0;
-	ballcolor = "black";
+	ballcolor = "brown";
 	ballR=10;
 	brickWidth=60;
 	brickHeight=36;
@@ -304,7 +308,7 @@ function draw(){
 			
 		}
 	}
-	$("#score").text("     score"+score);
+	$("#score").text("     score:"+score);
 	$("#combo").text("combo"+combo);
 	for (var i = 0; i < itemArr1.length; i++)
 		itemArr1[i].itemy = itemArr1[i].itemy+3;
