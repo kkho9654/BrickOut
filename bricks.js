@@ -7,9 +7,9 @@ $(function(){
 	});
 	$("#start").on("click",function(){//시작 버튼 클릭
 		$("#choose-level").css("display","block");
-		$("#heart:nth-child(n)").css({ visibility: "visible" });
+		
 	});
-
+	$("#heart:nth-child(n)").css({ visibility: "visible" });
 	$("#easy").on("click",function(){//시작->easy 클릭
 		$("#in-game-menu-button").css("display","block");
 		$("#story1").css("display","block");
@@ -92,21 +92,22 @@ $(function(){
 		$("#heart:nth-child(n)").css({ visibility: "hidden" });
 		
 	});
-	$("#restart").on("click", function(){ //restart 버튼 클릭
+	$("#restart").on("click", function(){ //gameover시 restart 버튼 클릭
 		$("#gameover").css("display","none");
 		$("#heart:nth-child(n)").css({ visibility: "visible" });
 		init(levelM);//현재 진행중인 게임을 받아옴		
 		document.addEventListener("keydown", startGame, false);
-
 	});
-	$("#quit2").on("click", function(){ //실패시 나가기 버튼 클릭
+	$("#quit2").on("click", function(){ //gameover시 나가기 버튼 클릭
 		$("#gameover").css("display","none");
 		$("#in-game-menu-button").css("display","none");
-		$("#story1").css("display","none");
 		$("#mCanvas").css("display","none");
 		$("#startPage").css("display","block");
-		$("#heart:nth-child(n)").css({ visibility: "hidden" });
+		$("#heart:nth-child(n)").css({ visibility: "visible" });
 	});
+	$("#cheatKeyBtn").click(function(){
+		cheatKey=true;
+	})
 });
 
 var audio = new Audio("sound/button.mp3");
@@ -125,10 +126,9 @@ function album(){
 		}
 	}
 }
+var cheatKey;
 
-var gameover=false;
-var gameover2=false;
-var quit3;
+var quit3;//true일때 게임이 멈춤.
 var breakBricksNum;
 var canvas;
 var context;
@@ -189,6 +189,7 @@ var itemArr4;
 var itemArr5;
 
 function init(level){
+	cheatKey=false;
 	quit3=false;
 	breakBricksNum=0;//파괴된 벽돌수 세는 변수
 	canvas=document.getElementById('mCanvas');
@@ -241,7 +242,7 @@ function start(){
 	document.removeEventListener("keydown", startGame, false);
 }
 function draw(){
-	checkEnd();
+	
 	context.clearRect(0,0,canvas.width,canvas.height);
 	x=x+dx;
 	y=y+dy;
@@ -309,6 +310,7 @@ function draw(){
 		if(quit3==true){
 			clearInterval(ball);
 		}
+
 	}
 	$("#score").text("     score:"+score);
 	$("#combo").text("combo"+combo);
@@ -323,7 +325,7 @@ function draw(){
 	for (var i = 0; i < itemArr5.length; i++)
 		itemArr5[i].itemy = itemArr5[i].itemy + 3;
 	checkItem();
-	
+	checkEnd();
 }
 function checkEnd() {
 	var num=0;
@@ -331,9 +333,21 @@ function checkEnd() {
 		if(brickArr[i].status==0)
 			num++;
 	}
-	if(brickArr.length==num){
+	if(brickArr.length==num||cheatKey==true){
+		context.beginPath();
+		canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
 		clearInterval(ball);
 		alert('game클리어');
+		if(levelM==1){
+			$("#mCanvas").css("display","none");
+			init2();
+			$("#story2").css("display","block");
+			
+		}else if(levelM==2){
+			$("#stroy4").css("display","block");
+		}else if(levelM==3){
+			$("#stroy6").css("display","block");
+		}
 	}
 }
 function checkItem() {
@@ -959,15 +973,16 @@ function retry(e){
 
 //==============================================미니게임 구현부===========================================================
 var Player;//움직일 플레이어
-
-var Bricks2 = new Array();//벽돌배열
+var mini;
+var setobs;
+var Bricks2;//벽돌배열
 //var gameover = false;
 //var score = 0;
 
 function init2(){
-	canvas = document.getElementById('mCanvas');
-	context = canvas.getContext('2d');
 	
+
+
 	Player = new GameObject("Player.png",60,60);//게임오브젝트로 만듬
 	//brick = new GameObject("brick.jpg",30,30);
 
@@ -975,28 +990,19 @@ function init2(){
 	Player.y = canvas.height - 60;
 	//brick.x = 0;
 	//brick.y = 0;
-
+ 	Bricks2= new Array();
 	//Bricks.push(brick);
 
 	rightPressed= false;
 	leftPressed=false;
-	document.addEventListener("keydown",keyDownHandler,false);
-	document.addEventListener("keyup",keyUpHandler,false);
-
+	document.addEventListener("keydown", startGame2, false);
 	Player.speed = 1;
 
-	setInterval(draw2,1);
-
+	
+	drawPlayer();
+	alert('1');
 	//벽돌 만드는 함수 난이도에 따라 함수 실행 간격 결정
-	setInterval(function() {
-    const newObstacle = new GameObject('brick.png', 30, 30);
-    Bricks2.push(newObstacle);
-    newObstacle.isObstacle = true;
-
-    newObstacle.direction = parseInt(Math.random()*3);
-    newObstacle.x = Math.random() * canvas.width;//0에서 440사이의 소수 반환
-    newObstacle.y = 0;
-	}, 100);//<-실행간격
+	//<-실행간격
 }
 
 
@@ -1048,17 +1054,12 @@ function draw2(){//화면 그리기
         context.fill();
 	}
 	else{
-		//배경색 변경
-        context.fillStyle = 'black';
-        context.fillRect(0, 0, canvas.width, canvas.height);
-
-        context.font = "20px malgun gothic"; //폰트의 크기, 글꼴체 지정      
-        context.fillStyle = "red"; //색상지정
-        context.fillText("game over",canvas.width/2-55,canvas.height/2);
-        context.fillText("score : "+score, canvas.width/2-55, canvas.height/2+20)
-        context.fill();
-        clearInterval();
-        return;
+        $("#gameover").css("display","block");
+        quit3=true;
+	}
+	if(quit3==true){
+		clearInterval(mini);
+		clearInterval(setobs);
 	}
 }
 	
@@ -1090,4 +1091,22 @@ function checkCollision(a, b) {//충돌 체크 함수
         a.y > b.y + b.height ||
         a.y + a.height < b.y
     );
+}
+function startMiniGame(){
+	mini = setInterval(draw2, 1);
+	setobs=setInterval(createObs, 100);
+	document.removeEventListener("keydown", startGame2, false);
+}
+function startGame2(e){
+	if(e.keyCode==32){
+		startMiniGame();
+	} 
+}
+function createObs() {
+    const newObstacle = new GameObject('brick.png', 30, 30);
+    Bricks2.push(newObstacle);
+    newObstacle.isObstacle = true;
+    newObstacle.direction = parseInt(Math.random()*3);
+    newObstacle.x = Math.random() * canvas.width;//0에서 440사이의 소수 반환
+    newObstacle.y = 0;
 }
