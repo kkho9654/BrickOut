@@ -7,6 +7,7 @@ $(function(){
 	});
 	$("#start").on("click",function(){//시작 버튼 클릭
 		$("#choose-level").css("display","block");
+		$("#heart:nth-child(n)").css({ visibility: "visible" });
 	});
 
 	$("#easy").on("click",function(){//시작->easy 클릭
@@ -59,6 +60,7 @@ $(function(){
 	$(".exit").on("click",function(){//나가기버튼
 		var parent1=$(this).parent();
 		parent1.css("display","none");
+		
 	});
 
 
@@ -89,10 +91,14 @@ $(function(){
 		$("#story1").css("display","none");
 		$("#mCanvas").css("display","none");
 		$("#startPage").css("display","block");
+		$("#heart:nth-child(n)").css({ visibility: "hidden" });
+		clearInterval(ball);
 	});
 	$("#restart").on("click", function(){ //restart 버튼 클릭
 		$("#gameover").css("display","none");
-		init(1);//현재 진행중인 게임을 받아와야 함. 변수 하나 생성해야될듯
+		$("#heart:nth-child(n)").css({ visibility: "visible" });
+		init(levelM);//현재 진행중인 게임을 받아옴		
+		document.addEventListener("keydown", startGame, false);
 	});
 	$("#quit2").on("click", function(){ //실패시 나가기 버튼 클릭
 		$("#gameover").css("display","none");
@@ -100,6 +106,7 @@ $(function(){
 		$("#story1").css("display","none");
 		$("#mCanvas").css("display","none");
 		$("#startPage").css("display","block");
+		$("#heart:nth-child(n)").css({ visibility: "hidden" });
 	});
 });
 
@@ -259,12 +266,27 @@ function draw(){
 		paddleX-=8;
 	}
 	if (y > 710) {
-		$("#" + life).css({ visibility: "hidden" });
+		//$("#" + life).css({ visibility: "hidden" });
+		
 		life--;
+		//itemArr3.pop();
+		if(life == 2){
+			$("#heart:nth-child(3)").css({ visibility: "hidden" });
+		}else if(life == 1){
+			$("#heart:nth-child(2").css({ visibility: "hidden" });
+		}
+
 		if (life == 0) { 
 			$("#gameover").css("display","block");
+			$("#heart:nth-child(1)").css({ visibility: "hidden" });
+			clearInterval(ball);
 		} // 게임오버 시 화면 이동 또는 팝업 필요
-		else { alert("remain:" + life); reset()}
+		else { 
+			
+			alert("remain:" + life); 
+			reset();
+			
+		}
 	}
 	$("#score").text("     score"+score);
 	$("#combo").text("combo"+combo);

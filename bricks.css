@@ -138,6 +138,10 @@ button:hover, title:hover, #tutorial:hover, subtitle:hover{
 	text-align: center;
 	border-radius: 5px;
 }
+
+#heart{
+	visibility: hidden;
+}
 #tutorial{
 	display: none;
 	background-color: #161717;
