@@ -37,7 +37,6 @@ $(function(){
 	$(".skip").on("click",function(){
 		$("#mCanvas").css("display","block");
 		$(this).parent().css("display","none");
-
 	});
 
 	$("#cBtn2").on("click",function(){//배경음악  버튼 클릭
@@ -55,7 +54,6 @@ $(function(){
 	$(".exit").on("click",function(){//나가기버튼
 		var parent1=$(this).parent();
 		parent1.css("display","none");
-		
 	});
 
 
@@ -93,6 +91,7 @@ $(function(){
 		
 	});
 	$("#restart").on("click", function(){ //gameover시 restart 버튼 클릭
+		$("#in-game-menu-button").css("display","block");
 		$("#gameover").css("display","none");
 		$("#heart:nth-child(n)").css({ visibility: "visible" });
 		init(levelM);//현재 진행중인 게임을 받아옴		
@@ -168,6 +167,8 @@ var haycrack = new Audio("crack_hay.mp3");
 var woodcrack = new Audio("crack_wood.mp3");
 var wallcrack = new Audio("crack_wall.mp3");
 var bounce = new Audio("bounce.mp3");
+var chimney = 0.55;
+var chimneycount = 2;
 haycrack.volume = "0.2";
 woodcrack.volume = "0.2";
 wallcrack.volume = "0.2";
@@ -249,7 +250,7 @@ function start(){
 	document.removeEventListener("keydown", startGame, false);
 }
 function draw(){
-
+	if(chimneycount == 0 ){chimney = 0.2;}
 	context.clearRect(0,0,canvas.width,canvas.height);
 	x=x+dx;
 	y=y+dy;
@@ -304,6 +305,7 @@ function draw(){
 		}
 
 		if (life == 0) { 
+			$("#in-game-menu-button").css("display","none");
 			$("#gameover").css("display","block");
 			$("#heart:nth-child(1)").css({ visibility: "hidden" });
 			quit3=true;
@@ -334,7 +336,7 @@ function draw(){
 function checkEnd() {
 	var num=0;
 	for(var i=0;i<brickArr.length;i++){
-		if(brickArr[i].status==0)
+		if(brickArr[i].status<=0)
 			num++;
 	}
 	if(brickArr.length==num||cheatKey==true){
@@ -344,7 +346,7 @@ function checkEnd() {
 		alert('game클리어');
 		if(levelM==1){
 			$("#mCanvas").css("display","none");
-			init2();
+			
 			$("#story2").css("display","block");
 		}else if(levelM==2){
 			alert('1');
@@ -692,6 +694,10 @@ function checkBall_normal(a){
 
 function checkBall_hard(a){
 	if((x>a.brickX-ballR-dx&&x<a.brickX+brickWidth+ballR-dx)&&(y>a.brickY&&y<a.brickY+brickHeight)&&a.status>0){
+		if (a.status == 7) {
+			a.status = 1;	
+			chimneycount--;
+		}
 		if (item5 == 1) {
 			a.status = 1;
 			dx = -dx;
@@ -706,10 +712,7 @@ function checkBall_hard(a){
 		if (a.status == 4) {
 			a.status++;
 		}
-		if (a.status == 7) {
-			a.status = 1;	
-			chimneycount--;
-		}
+		
 		a.status--;
 		dx =-dx;
 		combo++;
@@ -737,6 +740,10 @@ function checkBall_hard(a){
 		}
 	}
 	else if((y-5>a.brickY-ballR-dy&&y+5<a.brickY+brickHeight+ballR-dy)&&(x>a.brickX&&x<a.brickX+brickWidth)&&a.status>0){
+		if (a.status == 7) {
+			a.status = 1;
+			chimneycount--;
+		}
 		if (item5 == 1) {
 			a.status = 1;
 			dy = -dy;
@@ -751,10 +758,7 @@ function checkBall_hard(a){
 		if (a.status == 4) {
 			a.status++;
 		} 
-		if (a.status == 7) {
-			a.status = 1;
-			chimneycount--;
-		}
+		
 		a.status--;
 		dy=-dy;
 		combo++;
@@ -990,7 +994,7 @@ var initScore;
 //var score = 0;
 
 function init2(){
-	Player = new GameObject("Player.png",60,60);//게임오브젝트로 만듬
+	Player = new GameObject("Player.png",40,60);//게임오브젝트로 만듬
 	//brick = new GameObject("brick.jpg",30,30);
 	index=0;
 	initScore=score;
@@ -1000,13 +1004,13 @@ function init2(){
 	//brick.y = 0;
  	Bricks2= new Array();
 	//Bricks.push(brick);
-
 	rightPressed= false;
 	leftPressed=false;
 	document.addEventListener("keydown", startGame2, false);
 	Player.speed = 1;
 	
 	drawPlayer();
+	//draw2();
 	//벽돌 만드는 함수 난이도에 따라 함수 실행 간격 결정
 	//<-실행간격
 }
