@@ -46,11 +46,11 @@ $(function(){
 	$(".bgBtn").on("click",function(){//배경이미지 바꾸기
 		var str=$(this).attr("id");
 		if(str=="day")
-			$("#content").css("background-image","url('img/bg1.png')");
+			$("#content").css("background-image","url(" + dayImg.src + ")");
 		else if(str=="noon")
-			$("#content").css("background-image","url('img/bg2.png')");
+			$("#content").css("background-image","url("+ noonImg.src + ")");
 		else if(str=="night")
-			$("#content").css("background-image","url('img/bg3.png')");
+			$("#content").css("background-image","url(" + nightImg.src + ")");
 	});
 	$(".exit").on("click",function(){//나가기버튼
 		var parent1=$(this).parent();
@@ -109,6 +109,12 @@ $(function(){
 	});
 });
 
+var dayImg = new Image();
+var noonImg = new Image();
+var nightImg = new Image();
+dayImg.src = "img/bg1.png";
+noonImg.src ="img/bg2.png";
+nightImg.src ="img/bg3.png";
 var audio = new Audio("sound/button.mp3");
 var bgm = new Audio("sound/bgm.mp3");
 
