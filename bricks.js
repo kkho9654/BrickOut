@@ -49,11 +49,11 @@ $(function(){
 	$(".bgBtn").on("click",function(){//배경이미지 바꾸기
 		var str=$(this).attr("id");
 		if(str=="day")
-			$("#content").css("background-image","url(" + dayImg.src + ")");
+			$("#content").css("background-image","url('" + dayImg.src + "')");
 		else if(str=="noon")
-			$("#content").css("background-image","url("+ noonImg.src + ")");
+			$("#content").css("background-image","url('"+ noonImg.src + "')");
 		else if(str=="night")
-			$("#content").css("background-image","url(" + nightImg.src + ")");
+			$("#content").css("background-image","url('" + nightImg.src + "')");
 	});
 	$(".exit").on("click",function(){//나가기버튼
 		var parent1=$(this).parent();
