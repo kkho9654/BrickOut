@@ -1,7 +1,8 @@
 *{margin: 0;padding: 0}
 body{
-	background-image: url("img/newbgh.png");
+	background-image: url("img/newbgi.png");
 	background-size: 100%;
+	background-attachment: fixed;
 }
 .noo{
 	display: none;
