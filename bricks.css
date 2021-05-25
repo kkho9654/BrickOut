@@ -1,6 +1,6 @@
 *{margin: 0;padding: 0}
 body{
-	background-image: url("img/newbgi.png");
+	background-image: url("rsrc/newbgi.png");
 	background-size: 100%;
 	background-attachment: fixed;
 }
@@ -13,10 +13,10 @@ body{
 	margin: 40px auto;
 	width: 600px;
 	height: 750px;
-	background-image:url('img/bg1.png');
+	background-image:url('rsrc/bg1.png');
 	background-size: 600px 750px;
 	border:50px solid black;
-	border-image: url('img/brc.png') 37% repeat;
+	border-image: url('rsrc/brc.png') 37% repeat;
 	box-sizing: content-box;
 }
 #startPage{

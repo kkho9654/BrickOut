@@ -117,11 +117,11 @@ $(function(){
 var dayImg = new Image();
 var noonImg = new Image();
 var nightImg = new Image();
-dayImg.src = "img/bg1.png";
-noonImg.src ="img/bg2.png";
-nightImg.src ="img/bg3.png";
-var audio = new Audio("sound/button.mp3");
-var bgm = new Audio("sound/bgm.mp3");
+dayImg.src = "rsrc/bg1.png";
+noonImg.src ="rsrc/bg2.png";
+nightImg.src ="rsrc/bg3.png";
+var audio = new Audio("rsrc/sound/button.mp3");
+var bgm = new Audio("rsrc/sound/bgm.mp3");
 
 var imgArray = ["img/tuto1.png", "img/tuto2.png", "img/tuto3.png", "img/tuto4.png", "img/tuto5.png"];
 function album(){
@@ -165,12 +165,12 @@ var item1;
 var item4;
 var item5;
 var ballcolor = "brown";
-var bgm = new Audio("sound_bgm.mp3");
-var getItem = new Audio("sound_getItem.mp3");
-var haycrack = new Audio("crack_hay.mp3");
-var woodcrack = new Audio("crack_wood.mp3");
-var wallcrack = new Audio("crack_wall.mp3");
-var bounce = new Audio("bounce.mp3");
+//var bgm = new Audio("sound_bgm.mp3");
+var getItem = new Audio("rsrc/sound/sound_getItem.mp3");
+var haycrack = new Audio("rsrc/sound/crack_hay.mp3");
+var woodcrack = new Audio("rsrc/sound/crack_wood.mp3");
+var wallcrack = new Audio("rsrc/sound/crack_wall.mp3");
+var bounce = new Audio("rsrc/sound/bounce.mp3");
 var chimney = 0.55;
 var chimneycount = 2;
 haycrack.volume = "0.2";
@@ -323,7 +323,11 @@ function draw(){
 
 	}
 	$("#score").text("     score:"+score);
-	$("#combo").text("combo"+combo);
+	if(combo!=0){
+		context.font = "20px malgun gothic"; //폰트의 크기, 글꼴체 지정      
+   		context.fillStyle = "rgba(255,0,255,1)"; //색상지정
+    	context.fillText(combo+" COMBO !",260,30);
+	}
 	for (var i = 0; i < itemArr1.length; i++)
 		itemArr1[i].itemy = itemArr1[i].itemy+3;
 	for (var i = 0; i < itemArr2.length; i++)
@@ -996,7 +1000,7 @@ var initScore;
 //var score = 0;
 
 function init2(){
-	Player = new GameObject("Player.png",40,60);//게임오브젝트로 만듬
+	Player = new GameObject("rsrc/Player.png",40,60);//게임오브젝트로 만듬
 	//brick = new GameObject("brick.jpg",30,30);
 	index=0;
 	initScore=score;
@@ -1126,7 +1130,7 @@ function startGame2(e){
 	} 
 }
 function createObs() {
-    const newObstacle = new GameObject('brick.png', 30, 30);
+    const newObstacle = new GameObject('rsrc/brick.png', 30, 30);
     Bricks2.push(newObstacle);
     newObstacle.isObstacle = true;
     newObstacle.direction = parseInt(Math.random()*3);
