@@ -325,7 +325,7 @@ function draw(){
 
 	}
 	$("#score").text("     score:"+score);
-	if(combo!=0){
+	if(combo>1){
 		context.font = "20px malgun gothic"; //폰트의 크기, 글꼴체 지정      
    		context.fillStyle = "white"; //색상지정
     	context.fillText(combo+" COMBO !",260,30);
