@@ -231,6 +231,7 @@ function init(level){
 	levelM=level;
 	dx = (Math.random() - 0.5) * 10;
 	dy = -Math.sqrt(43 - dx * dx);
+	
 	itemdy=-2;
 	y = 680;
 	x=300-ballR;
@@ -1131,12 +1132,29 @@ function startGame2(e){
 	} 
 }
 function createObs() {
-    const newObstacle = new GameObject('rsrc/brick.png', 30, 30);
-    Bricks2.push(newObstacle);
-    newObstacle.isObstacle = true;
-    newObstacle.direction = parseInt(Math.random()*3);
-    newObstacle.x = Math.random() * canvas.width;//0에서 440사이의 소수 반환
-    newObstacle.y = 0;
+	if(levelM==1){
+    	const newObstacle = new GameObject('rsrc/hay1.png', 30, 30);
+    	Bricks2.push(newObstacle);
+    	newObstacle.isObstacle = true;
+    	newObstacle.direction = parseInt(Math.random()*3);
+    	newObstacle.x = Math.random() * canvas.width;//0에서 440사이의 소수 반환
+    	newObstacle.y = 0;
+	}else if(levelM==2){
+		const newObstacle = new GameObject('rsrc/wood1.png', 30, 30);
+		Bricks2.push(newObstacle);
+    	newObstacle.isObstacle = true;
+    	newObstacle.direction = parseInt(Math.random()*3);
+    	newObstacle.x = Math.random() * canvas.width;//0에서 440사이의 소수 반환
+    	newObstacle.y = 0;
+	}else if(levelM==3){
+		const newObstacle = new GameObject('rsrc/wall.png', 30, 30);
+		Bricks2.push(newObstacle);
+ 	   newObstacle.isObstacle = true;
+   		newObstacle.direction = parseInt(Math.random()*3);
+   		newObstacle.x = Math.random() * canvas.width;//0에서 440사이의 소수 반환
+    	newObstacle.y = 0;
+	}
+    
 }
 function checkEnd2() {
 	if(levelM==1){
