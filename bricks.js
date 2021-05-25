@@ -343,7 +343,6 @@ function checkEnd() {
 		context.beginPath();
 		canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
 		clearInterval(ball);
-		alert('game클리어');
 		if(levelM==1){
 			$("#mCanvas").css("display","none");
 			
