@@ -812,8 +812,8 @@ function checkBall2(){
 	 	dx = -((paddleX + (paddleWidth / 2) - x) / (paddleWidth)) * 10;
 		dy = -Math.sqrt(43-dx*dx);
 		if (3 > combo) score = score + combo;
-		if (6 > combo >= 3) score = score + combo + 2;
-		if (10 > combo >= 6) score = score + combo + 5;
+		if (6 > combo&& combo >= 3) score = score + combo + 2;
+		if (10 > combo&& combo >= 6) score = score + combo + 5;
 		if (combo >= 10) score = score + combo + 10;
 		combo = 0;
 		bounce.play();
