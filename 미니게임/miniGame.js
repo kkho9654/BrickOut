@@ -74,7 +74,7 @@ function draw(){//화면 그리기
 			Bricks[i].speed += 0.02;//난이도에 따라서 스피드도 변경할 가능성 유
 			Bricks[i].y += Bricks[i].speed;
 			
-
+			
 			
 			drawBrick(Bricks[i]);
 
@@ -85,6 +85,7 @@ function draw(){//화면 그리기
         	}
 			if (checkCollision(Player, Bricks[i])) {
 				life--;
+				
 				if(life === 2 || life === 1)
 					document.getElementById("hit2").play();
 				else

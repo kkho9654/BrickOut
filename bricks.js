@@ -1068,6 +1068,10 @@ function draw2(){//화면 그리기
         	}
 			if (checkCollision(Player, Bricks2[i])) {
 				life--;
+				if(life === 2 || life === 1)
+					document.getElementById("hit2").play();
+				else
+					document.getElementById("hit1").play();
 				//Bricks2.splice(i,1);
         		//i--;
 			}//충돌을 비교하는 것	
@@ -1154,7 +1158,6 @@ function createObs() {
    		newObstacle.x = Math.random() * canvas.width;//0에서 440사이의 소수 반환
     	newObstacle.y = 0;
 	}
-    
 }
 function checkEnd2() {
 	if(levelM==1){
