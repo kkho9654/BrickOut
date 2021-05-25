@@ -596,7 +596,7 @@ function checkBall_easy(a){
 			
 		}
 	}
-	else if((y-5>a.brickY-ballR-dy&&y+5<a.brickY+brickHeight+ballR-dy)&&(x>a.brickX&&x<a.brickX+brickWidth)&&a.status>0){
+	else if((y+3>a.brickY-ballR-dy&&y-3<a.brickY+brickHeight+ballR-dy)&&(x+3>a.brickX&&x-3<a.brickX+brickWidth)&&a.status>0){
 		if (item5 == 1) {
 			a.status = 1;
 			dy = -dy;
@@ -671,7 +671,7 @@ function checkBall_normal(a){
 
 		}
 	}
-	else if ((y -5> a.brickY - ballR - dy && y+5 < a.brickY + brickHeight + ballR - dy) && (x > a.brickX && x < a.brickX + brickWidth) && a.status > 0) {
+	else if ((y +3> a.brickY - ballR - dy && y-3 < a.brickY + brickHeight + ballR - dy) && (x+3 > a.brickX && x-3 < a.brickX + brickWidth) && a.status > 0) {
 		if (item5 == 1) {
 			a.status = 1;
 			dy = -dy;
@@ -714,10 +714,7 @@ function checkBall_normal(a){
 
 function checkBall_hard(a){
 	if((x>a.brickX-ballR-dx&&x<a.brickX+brickWidth+ballR-dx)&&(y>a.brickY&&y<a.brickY+brickHeight)&&a.status>0){
-		if (a.status == 7) {
-			a.status = 1;	
-			chimneycount--;
-		}
+		
 		if (item5 == 1) {
 			a.status = 1;
 			dx = -dx;
@@ -731,8 +728,17 @@ function checkBall_hard(a){
 		}
 		if (a.status == 4) {
 			a.status++;
+			combo--;
 		}
-		
+		if (a.status == 7) {
+			a.status = 1;
+			chimneycount--;
+			if (chimneycount == 0) {
+				chimney = 0.6;
+				item5=1;
+				ballcolor = "yellow"
+			}
+		}
 		a.status--;
 		dx =-dx;
 		combo++;
@@ -759,11 +765,10 @@ function checkBall_hard(a){
 			
 		}
 	}
-	else if((y-5>a.brickY-ballR-dy&&y+5<a.brickY+brickHeight+ballR-dy)&&(x>a.brickX&&x<a.brickX+brickWidth)&&a.status>0){
-		if (a.status == 7) {
-			a.status = 1;
-			chimneycount--;
-		}
+	else if((y+3>a.brickY-ballR-dy&&y-3<a.brickY+brickHeight+ballR-dy)&&(x+3>a.brickX&&x-3<a.brickX+brickWidth)&&a.status>0){
+
+		
+
 		if (item5 == 1) {
 			a.status = 1;
 			dy = -dy;
@@ -777,7 +782,17 @@ function checkBall_hard(a){
 		}
 		if (a.status == 4) {
 			a.status++;
+			combo--;
 		} 
+		if (a.status == 7) {
+			a.status = 1;
+			chimneycount--;
+			if (chimneycount == 0) {
+				chimney = 0.6;
+				item5=1;
+				ballcolor="yellow"
+			}
+		}
 		
 		a.status--;
 		dy=-dy;
