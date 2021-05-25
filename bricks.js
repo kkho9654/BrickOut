@@ -38,7 +38,11 @@ $(function(){
 		$("#mCanvas").css("display","block");
 		$(this).parent().css("display","none");
 	});
-
+	$("#endingBtn").on("click",function(){
+		$("#ending").css("display","none");
+		$("#mCanvas").css("display","none");
+		$("#startPage").css("display","block");
+	})
 	$("#cBtn2").on("click",function(){//배경음악  버튼 클릭
 		$("#changeMusicDiv").css("display","block");
 	});
@@ -345,10 +349,9 @@ function checkEnd() {
 		clearInterval(ball);
 		if(levelM==1){
 			$("#mCanvas").css("display","none");
-			
+			init2();
 			$("#story2").css("display","block");
 		}else if(levelM==2){
-			alert('1');
 			$("#mCanvas").css("display","none");
 			init2();
 			$("#story4").css("display","block");
