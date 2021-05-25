@@ -228,6 +228,7 @@ function init(level){
 	paddleHeight=15;
 	paddleWidth=120;
 	paddleX=230;
+	levelM=level;
 	dx = (Math.random() - 0.5) * 10;
 	dy = -Math.sqrt(43 - dx * dx);
 	itemdy=-2;
@@ -235,7 +236,7 @@ function init(level){
 	x=300-ballR;
 	rightPressed= false;
 	leftPressed=false;
-	levelM=level;
+	
 	if(levelM==1){
 		buildHouse_easy();
 	}
@@ -289,9 +290,9 @@ function draw(){
 	}
 	
 	if(rightPressed&&paddleX<canvas.width-paddleWidth){
-		paddleX+=8;
+		paddleX+=10;
 	}else if(leftPressed&&paddleX>0){
-		paddleX-=8;
+		paddleX-=10;
 	}
 	if (y > 710) {
 		//$("#" + life).css({ visibility: "hidden" });
@@ -1013,7 +1014,7 @@ function init2(){
 	rightPressed= false;
 	leftPressed=false;
 	document.addEventListener("keydown", startGame2, false);
-	Player.speed = 1;
+	Player.speed = 2;
 	
 	drawPlayer();
 	//draw2();
@@ -1139,7 +1140,7 @@ function createObs() {
 }
 function checkEnd2() {
 	if(levelM==1){
-		if(score-initScore==15){
+		if(score-initScore==15*levelM){
 			$("#mCanvas").css("display","none");
 			context.beginPath();
 			canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
@@ -1150,7 +1151,7 @@ function checkEnd2() {
 			$("#story3").css("display","block");
 		}
 	}else if(levelM==2){
-		if(score-initScore==15){
+		if(score-initScore==15*levelM){
 			$("#mCanvas").css("display","none");
 			context.beginPath();
 			canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
@@ -1161,7 +1162,7 @@ function checkEnd2() {
 			$("#story5").css("display","block");
 		}
 	}else if(levelM==3){
-		if(score-initScore==15){
+		if(score-initScore==15*levelM){
 			$("#mCanvas").css("display","none");
 			context.beginPath();
 			canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
