@@ -355,16 +355,28 @@ function checkEnd() {
 		clearInterval(ball);
 		if(levelM==1){
 			$("#mCanvas").css("display","none");
-			init2();
 			$("#story2").css("display","block");
+			setTimeout(function(){
+				init2();
+				$("#mCanvas").css("display","block");
+				$("#story2").css("display","none");
+			},3000);
 		}else if(levelM==2){
 			$("#mCanvas").css("display","none");
-			init2();
 			$("#story4").css("display","block");
+			setTimeout(function(){
+				init2();
+				$("#mCanvas").css("display","block");
+				$("#story4").css("display","none");
+			},3000);
 		}else if(levelM==3){
 			$("#mCanvas").css("display","none");
-			init2();
 			$("#story6").css("display","block");
+			setTimeout(function(){
+				init2();
+				$("#mCanvas").css("display","block");
+				$("#story6").css("display","none");
+			},3000);
 		}
 	}
 }
@@ -1014,7 +1026,8 @@ function init2(){
 	//Bricks.push(brick);
 	rightPressed= false;
 	leftPressed=false;
-	document.addEventListener("keydown", startGame2, false);
+	//document.addEventListener("keydown", startGame2, false);
+	startMiniGame();
 	Player.speed = 2;
 	
 	drawPlayer();
