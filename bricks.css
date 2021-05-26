@@ -19,6 +19,23 @@ body{
 	border-image: url('rsrc/brc.png') 37% repeat;
 	box-sizing: content-box;
 }
+#comboDiv {
+	font-size: 20px;
+	position: relative;
+	text-align: center;
+	left: 0;
+	right: 0;
+	top: 5%;
+	display: none;
+	font-family: 'Farro', sans-serif;
+	text-transform: uppercase;
+	color: yellow;
+	text-shadow:
+   -1px 0px #000,  
+    1px 0px #000,
+    0px 2px #000,
+    2px 1px #000;
+}
 #startPage{
 	display: block;
 	position: relative;
@@ -45,6 +62,15 @@ body{
 
 #cheatKeyBtn{
 	float: left;
+	width: 90px;
+	height: 20px;
+	text-transform: uppercase;
+	font-family: 'Black Han Sans', sans-serif;
+	font-size: 12px;
+	border-radius: 3px;
+	color: #34322f;	
+	background-color: #ebfbfe;
+	border: 2px solid #000;	
 }
 
 #miniGameGoal{
@@ -128,7 +154,7 @@ subtitle {
 	text-align: center;
 	font-family: 'Black Han Sans', sans-serif;
 	color: #ebfbfe;
-	font-size: 45px;
+	font-size: 40px;
 }
 ::selection{
 	color: #fff;
@@ -175,16 +201,17 @@ button:hover, title:hover, #tutorial:hover, subtitle:hover{
 	background-color: #161717;
 	border: 2px solid #fff;
 	z-index: 2;
-	width: 580px;
+	width: 380px;
 	position: absolute;
 	left: 50%;
-	top: 60%;
+	top: 65%;
 	transform: translate(-50%, -50%);
 	text-align: center;
 	border-radius: 5px;
 	padding: 5px;
 }
 .exit, .skip {
+	text-transform: uppercase;
 	height: 25px; font-size: 15px;
 	width: 80px;
 	font-family: 'Jua', sans-serif;
@@ -281,5 +308,6 @@ button:hover, title:hover, #tutorial:hover, subtitle:hover{
 }
 
 .alertmessage {
+	font-size: 25px;
 	display: block; width: 95%; height: 300px; line-height: 300px; padding: 20px; white-space: nowrap;
 }
