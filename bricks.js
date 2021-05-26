@@ -79,6 +79,8 @@ $(function(){
 	$("#in-game-menu-button").on("click", function(){ //ingamemenu 버튼 클릭
 		$("#in-game-menu").css("display","block");
 		clearInterval(ball);
+		document.removeEventListener("keydown", retry, false);
+		document.removeEventListener("keydown", startGame, false);
 	});
 	$("#continue").on("click", function(){ //ingamemenu 안에 게임 계속 버튼 클릭
 		start();
@@ -91,6 +93,7 @@ $(function(){
 		$("#mCanvas").css("display","none");
 		$("#startPage").css("display","block");
 		$("#heart:nth-child(n)").css({ visibility: "hidden" });
+		clearInterval();
 		document.removeEventListener("keydown", retry, false);
 	});
 	$("#restart").on("click", function(){ //gameover시 restart 버튼 클릭
@@ -359,6 +362,7 @@ function checkEnd() {
 		if(levelM==1){
 			$("#mCanvas").css("display","none");
 			$("#story2").css("display","block");
+			$("#in-game-menu-button").css("display","none");
 			setTimeout(function(){
 				init2();
 				$("#mCanvas").css("display","block");
@@ -367,6 +371,7 @@ function checkEnd() {
 		}else if(levelM==2){
 			$("#mCanvas").css("display","none");
 			$("#story4").css("display","block");
+			$("#in-game-menu-button").css("display","none");
 			setTimeout(function(){
 				init2();
 				$("#mCanvas").css("display","block");
@@ -375,6 +380,7 @@ function checkEnd() {
 		}else if(levelM==3){
 			$("#mCanvas").css("display","none");
 			$("#story6").css("display","block");
+			$("#in-game-menu-button").css("display","none");
 			setTimeout(function(){
 				init2();
 				$("#mCanvas").css("display","block");
@@ -1158,7 +1164,18 @@ function checkCollision(a, b) {//충돌 체크 함수
 //<<<<<<< HEAD
 function startMiniGame(){
 	mini = setInterval(draw2, 1);
-	setobs=setInterval(createObs, 100);
+
+	obTime = 0;
+
+	if(levelM == 1){
+		obTime = 200;
+	}else if(levelM == 2){
+		obTime = 100;
+	}else{
+		obTime = 70;
+	}
+
+	setobs=setInterval(createObs, obTime);
 	document.removeEventListener("keydown", startGame2, false);
 }
 function startGame2(e){
