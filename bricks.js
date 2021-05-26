@@ -97,6 +97,7 @@ $(function(){
 		document.removeEventListener("keydown", retry, false);
 	});
 	$("#restart").on("click", function(){ //gameover시 restart 버튼 클릭
+		$("#miniGameGoal").css("visibility","hidden");
 		$("#in-game-menu-button").css("display","block");
 		$("#gameover").css("display","none");
 		$("#heart:nth-child(n)").css({ visibility: "visible" });
@@ -363,6 +364,8 @@ function checkEnd() {
 			$("#mCanvas").css("display","none");
 			$("#story2").css("display","block");
 			$("#in-game-menu-button").css("display","none");
+			$("#miniGameGoal").css("visibility","visible");
+			$("#miniGameGoal").text("     목표:"+(15*levelM-score));
 			setTimeout(function(){
 				init2();
 				$("#mCanvas").css("display","block");
@@ -372,6 +375,8 @@ function checkEnd() {
 			$("#mCanvas").css("display","none");
 			$("#story4").css("display","block");
 			$("#in-game-menu-button").css("display","none");
+			$("#miniGameGoal").css("visibility","visible");
+			$("#miniGameGoal").text("     목표:"+(15*levelM-score));
 			setTimeout(function(){
 				init2();
 				$("#mCanvas").css("display","block");
@@ -381,6 +386,8 @@ function checkEnd() {
 			$("#mCanvas").css("display","none");
 			$("#story6").css("display","block");
 			$("#in-game-menu-button").css("display","none");
+			$("#miniGameGoal").css("visibility","visible");
+			$("#miniGameGoal").text("     목표:"+(15*levelM-score));
 			setTimeout(function(){
 				init2();
 				$("#mCanvas").css("display","block");
@@ -1089,6 +1096,7 @@ function draw2(){//화면 그리기
 			$("#heart:nth-child(1)").css({ visibility: "visible" });
 		}
 		drawPlayer();//플레이어 그리기
+		$("#miniGameGoal").text("     목표:"+(15*levelM-score));
 
 		for(var i=0;i<Bricks2.length;i++){
 			Bricks2[i].speed += 0.02;//난이도에 따라서 스피드도 변경할 가능성 유
@@ -1216,6 +1224,7 @@ function checkEnd2() {
 			clearInterval(mini);
 			clearInterval(setobs);
 			init(2);
+			$("#miniGameGoal").css("visibility","hidden");
 			$("#in-game-menu-button").css("display","block");
 			$("#story3").css("display","block");
 		}
@@ -1227,6 +1236,7 @@ function checkEnd2() {
 			clearInterval(mini);
 			clearInterval(setobs);
 			init(3);
+			$("#miniGameGoal").css("visibility","hidden");
 			$("#in-game-menu-button").css("display","block");
 			$("#story5").css("display","block");
 		}
@@ -1237,6 +1247,7 @@ function checkEnd2() {
 			canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
 			clearInterval(mini);
 			clearInterval(setobs);
+			$("#miniGameGoal").css("visibility","hidden");
 			$("#in-game-menu-button").css("display","block");
 			$("#ending").css("display","block");
 		}

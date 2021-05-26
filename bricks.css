@@ -42,6 +42,26 @@ body{
     0px 2px #000,
     2px 1px #000;
 }
+
+#cheatKeyBtn{
+	float: left;
+}
+
+#miniGameGoal{
+	display: inline-block;
+	position: relative;
+	left: 130px;
+	font-family: 'Farro', sans-serif;
+	text-transform: uppercase;
+	color: rgb(255, 255, 0);
+	visibility: hidden;
+	text-shadow:
+   -1px 0px #000,  
+    1px 0px #000,
+    0px 2px #000,
+    2px 1px #000;
+}
+
 #in-game-menu-button{
 	width: 50px;
 	height: 20px;
