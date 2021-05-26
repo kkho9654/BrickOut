@@ -87,6 +87,7 @@ $(function(){
 		$("#in-game-menu").css("display","none");
 	});
 	$("#quit").on("click", function(){ //ingamemenu 안에 나가기 버튼 클릭
+		$("#comboDiv").css("display", "none");
 		$("#in-game-menu").css("display","none");
 		$("#in-game-menu-button").css("display","none");
 		$("#story1").css("display","none");
@@ -97,6 +98,7 @@ $(function(){
 		document.removeEventListener("keydown", retry, false);
 	});
 	$("#restart").on("click", function(){ //gameover시 restart 버튼 클릭
+		$("#comboDiv").css("display", "none");		
 		$("#miniGameGoal").css("visibility","hidden");
 		$("#in-game-menu-button").css("display","block");
 		$("#gameover").css("display","none");
@@ -106,6 +108,7 @@ $(function(){
 	});
 	$("#quit2").on("click", function(){ //gameover시 나가기 버튼 클릭
 		quit3=true;
+		$("#comboDiv").css("display", "none");		
 		$("#gameover").css("display","none");
 		$("#in-game-menu-button").css("display","none");
 		$("#mCanvas").css("display","none");
@@ -126,19 +129,6 @@ nightImg.src ="rsrc/bg3.png";
 var audio = new Audio("rsrc/sound/button.mp3");
 var bgm = new Audio("rsrc/sound/bgm.mp3");
 
-var imgArray = ["img/tuto1.png", "img/tuto2.png", "img/tuto3.png", "img/tuto4.png", "img/tuto5.png"];
-function album(){
-	var imgSrc = document.getElementById("tutoAlbum").getAttribute("src");
-	for(var i=0; i < imgArray.length; i++){
-		audio.play();
-		if(imgSrc == imgArray[i]){
-			document.getElementById("tutoAlbum").setAttribute("src", imgArray[i+1]);
-		}
-		if(imgSrc == imgArray[imgArray.length-1]){
-			document.getElementById("tutoAlbum").setAttribute("src", imgArray[0]);
-		}
-	}
-}
 var cheatKey;
 
 var quit3;//true일때 게임이 멈춤.
@@ -333,9 +323,14 @@ function draw(){
 	}
 	$("#score").text("     score:"+score);
 	if(combo>1){
-		context.font = "20px malgun gothic"; //폰트의 크기, 글꼴체 지정      
-   		context.fillStyle = "white"; //색상지정
-    	context.fillText(combo+" COMBO !",260,30);
+		$("#comboDiv").css("display", "block");
+		$("#comboDiv").text(combo + " COMBO !");		
+		//context.font = "20px malgun gothic"; //폰트의 크기, 글꼴체 지정      
+   		//context.fillStyle = "white"; //색상지정
+    	//context.fillText(combo+" COMBO !",260,30);
+	}
+	else if(combo<1){
+		$("#comboDiv").css("display", "none");
 	}
 	for (var i = 0; i < itemArr1.length; i++)
 		itemArr1[i].itemy = itemArr1[i].itemy+3;
