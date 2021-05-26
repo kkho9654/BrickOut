@@ -1,13 +1,12 @@
 $(function(){
-		$("#TutoBtn").on("click",function(){//튜토리얼 버튼 클릭
-			$("#tutorial").css("display","block");
-		});
+	$("#TutoBtn").on("click",function(){//튜토리얼 버튼 클릭
+		$("#tutorial").css("display","block");
+	});
 	$("#cBtn").on("click",function(){//배경화면 바꾸기 버튼 클릭
 		$("#changeImgDiv").css("display","block");
 	});
 	$("#start").on("click",function(){//시작 버튼 클릭
 		$("#choose-level").css("display","block");
-		
 	});
 	$("#heart:nth-child(n)").css({ visibility: "visible" });
 	$("#easy").on("click",function(){//시작->easy 클릭
@@ -16,7 +15,6 @@ $(function(){
 		$("#startPage").css("display","none");
 		$("#choose-level").css("display","none");
 		init(1);
-		
 	});
 	$("#normal").on("click",function(){//시작->normal 클릭
 		$("#in-game-menu-button").css("display","block");
@@ -24,7 +22,6 @@ $(function(){
 		$("#startPage").css("display","none");
 		$("#choose-level").css("display","none");
 		init(2);
-		
 	});
 	$("#hard").on("click",function(){//시작->hard 클릭
 		$("#in-game-menu-button").css("display","block");
@@ -32,7 +29,6 @@ $(function(){
 		$("#startPage").css("display","none");
 		$("#choose-level").css("display","none");
 		init(3);
-		
 	});
 	$(".skip").on("click",function(){
 		$("#mCanvas").css("display","block");
@@ -42,6 +38,9 @@ $(function(){
 		$("#ending").css("display","none");
 		$("#mCanvas").css("display","none");
 		$("#startPage").css("display","block");
+		$("#in-game-menu").css("display","none");
+		$("#in-game-menu-button").css("display","none");
+		$("#heart:nth-child(n)").css({ visibility: "visible" });		
 	})
 	$("#cBtn2").on("click",function(){//배경음악  버튼 클릭
 		$("#changeMusicDiv").css("display","block");
@@ -59,7 +58,6 @@ $(function(){
 		var parent1=$(this).parent();
 		parent1.css("display","none");
 	});
-
 
 	$("#title").fadeIn(3000);
 	
@@ -88,12 +86,13 @@ $(function(){
 	});
 	$("#quit").on("click", function(){ //ingamemenu 안에 나가기 버튼 클릭
 		$("#comboDiv").css("display", "none");
+		$("#miniGameGoal").css("visibility","hidden");				
 		$("#in-game-menu").css("display","none");
 		$("#in-game-menu-button").css("display","none");
 		$("#story1").css("display","none");
 		$("#mCanvas").css("display","none");
 		$("#startPage").css("display","block");
-		$("#heart:nth-child(n)").css({ visibility: "hidden" });
+		$("#heart:nth-child(n)").css({ visibility: "visible" });
 		clearInterval();
 		document.removeEventListener("keydown", retry, false);
 	});
@@ -108,8 +107,10 @@ $(function(){
 	});
 	$("#quit2").on("click", function(){ //gameover시 나가기 버튼 클릭
 		quit3=true;
-		$("#comboDiv").css("display", "none");		
+		$("#comboDiv").css("display", "none");
+		$("#miniGameGoal").css("visibility","hidden");		
 		$("#gameover").css("display","none");
+		$("#in-game-menu").css("display","none");		
 		$("#in-game-menu-button").css("display","none");
 		$("#mCanvas").css("display","none");
 		$("#startPage").css("display","block");
@@ -244,7 +245,7 @@ function init(level){
 }
 function start(){
 	// bgm.play();
-	// bgm.loop="ture";
+	// bgm.loop="true";
 	ball = setInterval(draw, 10);
 	document.removeEventListener("keydown", startGame, false);
 }
