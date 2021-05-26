@@ -85,14 +85,13 @@ $(function(){
 		$("#in-game-menu").css("display","none");
 	});
 	$("#quit").on("click", function(){ //ingamemenu 안에 나가기 버튼 클릭
-		quit3=true;
 		$("#in-game-menu").css("display","none");
 		$("#in-game-menu-button").css("display","none");
 		$("#story1").css("display","none");
 		$("#mCanvas").css("display","none");
 		$("#startPage").css("display","block");
 		$("#heart:nth-child(n)").css({ visibility: "hidden" });
-		
+		document.removeEventListener("keydown", retry, false);
 	});
 	$("#restart").on("click", function(){ //gameover시 restart 버튼 클릭
 		$("#in-game-menu-button").css("display","block");
@@ -295,20 +294,24 @@ function draw(){
 	}else if(leftPressed&&paddleX>0){
 		paddleX-=10;
 	}
+	if(life == 2){
+		$("#heart:nth-child(3)").css({ visibility: "hidden" });
+		$("#heart:nth-child(2)").css({ visibility: "visible" });
+		$("#heart:nth-child(1)").css({ visibility: "visible" });
+	}else if(life == 1){
+		$("#heart:nth-child(3)").css({ visibility: "hidden" });
+		$("#heart:nth-child(2)").css({ visibility: "hidden" });
+		$("#heart:nth-child(1)").css({ visibility: "visible" });
+	}else if(life == 3){
+		$("#heart:nth-child(3)").css({ visibility: "visible" });
+		$("#heart:nth-child(2)").css({ visibility: "visible" });
+		$("#heart:nth-child(1)").css({ visibility: "visible" });
+	}
 	if (y > 710) {
 		//$("#" + life).css({ visibility: "hidden" });
 		
 		life--;
 		//itemArr3.pop();
-		if(life == 2){
-			$("#heart:nth-child(3)").css({ visibility: "hidden" });
-			$("#heart:nth-child(2)").css({ visibility: "visible" });
-			$("#heart:nth-child(1)").css({ visibility: "visible" });
-		}else if(life == 1){
-			$("#heart:nth-child(3)").css({ visibility: "hidden" });
-			$("#heart:nth-child(2)").css({ visibility: "hidden" });
-			$("#heart:nth-child(1)").css({ visibility: "visible" });
-		}
 
 		if (life == 0) { 
 			$("#in-game-menu-button").css("display","none");
