@@ -164,7 +164,7 @@ subtitle {
 	color: #fff;
 	background: #34322f;
 }
-button:hover, title:hover, #tutorial:hover, subtitle:hover{
+button:hover, title:hover, subtitle:hover{
 	cursor: pointer;
 }
 #menu>button{
