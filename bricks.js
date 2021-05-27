@@ -126,19 +126,7 @@ nightImg.src ="rsrc/bg3.png";
 var audio = new Audio("rsrc/sound/button.mp3");
 var bgm = new Audio("rsrc/sound/bgm.mp3");
 
-var imgArray = ["img/tuto1.png", "img/tuto2.png", "img/tuto3.png", "img/tuto4.png", "img/tuto5.png"];
-function album(){
-	var imgSrc = document.getElementById("tutoAlbum").getAttribute("src");
-	for(var i=0; i < imgArray.length; i++){
-		audio.play();
-		if(imgSrc == imgArray[i]){
-			document.getElementById("tutoAlbum").setAttribute("src", imgArray[i+1]);
-		}
-		if(imgSrc == imgArray[imgArray.length-1]){
-			document.getElementById("tutoAlbum").setAttribute("src", imgArray[0]);
-		}
-	}
-}
+
 var cheatKey;
 
 var quit3;//true일때 게임이 멈춤.
