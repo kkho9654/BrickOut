@@ -1,12 +1,13 @@
 $(function(){
-	$("#TutoBtn").on("click",function(){//튜토리얼 버튼 클릭
-		$("#tutorial").css("display","block");
-	});
+		$("#TutoBtn").on("click",function(){//튜토리얼 버튼 클릭
+			$("#tutorial").css("display","block");
+		});
 	$("#cBtn").on("click",function(){//배경화면 바꾸기 버튼 클릭
 		$("#changeImgDiv").css("display","block");
 	});
 	$("#start").on("click",function(){//시작 버튼 클릭
 		$("#choose-level").css("display","block");
+		
 	});
 	$("#heart:nth-child(n)").css({ visibility: "visible" });
 	$("#easy").on("click",function(){//시작->easy 클릭
@@ -15,6 +16,7 @@ $(function(){
 		$("#startPage").css("display","none");
 		$("#choose-level").css("display","none");
 		init(1);
+		
 	});
 	$("#normal").on("click",function(){//시작->normal 클릭
 		$("#in-game-menu-button").css("display","block");
@@ -22,6 +24,7 @@ $(function(){
 		$("#startPage").css("display","none");
 		$("#choose-level").css("display","none");
 		init(2);
+		
 	});
 	$("#hard").on("click",function(){//시작->hard 클릭
 		$("#in-game-menu-button").css("display","block");
@@ -29,6 +32,7 @@ $(function(){
 		$("#startPage").css("display","none");
 		$("#choose-level").css("display","none");
 		init(3);
+		
 	});
 	$(".skip").on("click",function(){
 		$("#mCanvas").css("display","block");
@@ -38,9 +42,6 @@ $(function(){
 		$("#ending").css("display","none");
 		$("#mCanvas").css("display","none");
 		$("#startPage").css("display","block");
-		$("#in-game-menu").css("display","none");
-		$("#in-game-menu-button").css("display","none");
-		$("#heart:nth-child(n)").css({ visibility: "visible" });		
 	})
 	$("#cBtn2").on("click",function(){//배경음악  버튼 클릭
 		$("#changeMusicDiv").css("display","block");
@@ -58,6 +59,7 @@ $(function(){
 		var parent1=$(this).parent();
 		parent1.css("display","none");
 	});
+
 
 	$("#title").fadeIn(3000);
 	
@@ -85,19 +87,16 @@ $(function(){
 		$("#in-game-menu").css("display","none");
 	});
 	$("#quit").on("click", function(){ //ingamemenu 안에 나가기 버튼 클릭
-		$("#comboDiv").css("display", "none");
-		$("#miniGameGoal").css("visibility","hidden");				
 		$("#in-game-menu").css("display","none");
 		$("#in-game-menu-button").css("display","none");
 		$("#story1").css("display","none");
 		$("#mCanvas").css("display","none");
 		$("#startPage").css("display","block");
-		$("#heart:nth-child(n)").css({ visibility: "visible" });
+		$("#heart:nth-child(n)").css({ visibility: "hidden" });
 		clearInterval();
 		document.removeEventListener("keydown", retry, false);
 	});
 	$("#restart").on("click", function(){ //gameover시 restart 버튼 클릭
-		$("#comboDiv").css("display", "none");		
 		$("#miniGameGoal").css("visibility","hidden");
 		$("#in-game-menu-button").css("display","block");
 		$("#gameover").css("display","none");
@@ -107,10 +106,7 @@ $(function(){
 	});
 	$("#quit2").on("click", function(){ //gameover시 나가기 버튼 클릭
 		quit3=true;
-		$("#comboDiv").css("display", "none");
-		$("#miniGameGoal").css("visibility","hidden");		
 		$("#gameover").css("display","none");
-		$("#in-game-menu").css("display","none");		
 		$("#in-game-menu-button").css("display","none");
 		$("#mCanvas").css("display","none");
 		$("#startPage").css("display","block");
@@ -130,6 +126,19 @@ nightImg.src ="rsrc/bg3.png";
 var audio = new Audio("rsrc/sound/button.mp3");
 var bgm = new Audio("rsrc/sound/bgm.mp3");
 
+var imgArray = ["img/tuto1.png", "img/tuto2.png", "img/tuto3.png", "img/tuto4.png", "img/tuto5.png"];
+function album(){
+	var imgSrc = document.getElementById("tutoAlbum").getAttribute("src");
+	for(var i=0; i < imgArray.length; i++){
+		audio.play();
+		if(imgSrc == imgArray[i]){
+			document.getElementById("tutoAlbum").setAttribute("src", imgArray[i+1]);
+		}
+		if(imgSrc == imgArray[imgArray.length-1]){
+			document.getElementById("tutoAlbum").setAttribute("src", imgArray[0]);
+		}
+	}
+}
 var cheatKey;
 
 var quit3;//true일때 게임이 멈춤.
@@ -245,7 +254,7 @@ function init(level){
 }
 function start(){
 	// bgm.play();
-	// bgm.loop="true";
+	// bgm.loop="ture";
 	ball = setInterval(draw, 10);
 	document.removeEventListener("keydown", startGame, false);
 }
@@ -324,14 +333,9 @@ function draw(){
 	}
 	$("#score").text("     score:"+score);
 	if(combo>1){
-		$("#comboDiv").css("display", "block");
-		$("#comboDiv").text(combo + " COMBO !");		
-		//context.font = "20px malgun gothic"; //폰트의 크기, 글꼴체 지정      
-   		//context.fillStyle = "white"; //색상지정
-    	//context.fillText(combo+" COMBO !",260,30);
-	}
-	else if(combo<1){
-		$("#comboDiv").css("display", "none");
+		context.font = "20px malgun gothic"; //폰트의 크기, 글꼴체 지정      
+   		context.fillStyle = "white"; //색상지정
+    	context.fillText(combo+" COMBO !",260,30);
 	}
 	for (var i = 0; i < itemArr1.length; i++)
 		itemArr1[i].itemy = itemArr1[i].itemy+3;
@@ -356,6 +360,7 @@ function checkEnd() {
 		context.beginPath();
 		canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
 		clearInterval(ball);
+		score = 0;
 		if(levelM==1){
 			$("#mCanvas").css("display","none");
 			$("#story2").css("display","block");
@@ -363,7 +368,7 @@ function checkEnd() {
 			$("#miniGameGoal").css("visibility","visible");
 			$("#miniGameGoal").text("     목표:"+(15*levelM-score));
 			setTimeout(function(){
-				init2();
+				init2();clickRorL = false;
 				$("#mCanvas").css("display","block");
 				$("#story2").css("display","none");
 			},3000);
@@ -1045,6 +1050,7 @@ function init2(){
 	//brick = new GameObject("brick.jpg",30,30);
 	index=0;
 	initScore=score;
+	
 	Player.x = canvas.width/2 - 30;
 	Player.y = canvas.height - 60;
 	//brick.x = 0;
