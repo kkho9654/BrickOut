@@ -527,10 +527,10 @@ function buildHouse_hard() {
 	for (var i = 3; i < 7; i++) {
 		brickArr.push(new bricks(i * 60 + i, 172, 3));
 	}
-	for (var i = 1; i < 3; i++) {
+	for (var i = 2; i < 3; i++) {
 		brickArr.push(new bricks(i * 60 + i, 172, 4));
 	}
-	for (var i = 7; i < 9; i++) {
+	for (var i = 7; i < 8; i++) {
 		brickArr.push(new bricks(i * 60 + i, 172, 4));
 	}
 	for (var i = 1; i < 9; i++) {
@@ -547,7 +547,10 @@ function buildHouse_hard() {
 	brickArr.push(new bricks(488, 280, 3));
 	brickArr.push(new bricks(61, 316, 3));
 	brickArr.push(new bricks(61, 352, 3));
-	for (var i = 4; i < 9; i++) {
+	for (var i = 4; i < 5; i++) {
+		brickArr.push(new bricks(i * 60 + i, 316, 3));
+	}
+	for (var i = 8; i < 9; i++) {
 		brickArr.push(new bricks(i * 60 + i, 316, 3));
 	}
 	for (var i = 4; i < 9; i++) {
@@ -721,14 +724,21 @@ function checkBall_hard(a){
 	if((x>a.brickX-ballR-dx&&x<a.brickX+brickWidth+ballR-dx)&&(y>a.brickY&&y<a.brickY+brickHeight)&&a.status>0){
 		
 		if (item5 == 1) {
+			if (a.status == 8 || a.status == 7) {chimneycount--;}
+			if (chimneycount <= 0) {
+				for (var i = 0; i < brickArr.length; i++) {
+					if (brickArr[i].status == 4) brickArr[i].status = 1;
+					chimneycount = 100;
+				}
+			}
 			a.status = 1;
 			dx = -dx;
 		}
 		if (item1 == 1) {
-			if (a.status != 6)
+			if (a.status != 6 && a.status != 7 && a.status !=0)
 				a.status--;
 		}
-		if (a.status == 6){
+		if (a.status == 6) {
 			a.status = 1;
 		}
 		if (a.status == 4) {
@@ -739,11 +749,13 @@ function checkBall_hard(a){
 			a.status = 1;
 			chimneycount--;
 			if (chimneycount == 0) {
-				chimney = 0.6;
-				item5=1;
-				ballcolor = "yellow"
+				for (var i = 0; i < brickArr.length; i++) {
+					if (brickArr[i].status == 4) brickArr[i].status = 1;
+					chimneycount = 100;
+				}
 			}
 		}
+
 		a.status--;
 		dx =-dx;
 		combo++;
@@ -764,22 +776,26 @@ function checkBall_hard(a){
 			if (0.7 > b && b > 0.6) {
 				itemArr4.push(new item(x, y));
 			}
-			if (0.6 > b && b > chimney) {
+			if (0.6 > b && b > 0.55) {
 				itemArr5.push(new item(x, y));
 			}
 			
 		}
 	}
 	else if((y+3>a.brickY-ballR-dy&&y-3<a.brickY+brickHeight+ballR-dy)&&(x+3>a.brickX&&x-3<a.brickX+brickWidth)&&a.status>0){
-
-		
-
 		if (item5 == 1) {
+			if (a.status ==8 || a.status ==7) {chimneycount--;}
+			if (chimneycount <= 0) {
+				for (var i = 0; i < brickArr.length; i++) {
+					if (brickArr[i].status == 4) brickArr[i].status = 1;
+					chimneycount = 100;
+				}
+			}
 			a.status = 1;
 			dy = -dy;
 		}
 		if (item1 == 1) {
-			if (a.status != 6)
+			if (a.status != 6 && a.status != 7 && a.status != 0)
 				a.status--;
 		}
 		if (a.status == 6) {
@@ -792,10 +808,11 @@ function checkBall_hard(a){
 		if (a.status == 7) {
 			a.status = 1;
 			chimneycount--;
-			if (chimneycount == 0) {
-				chimney = 0.6;
-				item5=1;
-				ballcolor="yellow"
+			if (chimneycount <= 0) {
+				for (var i = 0; i < brickArr.length; i++) {
+					if (brickArr[i].status == 4) brickArr[i].status = 1;
+					chimneycount = 100;
+				}
 			}
 		}
 		
@@ -820,7 +837,7 @@ function checkBall_hard(a){
 			if (0.7 > b && b > 0.6) {
 				itemArr4.push(new item(x, y));
 			}
-			if (0.6 > b && b > chimney) {
+			if (0.6 > b && b > 0.55) {
 				itemArr5.push(new item(x, y));
 			}
 		}
@@ -893,7 +910,7 @@ function checkBall2(){
 			item5 = 1;
 			item1 = 0;
 			ballcolor = "yellow";
-			setTimeout(function () { item5--; ballcolor ="brown"}, 1500);
+			setTimeout(function () { item5--; ballcolor ="brown"}, 15000);
 		}
 }
 function drawItem1(a){
