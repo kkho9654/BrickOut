@@ -42,6 +42,9 @@ $(function(){
 		$("#ending").css("display","none");
 		$("#mCanvas").css("display","none");
 		$("#startPage").css("display","block");
+		$("#in-game-menu").css("display","none");
+		$("#in-game-menu-button").css("display","none");
+		$("#heart:nth-child(n)").css({ visibility: "visible" });		
 	})
 	$("#cBtn2").on("click",function(){//배경음악  버튼 클릭
 		$("#changeMusicDiv").css("display","block");
@@ -88,17 +91,20 @@ $(function(){
 	});
 	$("#quit").on("click", function(){ //ingamemenu 안에 나가기 버튼 클릭
 		tmpScore=0;
+		$("#comboDiv").css("display", "none");
+		$("#miniGameGoal").css("visibility","hidden");		
 		$("#in-game-menu").css("display","none");
 		$("#in-game-menu-button").css("display","none");
 		$("#story1").css("display","none");
 		$("#mCanvas").css("display","none");
 		$("#startPage").css("display","block");
-		$("#heart:nth-child(n)").css({ visibility: "hidden" });
+		$("#heart:nth-child(n)").css({ visibility: "visible" });
 		clearInterval();
 		document.removeEventListener("keydown", retry, false);
 	});
 	$("#restart").on("click", function(){ //gameover시 restart 버튼 클릭
 		tmpScore=0;
+		$("#comboDiv").css("display", "none");				
 		$("#miniGameGoal").css("visibility","hidden");
 		$("#in-game-menu-button").css("display","block");
 		$("#gameover").css("display","none");
@@ -109,7 +115,10 @@ $(function(){
 	$("#quit2").on("click", function(){ //gameover시 나가기 버튼 클릭
 		tmpScore=0;
 		quit3=true;
+		$("#comboDiv").css("display", "none");
+		$("#miniGameGoal").css("visibility","hidden");	
 		$("#gameover").css("display","none");
+		$("#in-game-menu").css("display","none");				
 		$("#in-game-menu-button").css("display","none");
 		$("#mCanvas").css("display","none");
 		$("#startPage").css("display","block");
@@ -203,7 +212,6 @@ function init(level){
 	document.addEventListener("keydown", keyDownHandler, false);
 	document.addEventListener("keyup", keyUpHandler, false);
 	document.addEventListener("keydown", startGame, false);
-	$("#miniGameGoal").css("visibility","hidden");
 	brickArr=new Array();
 	itemArr1=new Array();
 	itemArr2=new Array();
@@ -328,9 +336,14 @@ function draw(){
 	}
 	$("#score").text("     score:"+score);
 	if(combo>1){
-		context.font = "20px malgun gothic"; //폰트의 크기, 글꼴체 지정      
-   		context.fillStyle = "white"; //색상지정
-    	context.fillText(combo+" COMBO !",260,30);
+		$("#comboDiv").css("display", "block");
+		$("#comboDiv").text(combo + " COMBO !");		
+		//context.font = "20px malgun gothic"; //폰트의 크기, 글꼴체 지정      
+   		//context.fillStyle = "white"; //색상지정
+    	//context.fillText(combo+" COMBO !",260,30);
+	}
+	else if(combo<1){
+		$("#comboDiv").css("display", "none");
 	}
 	for (var i = 0; i < itemArr1.length; i++)
 		itemArr1[i].itemy = itemArr1[i].itemy+3;
