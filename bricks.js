@@ -354,7 +354,7 @@ function checkEnd() {
 			$("#story2").css("display","block");
 			$("#in-game-menu-button").css("display","none");
 			$("#miniGameGoal").css("visibility","visible");
-			$("#miniGameGoal").text("     목표:"+(15*levelM-score));
+			$("#miniGameGoal").text("     목표:"+(10*levelM+30-score));
 			setTimeout(function(){
 				init2();clickRorL = false;
 				$("#mCanvas").css("display","block");
@@ -365,7 +365,7 @@ function checkEnd() {
 			$("#story4").css("display","block");
 			$("#in-game-menu-button").css("display","none");
 			$("#miniGameGoal").css("visibility","visible");
-			$("#miniGameGoal").text("     목표:"+(15*levelM-score));
+			$("#miniGameGoal").text("     목표:"+(10*levelM+30-score));
 			setTimeout(function(){
 				init2();
 				$("#mCanvas").css("display","block");
@@ -376,7 +376,7 @@ function checkEnd() {
 			$("#story6").css("display","block");
 			$("#in-game-menu-button").css("display","none");
 			$("#miniGameGoal").css("visibility","visible");
-			$("#miniGameGoal").text("     목표:"+(15*levelM-score));
+			$("#miniGameGoal").text("     목표:"+(10*levelM+30-score));
 			setTimeout(function(){
 				init2();
 				$("#mCanvas").css("display","block");
