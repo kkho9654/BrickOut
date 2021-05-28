@@ -1103,7 +1103,7 @@ function draw2(){//화면 그리기
 			$("#heart:nth-child(1)").css({ visibility: "visible" });
 		}
 		drawPlayer();//플레이어 그리기
-		$("#miniGameGoal").text("     목표:"+(15*levelM-score));
+		$("#miniGameGoal").text("     목표:"+(10*levelM+30-score));
 
 		for(var i=0;i<Bricks2.length;i++){
 			Bricks2[i].speed += 0.02;//난이도에 따라서 스피드도 변경할 가능성 유
