@@ -1224,7 +1224,7 @@ function createObs() {
 }
 function checkEnd2() {
 	if(levelM==1){
-		if(score-initScore==15*levelM){
+		if(score-initScore==10*levelM+30){
 			$("#mCanvas").css("display","none");
 			context.beginPath();
 			canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
@@ -1236,7 +1236,7 @@ function checkEnd2() {
 			$("#story3").css("display","block");
 		}
 	}else if(levelM==2){
-		if(score-initScore==15*levelM){
+		if(score-initScore==10*levelM+30){
 			$("#mCanvas").css("display","none");
 			context.beginPath();
 			canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
@@ -1248,7 +1248,7 @@ function checkEnd2() {
 			$("#story5").css("display","block");
 		}
 	}else if(levelM==3){
-		if(score-initScore==15*levelM){
+		if(score-initScore==10*levelM+30){
 			$("#mCanvas").css("display","none");
 			context.beginPath();
 			canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
