@@ -212,6 +212,7 @@ function init(level){
 	document.addEventListener("keydown", keyDownHandler, false);
 	document.addEventListener("keyup", keyUpHandler, false);
 	document.addEventListener("keydown", startGame, false);
+	$("#miniGameGoal").css("visibility","hidden");
 	brickArr=new Array();
 	itemArr1=new Array();
 	itemArr2=new Array();
