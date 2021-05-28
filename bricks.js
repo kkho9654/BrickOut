@@ -87,6 +87,7 @@ $(function(){
 		$("#in-game-menu").css("display","none");
 	});
 	$("#quit").on("click", function(){ //ingamemenu 안에 나가기 버튼 클릭
+		tmpScore=0;
 		$("#in-game-menu").css("display","none");
 		$("#in-game-menu-button").css("display","none");
 		$("#story1").css("display","none");
@@ -97,6 +98,7 @@ $(function(){
 		document.removeEventListener("keydown", retry, false);
 	});
 	$("#restart").on("click", function(){ //gameover시 restart 버튼 클릭
+		tmpScore=0;
 		$("#miniGameGoal").css("visibility","hidden");
 		$("#in-game-menu-button").css("display","block");
 		$("#gameover").css("display","none");
@@ -105,6 +107,7 @@ $(function(){
 		document.addEventListener("keydown", startGame, false);
 	});
 	$("#quit2").on("click", function(){ //gameover시 나가기 버튼 클릭
+		tmpScore=0;
 		quit3=true;
 		$("#gameover").css("display","none");
 		$("#in-game-menu-button").css("display","none");
@@ -170,7 +173,7 @@ wallcrack.volume = "0.2";
 getItem.volume = "0.2";
 bgm.volume = "0.1";
 bounce.volume = "0.4";
-
+var tmpScore;
 var levelM;
 
 function bricks(a,b,c){
@@ -207,7 +210,10 @@ function init(level){
 	itemArr4= new Array();
 	itemArr5 = new Array();
 	life = 3;//@@@@목숨 추가
-	score=0;
+	if(tmpScore>0)
+		score=tmpScore;
+	else
+		score=0;
 	combo=0;
 	item1=0;
 	item4=0;
@@ -344,17 +350,18 @@ function checkEnd() {
 		if(brickArr[i].status<=0)
 			num++;
 	}
+
 	if(brickArr.length==num||cheatKey==true){
 		context.beginPath();
 		canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
 		clearInterval(ball);
-		score = 0;
+		tmpScore=score;
 		if(levelM==1){
 			$("#mCanvas").css("display","none");
 			$("#story2").css("display","block");
 			$("#in-game-menu-button").css("display","none");
 			$("#miniGameGoal").css("visibility","visible");
-			$("#miniGameGoal").text("     목표:"+(10*levelM+30-score));
+			$("#miniGameGoal").text("     목표:"+40);
 			setTimeout(function(){
 				init2();clickRorL = false;
 				$("#mCanvas").css("display","block");
@@ -365,7 +372,7 @@ function checkEnd() {
 			$("#story4").css("display","block");
 			$("#in-game-menu-button").css("display","none");
 			$("#miniGameGoal").css("visibility","visible");
-			$("#miniGameGoal").text("     목표:"+(10*levelM+30-score));
+			$("#miniGameGoal").text("     목표:"+50);
 			setTimeout(function(){
 				init2();
 				$("#mCanvas").css("display","block");
@@ -376,7 +383,7 @@ function checkEnd() {
 			$("#story6").css("display","block");
 			$("#in-game-menu-button").css("display","none");
 			$("#miniGameGoal").css("visibility","visible");
-			$("#miniGameGoal").text("     목표:"+(10*levelM+30-score));
+			$("#miniGameGoal").text("     목표:"+60);
 			setTimeout(function(){
 				init2();
 				$("#mCanvas").css("display","block");
@@ -1103,7 +1110,7 @@ function draw2(){//화면 그리기
 			$("#heart:nth-child(1)").css({ visibility: "visible" });
 		}
 		drawPlayer();//플레이어 그리기
-		$("#miniGameGoal").text("     목표:"+(10*levelM+30-score));
+		$("#miniGameGoal").text("     목표:"+(10*levelM+30-score+initScore));
 
 		for(var i=0;i<Bricks2.length;i++){
 			Bricks2[i].speed += 0.02;//난이도에 따라서 스피드도 변경할 가능성 유
@@ -1225,6 +1232,7 @@ function createObs() {
 function checkEnd2() {
 	if(levelM==1){
 		if(score-initScore==10*levelM+30){
+			tmpScore=score;
 			$("#mCanvas").css("display","none");
 			context.beginPath();
 			canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
@@ -1237,6 +1245,7 @@ function checkEnd2() {
 		}
 	}else if(levelM==2){
 		if(score-initScore==10*levelM+30){
+			tmpScore=score;
 			$("#mCanvas").css("display","none");
 			context.beginPath();
 			canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
@@ -1249,6 +1258,7 @@ function checkEnd2() {
 		}
 	}else if(levelM==3){
 		if(score-initScore==10*levelM+30){
+			tmpScore=0;
 			$("#mCanvas").css("display","none");
 			context.beginPath();
 			canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
@@ -1257,6 +1267,7 @@ function checkEnd2() {
 			$("#miniGameGoal").css("visibility","hidden");
 			$("#in-game-menu-button").css("display","block");
 			$("#ending").css("display","block");
+			
 		}
 	}
 }
