@@ -164,12 +164,12 @@ var wallcrack = new Audio("rsrc/sound/crack_wall.mp3");
 var bounce = new Audio("rsrc/sound/bounce.mp3");
 var chimney = 0.55;
 var chimneycount = 2;
-haycrack.volume = "0.1";
-woodcrack.volume = "0.1";
-wallcrack.volume = "0.1";
-getItem.volume = "0.1";
-bgm.volume = "0.04";
-bounce.volume = "0.2";
+haycrack.volume = "0.2";
+woodcrack.volume = "0.2";
+wallcrack.volume = "0.2";
+getItem.volume = "0.2";
+bgm.volume = "0.1";
+bounce.volume = "0.4";
 
 var levelM;
 
