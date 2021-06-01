@@ -910,7 +910,7 @@ function checkBall2(){
 			item5 = 1;
 			item1 = 0;
 			ballcolor = "yellow";
-			setTimeout(function () { item5--; ballcolor ="brown"}, 3000);
+			setTimeout(function () { item5--; ballcolor ="brown"}, 15000);
 		}
 }
 function drawItem1(a){
