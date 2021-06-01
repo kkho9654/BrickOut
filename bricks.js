@@ -689,7 +689,7 @@ function checkBall_normal(a){
 			a.status--;
 		}
 		if (a.status == 4) {
-			a.status = 1;
+			a.status = 1;ㄴ
 		}
 		a.status--;
 		dy = -dy;
